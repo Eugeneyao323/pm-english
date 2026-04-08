@@ -1,0 +1,2178 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PM English Pro - 项目经理英语实战训练</title>
+<style>
+  :root {
+    --primary: #2563eb;
+    --primary-light: #3b82f6;
+    --primary-dark: #1d4ed8;
+    --accent: #f59e0b;
+    --accent-light: #fbbf24;
+    --success: #10b981;
+    --danger: #ef4444;
+    --bg: #f8fafc;
+    --card: #ffffff;
+    --text: #1e293b;
+    --text-secondary: #64748b;
+    --border: #e2e8f0;
+    --shadow: 0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+    --radius: 12px;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    background: var(--bg); color: var(--text); line-height: 1.6;
+  }
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: white; padding: 0; position: sticky; top: 0; z-index: 100;
+    box-shadow: 0 4px 12px rgba(37,99,235,0.3);
+  }
+  .header-inner {
+    max-width: 1200px; margin: 0 auto; padding: 16px 24px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .logo { font-size: 22px; font-weight: 800; letter-spacing: -0.5px; }
+  .logo span { color: var(--accent-light); }
+  .header-stats {
+    display: flex; gap: 20px; font-size: 13px; opacity: 0.9;
+  }
+  .header-stats b { color: var(--accent-light); }
+  /* Navigation */
+  .nav {
+    background: white; border-bottom: 1px solid var(--border);
+    position: sticky; top: 62px; z-index: 99;
+  }
+  .nav-inner {
+    max-width: 1200px; margin: 0 auto; padding: 0 24px;
+    display: flex; gap: 0; overflow-x: auto;
+  }
+  .nav-tab {
+    padding: 14px 20px; font-size: 14px; font-weight: 600;
+    color: var(--text-secondary); cursor: pointer; border-bottom: 3px solid transparent;
+    white-space: nowrap; transition: all 0.2s;
+  }
+  .nav-tab:hover { color: var(--primary); background: #f1f5f9; }
+  .nav-tab.active { color: var(--primary); border-bottom-color: var(--primary); }
+  .nav-tab .emoji { margin-right: 6px; }
+  /* Main layout */
+  .main { max-width: 1200px; margin: 0 auto; padding: 24px; }
+  /* Topic selector */
+  .topic-bar {
+    background: white; border-radius: var(--radius); padding: 20px 24px;
+    margin-bottom: 24px; box-shadow: var(--shadow);
+  }
+  .topic-bar h3 { font-size: 14px; color: var(--text-secondary); margin-bottom: 12px; }
+  .topic-chips {
+    display: flex; gap: 10px; flex-wrap: wrap;
+  }
+  .topic-chip {
+    padding: 8px 16px; border-radius: 20px; font-size: 13px; font-weight: 600;
+    cursor: pointer; border: 2px solid var(--border); background: white;
+    transition: all 0.2s; display: flex; align-items: center; gap: 6px;
+  }
+  .topic-chip:hover { border-color: var(--primary); color: var(--primary); }
+  .topic-chip.active {
+    background: var(--primary); color: white; border-color: var(--primary);
+  }
+  .topic-chip.locked { opacity: 0.5; cursor: default; }
+  .topic-chip .badge {
+    background: var(--accent); color: white; font-size: 10px; padding: 2px 6px;
+    border-radius: 10px; font-weight: 700;
+  }
+  .topic-chip.active .badge { background: white; color: var(--primary); }
+  /* Cards */
+  .card {
+    background: var(--card); border-radius: var(--radius); padding: 24px;
+    box-shadow: var(--shadow); margin-bottom: 20px;
+  }
+  .card-title {
+    font-size: 18px; font-weight: 700; margin-bottom: 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .card-title .icon { font-size: 24px; }
+  /* Vocabulary module */
+  .vocab-grid {
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 16px;
+  }
+  .vocab-card {
+    border: 2px solid var(--border); border-radius: 10px; padding: 16px;
+    cursor: pointer; transition: all 0.3s; position: relative; min-height: 100px;
+  }
+  .vocab-card:hover { border-color: var(--primary-light); transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+  .vocab-card.flipped { background: #eff6ff; border-color: var(--primary); }
+  .vocab-word {
+    font-size: 18px; font-weight: 700; color: var(--primary-dark); margin-bottom: 4px;
+  }
+  .vocab-phonetic { font-size: 13px; color: var(--text-secondary); margin-bottom: 8px; }
+  .vocab-meaning { font-size: 14px; color: var(--text); margin-bottom: 8px; }
+  .vocab-examples {
+    margin-top: 10px; display: none;
+  }
+  .vocab-card.flipped .vocab-examples { display: block; }
+  .vocab-example-item {
+    padding: 8px 10px; background: #f8fafc;
+    border-radius: 6px; border-left: 3px solid var(--primary-light);
+  }
+  .vocab-example-en {
+    font-size: 13px; color: var(--text); line-height: 1.6;
+    display: flex; align-items: flex-start; gap: 4px; flex-wrap: wrap;
+  }
+  .vocab-example-cn {
+    font-size: 12px; color: var(--text-secondary); margin-top: 3px;
+  }
+  .example-keyword {
+    background: #fef3c7; padding: 1px 4px; border-radius: 3px; cursor: pointer;
+    font-weight: 600; border-bottom: 2px dashed var(--accent); transition: all 0.2s;
+    position: relative;
+  }
+  .example-keyword:hover { background: #fde68a; }
+  .example-keyword.added { background: #d1fae5; border-bottom-color: var(--success); color: #065f46; }
+  .keyword-tooltip {
+    display: none; position: absolute; bottom: 100%; left: 50%; transform: translateX(-50%);
+    background: var(--text); color: white; padding: 6px 12px; border-radius: 6px;
+    font-size: 12px; white-space: nowrap; z-index: 10; font-weight: 400;
+    margin-bottom: 6px;
+  }
+  .keyword-tooltip::after {
+    content: ''; position: absolute; top: 100%; left: 50%; transform: translateX(-50%);
+    border: 5px solid transparent; border-top-color: var(--text);
+  }
+  .example-keyword:hover .keyword-tooltip { display: block; }
+  .example-keyword.added .keyword-tooltip { background: var(--success); }
+  .example-keyword.added .keyword-tooltip::after { border-top-color: var(--success); }
+  /* Custom word modal */
+  .add-word-toast {
+    position: fixed; bottom: 24px; right: 24px; background: var(--success); color: white;
+    padding: 12px 20px; border-radius: 10px; font-size: 14px; font-weight: 600;
+    box-shadow: var(--shadow-lg); z-index: 200; animation: slideUp 0.3s ease;
+    display: none;
+  }
+  .add-word-toast.show { display: block; }
+  @keyframes slideUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+  /* Mastery buttons */
+  .vocab-mastery {
+    display: none; margin-top: 10px; padding-top: 10px;
+    border-top: 1px dashed var(--border); gap: 8px;
+  }
+  .vocab-card.flipped .vocab-mastery { display: flex; }
+  .mastery-btn {
+    flex: 1; padding: 8px 12px; border-radius: 8px; border: 2px solid var(--border);
+    font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s;
+    background: white; text-align: center;
+  }
+  .mastery-btn:hover { transform: scale(1.02); }
+  .mastery-btn.got-it { color: var(--success); border-color: var(--success); }
+  .mastery-btn.got-it:hover { background: #ecfdf5; }
+  .mastery-btn.not-yet { color: var(--danger); border-color: var(--danger); }
+  .mastery-btn.not-yet:hover { background: #fef2f2; }
+  .vocab-card.mastered { border-color: var(--success); opacity: 0.65; }
+  .vocab-card.mastered::after {
+    content: '✅ 已掌握'; position: absolute; bottom: 8px; right: 10px; font-size: 11px;
+    background: #ecfdf5; color: var(--success); padding: 2px 8px; border-radius: 8px; font-weight: 600;
+    z-index: 1;
+  }
+  .vocab-card.not-mastered { border-color: var(--accent); }
+  .vocab-card.not-mastered::after {
+    content: '🔄 待复习'; position: absolute; bottom: 8px; right: 10px; font-size: 11px;
+    background: #fffbeb; color: #b45309; padding: 2px 8px; border-radius: 8px; font-weight: 600;
+    z-index: 1;
+  }
+  /* Vocab stats bar */
+  .vocab-stats {
+    display: flex; gap: 16px; align-items: center; padding: 12px 16px;
+    background: #f8fafc; border-radius: 8px; margin-bottom: 16px;
+    border: 1px solid var(--border); flex-wrap: wrap;
+  }
+  .vocab-stat-item { font-size: 13px; color: var(--text-secondary); }
+  .vocab-stat-item b { font-size: 18px; margin-right: 4px; }
+  .vocab-stat-item b.total-count { color: var(--primary); }
+  .vocab-stat-item b.mastered-count { color: var(--success); }
+  .vocab-stat-item b.unmastered-count { color: var(--danger); }
+  .vocab-stat-item b.review-count { color: var(--accent); }
+  .vocab-filter-btns { display: flex; gap: 6px; margin-left: auto; flex-wrap: wrap; }
+  .vocab-filter-active { background: var(--primary) !important; color: white !important; border-color: var(--primary) !important; }
+  .review-banner {
+    background: linear-gradient(135deg, #fffbeb, #fef3c7); border: 2px solid var(--accent);
+    border-radius: 10px; padding: 14px 18px; margin-bottom: 16px;
+    display: flex; align-items: center; justify-content: space-between;
+  }
+  .review-banner .text { font-size: 14px; font-weight: 600; color: #92400e; }
+  .review-banner .count { font-size: 22px; font-weight: 800; color: var(--accent); }
+  .vocab-tag {
+    position: absolute; top: 10px; right: 10px; font-size: 11px; padding: 2px 8px;
+    border-radius: 8px; font-weight: 600;
+  }
+  .vocab-tag.core { background: #fef3c7; color: #92400e; }
+  .vocab-tag.business { background: #dbeafe; color: #1e40af; }
+  .vocab-tag.tech { background: #d1fae5; color: #065f46; }
+  .vocab-tag.retail { background: #fce7f3; color: #9d174d; }
+  .vocab-hint { font-size: 12px; color: var(--text-secondary); text-align: center; margin-top: 4px; }
+  .vocab-play-btn {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 32px; height: 32px; border-radius: 50%; border: 2px solid var(--primary-light);
+    background: white; color: var(--primary); cursor: pointer; font-size: 14px;
+    transition: all 0.2s; margin-left: 8px; vertical-align: middle; flex-shrink: 0;
+  }
+  .vocab-play-btn:hover { background: var(--primary); color: white; transform: scale(1.1); }
+  .vocab-play-btn.playing { background: var(--primary); color: white; animation: pulse-play 1s infinite; }
+  @keyframes pulse-play { 0%,100%{box-shadow:0 0 0 0 rgba(37,99,235,0.4);} 50%{box-shadow:0 0 0 8px rgba(37,99,235,0);} }
+  .vocab-word-row { display: flex; align-items: center; gap: 4px; margin-bottom: 4px; }
+  .vocab-speed-control {
+    display: flex; align-items: center; gap: 6px; margin-top: 8px; padding-top: 8px;
+    border-top: 1px dashed var(--border);
+  }
+  .vocab-speed-control span { font-size: 11px; color: var(--text-secondary); }
+  .speed-btn {
+    padding: 2px 8px; border-radius: 4px; border: 1px solid var(--border); background: white;
+    font-size: 11px; cursor: pointer; transition: all 0.2s; color: var(--text-secondary);
+  }
+  .speed-btn:hover, .speed-btn.active { background: var(--primary); color: white; border-color: var(--primary); }
+  .vocab-example-play {
+    display: inline-flex; align-items: center; gap: 4px; margin-top: 6px;
+    font-size: 12px; color: var(--primary); cursor: pointer; padding: 3px 8px;
+    border-radius: 12px; background: #eff6ff; border: none; transition: all 0.2s;
+  }
+  .vocab-example-play:hover { background: #dbeafe; }
+  /* Listening module */
+  .listen-section { margin-bottom: 20px; }
+  .listen-dialogue {
+    background: #f8fafc; border-radius: 10px; padding: 20px; margin-bottom: 16px;
+    border: 1px solid var(--border);
+  }
+  .dialogue-line {
+    display: flex; gap: 12px; margin-bottom: 14px; align-items: flex-start;
+  }
+  .dialogue-speaker {
+    font-weight: 700; font-size: 13px; color: white; background: var(--primary);
+    padding: 3px 10px; border-radius: 12px; white-space: nowrap; flex-shrink: 0;
+  }
+  .dialogue-speaker.client { background: var(--accent); }
+  .dialogue-text { font-size: 15px; line-height: 1.7; }
+  .dialogue-text .highlight { background: #fef3c7; padding: 1px 4px; border-radius: 3px; font-weight: 600; }
+  .dialogue-translation {
+    font-size: 13px; color: var(--text-secondary); margin-top: 4px;
+    display: none; border-top: 1px dashed var(--border); padding-top: 4px;
+  }
+  .dialogue-line.show-translation .dialogue-translation { display: block; }
+  /* Dialogue play buttons */
+  .scene-play-bar {
+    display: flex; gap: 8px; margin-bottom: 12px; flex-wrap: wrap;
+  }
+  .scene-play-btn {
+    padding: 8px 16px; border-radius: 8px; font-size: 13px; font-weight: 600;
+    cursor: pointer; border: 2px solid var(--primary); background: var(--primary);
+    color: white; transition: all 0.2s; display: inline-flex; align-items: center; gap: 6px;
+  }
+  .scene-play-btn:hover { background: var(--primary-dark); }
+  .scene-play-btn.playing { background: var(--accent); border-color: var(--accent); animation: pulse-play 1s infinite; }
+  .scene-play-btn.outline { background: white; color: var(--primary); }
+  .scene-play-btn.outline:hover { background: #eff6ff; }
+  .scene-play-btn.stop { background: var(--danger); border-color: var(--danger); }
+  .line-play-btn {
+    width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid var(--primary-light);
+    background: white; color: var(--primary); font-size: 11px; cursor: pointer;
+    display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0;
+    transition: all 0.2s; margin-right: 4px;
+  }
+  .line-play-btn:hover { background: var(--primary); color: white; }
+  .line-play-btn.playing { background: var(--primary); color: white; animation: pulse-play 1s infinite; }
+  .dialogue-line.now-playing { background: #eff6ff; border-radius: 8px; margin: -4px -6px; padding: 4px 6px; }
+  .listen-controls {
+    display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 16px;
+  }
+  /* Buttons */
+  .btn {
+    padding: 10px 20px; border-radius: 8px; font-size: 14px; font-weight: 600;
+    cursor: pointer; border: none; transition: all 0.2s; display: inline-flex;
+    align-items: center; gap: 6px;
+  }
+  .btn-primary { background: var(--primary); color: white; }
+  .btn-primary:hover { background: var(--primary-dark); }
+  .btn-outline { background: white; color: var(--primary); border: 2px solid var(--primary); }
+  .btn-outline:hover { background: #eff6ff; }
+  .btn-success { background: var(--success); color: white; }
+  .btn-success:hover { background: #059669; }
+  .btn-warning { background: var(--accent); color: white; }
+  .btn-warning:hover { background: #d97706; }
+  .btn-sm { padding: 6px 14px; font-size: 13px; }
+  .btn-ghost { background: transparent; color: var(--text-secondary); border: 1px solid var(--border); }
+  .btn-ghost:hover { background: #f1f5f9; }
+  /* Template module */
+  .template-block {
+    border: 1px solid var(--border); border-radius: 10px; margin-bottom: 16px;
+    overflow: hidden;
+  }
+  .template-header {
+    padding: 14px 18px; background: #f8fafc; font-weight: 700; font-size: 15px;
+    cursor: pointer; display: flex; justify-content: space-between; align-items: center;
+    border-bottom: 1px solid var(--border);
+  }
+  .template-header:hover { background: #f1f5f9; }
+  .template-body { padding: 18px; }
+  .template-en {
+    font-size: 16px; line-height: 1.8; margin-bottom: 12px; color: var(--text);
+    background: #fffbeb; padding: 14px; border-radius: 8px; border-left: 4px solid var(--accent);
+  }
+  .template-en .blank {
+    display: inline-block; min-width: 120px; border-bottom: 2px dashed var(--primary);
+    color: var(--primary); font-weight: 600; cursor: pointer; padding: 0 4px;
+    transition: all 0.2s;
+  }
+  .template-en .blank:hover { background: #dbeafe; }
+  .template-en .blank.filled { border-bottom-style: solid; background: #dbeafe; }
+  .template-cn {
+    font-size: 14px; color: var(--text-secondary); padding: 10px 14px;
+    background: #f8fafc; border-radius: 8px; display: none;
+  }
+  .template-tips {
+    font-size: 13px; color: var(--text-secondary); margin-top: 10px;
+    padding: 10px; background: #f0fdf4; border-radius: 8px;
+  }
+  .template-tips strong { color: var(--success); }
+  /* Practice module */
+  .practice-chat {
+    background: #f8fafc; border-radius: 10px; border: 1px solid var(--border);
+    height: 420px; overflow-y: auto; padding: 20px; margin-bottom: 16px;
+  }
+  .chat-msg {
+    display: flex; gap: 10px; margin-bottom: 16px; max-width: 85%;
+  }
+  .chat-msg.ai { margin-right: auto; }
+  .chat-msg.user { margin-left: auto; flex-direction: row-reverse; }
+  .chat-avatar {
+    width: 36px; height: 36px; border-radius: 50%; display: flex;
+    align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0;
+  }
+  .chat-msg.ai .chat-avatar { background: var(--primary); color: white; }
+  .chat-msg.user .chat-avatar { background: var(--accent); color: white; }
+  .chat-bubble {
+    padding: 12px 16px; border-radius: 12px; font-size: 14px; line-height: 1.6;
+  }
+  .chat-msg.ai .chat-bubble { background: white; border: 1px solid var(--border); }
+  .chat-msg.user .chat-bubble { background: var(--primary); color: white; }
+  .chat-bubble .cn-hint {
+    font-size: 12px; color: var(--text-secondary); margin-top: 6px;
+    font-style: italic; display: none;
+  }
+  .chat-msg.ai .chat-bubble .cn-hint { display: block; }
+  .chat-input-area {
+    display: flex; gap: 10px;
+  }
+  .chat-input {
+    flex: 1; padding: 12px 16px; border: 2px solid var(--border); border-radius: 10px;
+    font-size: 14px; outline: none; transition: border-color 0.2s;
+  }
+  .chat-input:focus { border-color: var(--primary); }
+  .practice-hints {
+    display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px;
+  }
+  .hint-chip {
+    padding: 6px 12px; background: #eff6ff; border: 1px solid #bfdbfe;
+    border-radius: 16px; font-size: 12px; color: var(--primary); cursor: pointer;
+    transition: all 0.2s;
+  }
+  .hint-chip:hover { background: #dbeafe; }
+  /* Quiz module */
+  .quiz-question {
+    font-size: 16px; font-weight: 600; margin-bottom: 16px; line-height: 1.6;
+  }
+  .quiz-options { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+  .quiz-option {
+    padding: 14px 18px; border: 2px solid var(--border); border-radius: 10px;
+    cursor: pointer; font-size: 14px; transition: all 0.2s; display: flex;
+    align-items: center; gap: 10px;
+  }
+  .quiz-option:hover { border-color: var(--primary-light); background: #f8fafc; }
+  .quiz-option.selected { border-color: var(--primary); background: #eff6ff; }
+  .quiz-option.correct { border-color: var(--success); background: #ecfdf5; }
+  .quiz-option.wrong { border-color: var(--danger); background: #fef2f2; }
+  .quiz-option .letter {
+    width: 28px; height: 28px; border-radius: 50%; background: #f1f5f9;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700; font-size: 13px; flex-shrink: 0;
+  }
+  .quiz-result {
+    padding: 14px; border-radius: 10px; margin-bottom: 16px; font-size: 14px;
+    display: none;
+  }
+  .quiz-result.show { display: block; }
+  .quiz-result.correct-result { background: #ecfdf5; color: #065f46; border: 1px solid #a7f3d0; }
+  .quiz-result.wrong-result { background: #fef2f2; color: #991b1b; border: 1px solid #fecaca; }
+  /* Progress */
+  .progress-bar {
+    height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden;
+    margin-bottom: 8px;
+  }
+  .progress-fill {
+    height: 100%; background: linear-gradient(90deg, var(--primary), var(--accent));
+    border-radius: 4px; transition: width 0.5s ease;
+  }
+  .progress-text { font-size: 12px; color: var(--text-secondary); text-align: right; }
+  /* Sections */
+  .section { display: none; }
+  .section.active { display: block; }
+  /* Roadmap */
+  .roadmap-phase {
+    margin-bottom: 24px;
+  }
+  .phase-title {
+    font-size: 16px; font-weight: 700; margin-bottom: 12px; padding: 10px 16px;
+    border-radius: 8px; display: flex; align-items: center; gap: 8px;
+  }
+  .phase-title.urgent { background: #fef2f2; color: #dc2626; }
+  .phase-title.core { background: #eff6ff; color: var(--primary); }
+  .phase-title.advanced { background: #f0fdf4; color: #16a34a; }
+  .roadmap-topics { display: flex; flex-direction: column; gap: 8px; padding-left: 20px; }
+  .roadmap-item {
+    padding: 12px 16px; background: white; border: 1px solid var(--border);
+    border-radius: 8px; display: flex; justify-content: space-between; align-items: center;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .roadmap-item:hover { border-color: var(--primary-light); box-shadow: var(--shadow); }
+  .roadmap-item .status {
+    font-size: 12px; padding: 3px 10px; border-radius: 12px; font-weight: 600;
+  }
+  .roadmap-item .status.current { background: #fef3c7; color: #92400e; }
+  .roadmap-item .status.upcoming { background: #f1f5f9; color: #64748b; }
+  /* Responsive */
+  @media (max-width: 768px) {
+    .header-inner { flex-direction: column; gap: 8px; }
+    .nav-inner { padding: 0 12px; }
+    .nav-tab { padding: 12px 14px; font-size: 13px; }
+    .main { padding: 16px; }
+    .vocab-grid { grid-template-columns: 1fr; }
+    .chat-msg { max-width: 95%; }
+  }
+  /* Animations */
+  @keyframes fadeIn { from { opacity:0; transform: translateY(10px); } to { opacity:1; transform: translateY(0); } }
+  .fade-in { animation: fadeIn 0.3s ease; }
+  /* Speaking practice */
+  .speak-prompt {
+    background: linear-gradient(135deg, #eff6ff, #f0f9ff); border-radius: 10px;
+    padding: 20px; margin-bottom: 16px; border: 1px solid #bfdbfe;
+  }
+  .speak-prompt .scenario {
+    font-size: 14px; color: var(--text-secondary); margin-bottom: 8px;
+  }
+  .speak-prompt .prompt-text {
+    font-size: 17px; font-weight: 600; line-height: 1.6; color: var(--text);
+  }
+  .speak-reference {
+    background: white; border: 1px solid var(--border); border-radius: 10px;
+    padding: 16px; margin-bottom: 12px; display: none;
+  }
+  .speak-reference.show { display: block; }
+  .speak-reference h4 { font-size: 14px; color: var(--success); margin-bottom: 8px; }
+  .speak-reference p { font-size: 15px; line-height: 1.8; }
+  .speak-reference .cn { font-size: 13px; color: var(--text-secondary); margin-top: 6px; }
+  /* Tab highlight pulse */
+  @keyframes pulse { 0%,100%{box-shadow:none;} 50%{box-shadow: 0 0 0 3px rgba(245,158,11,0.3);} }
+  .topic-chip.active { animation: pulse 2s ease-in-out; }
+  /* Scrollbar */
+  .practice-chat::-webkit-scrollbar { width: 6px; }
+  .practice-chat::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+  /* Toggle switch for translation */
+  .toggle-wrap { display:flex; align-items:center; gap:8px; font-size:13px; color:var(--text-secondary); }
+  .toggle { position:relative; width:44px; height:24px; cursor:pointer; }
+  .toggle input { opacity:0; width:0; height:0; }
+  .toggle .slider {
+    position:absolute; inset:0; background:#cbd5e1; border-radius:12px; transition:0.3s;
+  }
+  .toggle .slider:before {
+    content:''; position:absolute; height:18px; width:18px; left:3px; bottom:3px;
+    background:white; border-radius:50%; transition:0.3s;
+  }
+  .toggle input:checked + .slider { background:var(--primary); }
+  .toggle input:checked + .slider:before { transform:translateX(20px); }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<div class="header">
+  <div class="header-inner">
+    <div class="logo">PM English <span>Pro</span></div>
+    <div class="header-stats">
+      <span>📅 今日学习 <b id="todayMinutes">0</b> 分钟</span>
+      <span>🔥 连续 <b id="streakDays">1</b> 天</span>
+      <span>📝 已掌握 <b id="masteredWords">0</b> 词汇</span>
+    </div>
+  </div>
+</div>
+
+<!-- Navigation -->
+<div class="nav">
+  <div class="nav-inner">
+    <div class="nav-tab active" data-tab="roadmap"><span class="emoji">🗺️</span>学习路线</div>
+    <div class="nav-tab" data-tab="vocab"><span class="emoji">📖</span>词汇卡片</div>
+    <div class="nav-tab" data-tab="listen"><span class="emoji">🎧</span>听力训练</div>
+    <div class="nav-tab" data-tab="template"><span class="emoji">📋</span>话术模板</div>
+    <div class="nav-tab" data-tab="practice"><span class="emoji">🎤</span>口语练习</div>
+    <div class="nav-tab" data-tab="quiz"><span class="emoji">✅</span>测验</div>
+  </div>
+</div>
+
+<!-- Main -->
+<div class="main">
+
+  <!-- Topic Bar -->
+  <div class="topic-bar">
+    <h3>📌 当前学习主题</h3>
+    <div class="topic-chips">
+      <div class="topic-chip active" data-topic="kickoff">🚀 项目启动会 <span class="badge">紧急</span></div>
+      <div class="topic-chip" data-topic="meeting">📅 日常会议管理</div>
+      <div class="topic-chip locked" data-topic="requirement">📋 需求分析</div>
+      <div class="topic-chip locked" data-topic="technical">⚙️ 技术方案</div>
+      <div class="topic-chip locked" data-topic="progress">📊 进度管理</div>
+      <div class="topic-chip locked" data-topic="risk">⚠️ 风险管理</div>
+    </div>
+  </div>
+
+  <!-- ==================== ROADMAP ==================== -->
+  <div class="section active" id="sec-roadmap">
+    <div class="card fade-in">
+      <div class="card-title"><span class="icon">🗺️</span>学习路线图</div>
+      <p style="color:var(--text-secondary);margin-bottom:20px;">按你的工作场景设计，每个主题包含词汇、听力、模板、口语四个模块的完整训练</p>
+
+      <div class="roadmap-phase">
+        <div class="phase-title urgent">🔥 阶段一：应急实战（本周-下周）</div>
+        <div class="roadmap-topics">
+          <div class="roadmap-item" onclick="switchTopic('kickoff')">
+            <div>
+              <strong>主题1：项目启动会 Project Kickoff</strong>
+              <div style="font-size:13px;color:var(--text-secondary);">项目介绍、目标价值、范围计划、组织架构、沟通方式</div>
+            </div>
+            <span class="status current">⭐ 当前</span>
+          </div>
+          <div class="roadmap-item" onclick="switchTopic('meeting')">
+            <div>
+              <strong>主题2：日常会议管理 Meeting Facilitation</strong>
+              <div style="font-size:13px;color:var(--text-secondary);">开场议程、引导讨论、纪要确认、后续跟进</div>
+            </div>
+            <span class="status upcoming">待学习</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="roadmap-phase">
+        <div class="phase-title core">📘 阶段二：核心场景（第3-6周）</div>
+        <div class="roadmap-topics">
+          <div class="roadmap-item"><div><strong>主题3：需求分析与讨论</strong><div style="font-size:13px;color:var(--text-secondary);">需求收集确认、优先级、变更管理</div></div><span class="status upcoming">待解锁</span></div>
+          <div class="roadmap-item"><div><strong>主题4：技术方案沟通</strong><div style="font-size:13px;color:var(--text-secondary);">方案演示、技术选型、架构讨论</div></div><span class="status upcoming">待解锁</span></div>
+          <div class="roadmap-item"><div><strong>主题5：项目进度管理</strong><div style="font-size:13px;color:var(--text-secondary);">周报月报、里程碑、延期风险</div></div><span class="status upcoming">待解锁</span></div>
+          <div class="roadmap-item"><div><strong>主题6：问题与风险管理</strong><div style="font-size:13px;color:var(--text-secondary);">问题升级、风险评估、故障复盘</div></div><span class="status upcoming">待解锁</span></div>
+        </div>
+      </div>
+
+      <div class="roadmap-phase">
+        <div class="phase-title advanced">🎯 阶段三：进阶场景（第7-10周）</div>
+        <div class="roadmap-topics">
+          <div class="roadmap-item"><div><strong>主题7：敏捷迭代管理</strong></div><span class="status upcoming">待解锁</span></div>
+          <div class="roadmap-item"><div><strong>主题8：系统运维沟通</strong></div><span class="status upcoming">待解锁</span></div>
+          <div class="roadmap-item"><div><strong>主题9：客户汇报与演示</strong></div><span class="status upcoming">待解锁</span></div>
+          <div class="roadmap-item"><div><strong>主题10：商务谈判与关系</strong></div><span class="status upcoming">待解锁</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== VOCABULARY ==================== -->
+  <div class="section" id="sec-vocab">
+    <div class="card fade-in">
+      <div class="card-title"><span class="icon">📖</span>词汇卡片 — 项目启动会</div>
+
+      <!-- Stats bar -->
+      <div class="vocab-stats">
+        <div class="vocab-stat-item"><b class="total-count" id="vocabTotal">200</b>总词汇</div>
+        <div class="vocab-stat-item"><b class="mastered-count" id="vocabMastered">0</b>已掌握</div>
+        <div class="vocab-stat-item"><b class="unmastered-count" id="vocabUnmastered">0</b>未掌握</div>
+        <div class="vocab-stat-item"><b class="review-count" id="vocabReview">0</b>复习中</div>
+        <div class="progress-bar" style="flex:1;min-width:120px;"><div class="progress-fill" id="vocabProgressFill" style="width:0%"></div></div>
+        <div class="vocab-filter-btns">
+          <button class="btn btn-sm btn-ghost vocab-filter-active" onclick="filterVocab('all', this)">全部</button>
+          <button class="btn btn-sm btn-ghost" onclick="filterVocab('hide-mastered', this)">🙈 隐藏已掌握</button>
+          <button class="btn btn-sm btn-ghost" onclick="filterVocab('unmastered', this)">❌ 仅未掌握</button>
+          <button class="btn btn-sm btn-ghost" onclick="filterVocab('mastered', this)">✅ 仅已掌握</button>
+          <button class="btn btn-sm btn-ghost" onclick="filterVocab('review', this)">🔄 复习中</button>
+        </div>
+      </div>
+
+      <!-- Category filter -->
+      <div style="display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap;">
+        <button class="btn btn-sm btn-ghost" onclick="filterVocabTag('all')">全部分类</button>
+        <button class="btn btn-sm btn-ghost" onclick="filterVocabTag('core')">核心</button>
+        <button class="btn btn-sm btn-ghost" onclick="filterVocabTag('business')">商务</button>
+        <button class="btn btn-sm btn-ghost" onclick="filterVocabTag('tech')">技术</button>
+        <button class="btn btn-sm btn-ghost" onclick="filterVocabTag('retail')">零售</button>
+      </div>
+
+      <!-- Review banner (shown when there are review words) -->
+      <div class="review-banner" id="reviewBanner" style="display:none;">
+        <div class="text">🔄 上一主题遗留的待复习词汇</div>
+        <div class="count" id="reviewCount">0</div>
+      </div>
+
+      <div class="vocab-grid" id="vocabGrid"></div>
+      <p class="vocab-hint">💡 点击 🔊 播放发音 | 点击卡片翻转查看例句 | 选择「掌握」或「未掌握」标记学习进度</p>
+      <div style="text-align:center;margin-top:16px;">
+        <button class="btn btn-warning" onclick="exportReviewCards()" id="exportReviewBtn">📸 导出待复习生词卡（过滤已掌握）</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== LISTENING ==================== -->
+  <div class="section" id="sec-listen">
+    <div class="card fade-in">
+      <div class="card-title"><span class="icon">🎧</span>听力训练 — 项目启动会场景对话</div>
+      <p style="color:var(--text-secondary);margin-bottom:16px;">模拟真实项目启动会对话，练习听懂关键信息。点击每句话可以显示/隐藏中文翻译。</p>
+
+      <div class="listen-controls">
+        <button class="btn btn-primary btn-sm" onclick="toggleAllTranslations(true)">👁️ 显示全部翻译</button>
+        <button class="btn btn-outline btn-sm" onclick="toggleAllTranslations(false)">🙈 隐藏全部翻译</button>
+        <button class="btn btn-ghost btn-sm" onclick="highlightKeywords()">🔑 高亮关键词</button>
+      </div>
+
+      <div id="dialogueContainer"></div>
+
+      <div class="card" style="background:#f0fdf4;margin-top:20px;">
+        <h4 style="color:var(--success);margin-bottom:8px;">🎯 听力练习建议</h4>
+        <ol style="font-size:14px;color:var(--text-secondary);padding-left:20px;line-height:2;">
+          <li><strong>第一遍</strong>：不看翻译，尝试抓住每句的大意</li>
+          <li><strong>第二遍</strong>：打开翻译，对照理解</li>
+          <li><strong>第三遍</strong>：关闭翻译，跟读每一句（影子跟读法）</li>
+          <li><strong>第四遍</strong>：尝试用自己的话复述每段内容</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==================== TEMPLATES ==================== -->
+  <div class="section" id="sec-template">
+    <div class="card fade-in">
+      <div class="card-title"><span class="icon">📋</span>话术模板 — 项目启动会</div>
+      <p style="color:var(--text-secondary);margin-bottom:20px;">这些是你在启动会上最可能用到的表达。先熟读模板，再尝试用自己的项目信息填空。</p>
+      <div id="templateContainer"></div>
+    </div>
+  </div>
+
+  <!-- ==================== PRACTICE ==================== -->
+  <div class="section" id="sec-practice">
+    <div class="card fade-in">
+      <div class="card-title"><span class="icon">🎤</span>口语模拟 — 项目启动会</div>
+      <p style="color:var(--text-secondary);margin-bottom:16px;">模拟你在启动会中的角色，练习用英语表达。每个场景都有参考答案可以对照。</p>
+
+      <div id="speakingContainer"></div>
+    </div>
+  </div>
+
+  <!-- ==================== QUIZ ==================== -->
+  <div class="section" id="sec-quiz">
+    <div class="card fade-in">
+      <div class="card-title"><span class="icon">✅</span>综合测验 — 项目启动会</div>
+      <div class="progress-bar"><div class="progress-fill" id="quizProgress" style="width:0%"></div></div>
+      <div class="progress-text" id="quizProgressText">第 1 题 / 共 10 题</div>
+      <div id="quizContainer" style="margin-top:20px;"></div>
+      <div class="quiz-result" id="quizResult"></div>
+      <div style="display:flex;gap:10px;margin-top:16px;">
+        <button class="btn btn-primary" id="quizSubmitBtn" onclick="submitQuiz()">提交答案</button>
+        <button class="btn btn-outline" id="quizNextBtn" onclick="nextQuiz()" style="display:none;">下一题 →</button>
+      </div>
+      <div id="quizFinalResult" style="display:none;margin-top:20px;"></div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+// ============================================================
+// DATA: Topic 1 - Project Kickoff Meeting
+// ============================================================
+
+const VOCAB_DATA = {
+  kickoff: [
+  // ── A. 项目基础术语 (20) ──
+  { word: "kickoff meeting", phonetic: "/ˈkɪkɒf ˈmiːtɪŋ/", meaning: "项目启动会", tag: "core", example: "Let's schedule a kickoff meeting with the client for next Monday.", exampleCn: "我们把启动会安排在下周一跟客户开吧。" },
+  { word: "project charter", phonetic: "/ˈprɒdʒɛkt ˈtʃɑːrtər/", meaning: "项目章程", tag: "core", example: "The project charter defines the high-level scope and objectives.", exampleCn: "项目章程定义了高层级的范围和目标。" },
+  { word: "stakeholder", phonetic: "/ˈsteɪkhoʊldər/", meaning: "干系人/利益相关者", tag: "core", example: "We need to identify all key stakeholders before the kickoff.", exampleCn: "启动前我们需要确认所有关键干系人。" },
+  { word: "sponsor", phonetic: "/ˈspɒnsər/", meaning: "项目发起人", tag: "core", example: "The project sponsor has approved the budget for Phase 1.", exampleCn: "项目发起人已批准第一阶段的预算。" },
+  { word: "objective", phonetic: "/əbˈdʒɛktɪv/", meaning: "目标", tag: "core", example: "The primary objective is to modernize the retail platform.", exampleCn: "首要目标是实现零售平台的现代化。" },
+  { word: "scope", phonetic: "/skoʊp/", meaning: "范围", tag: "core", example: "This feature request is out of scope for the current phase.", exampleCn: "这个功能需求不在当前阶段的范围内。" },
+  { word: "deliverable", phonetic: "/dɪˈlɪvərəbl/", meaning: "交付物", tag: "core", example: "The main deliverables include the design document and prototype.", exampleCn: "主要交付物包括设计文档和原型。" },
+  { word: "milestone", phonetic: "/ˈmaɪlstoʊn/", meaning: "里程碑", tag: "core", example: "We have three major milestones: UAT, Go-live, and Hypercare.", exampleCn: "我们有三个主要里程碑。" },
+  { word: "timeline", phonetic: "/ˈtaɪmlaɪn/", meaning: "时间线", tag: "core", example: "The overall timeline is 6 months from kickoff to go-live.", exampleCn: "总时间线从启动到上线6个月。" },
+  { word: "workstream", phonetic: "/ˈwɜːrkstriːm/", meaning: "工作线", tag: "core", example: "The project is divided into three workstreams.", exampleCn: "项目分为三个工作线。" },
+  { word: "work breakdown structure", phonetic: "/wɜːrk ˈbreɪkdaʊn/", meaning: "工作分解结构 (WBS)", tag: "core", example: "The WBS breaks the project into manageable work packages.", exampleCn: "WBS将项目分解为可管理的工作包。" },
+  { word: "baseline", phonetic: "/ˈbeɪslaɪn/", meaning: "基线", tag: "core", example: "Once approved, this plan becomes our project baseline.", exampleCn: "一旦批准，这个计划就成为项目基线。" },
+  { word: "agenda", phonetic: "/əˈdʒɛndə/", meaning: "议程", tag: "core", example: "I'll share the meeting agenda one day before the kickoff.", exampleCn: "我会在启动会前一天分享会议议程。" },
+  { word: "action item", phonetic: "/ˈækʃən ˈaɪtəm/", meaning: "行动项", tag: "core", example: "Let me summarize the action items from today's meeting.", exampleCn: "让我总结一下今天会议的行动项。" },
+  { word: "assumption", phonetic: "/əˈsʌmpʃən/", meaning: "假设条件", tag: "core", example: "One key assumption is that the client will provide test data by Week 3.", exampleCn: "一个关键假设是客户会在第3周提供测试数据。" },
+  { word: "constraint", phonetic: "/kənˈstreɪnt/", meaning: "约束条件", tag: "core", example: "Budget and timeline are the main constraints for this project.", exampleCn: "预算和时间是这个项目的主要约束条件。" },
+  { word: "dependency", phonetic: "/dɪˈpɛndənsi/", meaning: "依赖关系", tag: "core", example: "There's a dependency on the client's API team for the integration.", exampleCn: "集成工作依赖于客户的API团队。" },
+  { word: "critical path", phonetic: "/ˈkrɪtɪkəl pæθ/", meaning: "关键路径", tag: "core", example: "Any delay on the critical path will push back the go-live date.", exampleCn: "关键路径上的任何延误都会推迟上线日期。" },
+  { word: "kick off", phonetic: "/kɪk ɒf/", meaning: "启动（动词）", tag: "core", example: "We plan to kick off the project next Monday.", exampleCn: "我们计划下周一启动项目。" },
+  { word: "engagement", phonetic: "/ɪnˈɡeɪdʒmənt/", meaning: "项目合作", tag: "core", example: "I'll be your main contact throughout this engagement.", exampleCn: "在整个项目合作期间我将是你的主要联系人。" },
+  // ── B. 目标与价值 (15) ──
+  { word: "value proposition", phonetic: "/ˈvæljuː prɒpəˈzɪʃən/", meaning: "价值主张", tag: "business", example: "The value proposition is cost reduction and scalability.", exampleCn: "价值主张是降本和可扩展性。" },
+  { word: "ROI", phonetic: "/ɑːr oʊ aɪ/", meaning: "投资回报率", tag: "business", example: "The expected ROI is 150% within the first year.", exampleCn: "预期投资回报率在第一年为150%。" },
+  { word: "KPI", phonetic: "/keɪ piː aɪ/", meaning: "关键绩效指标", tag: "business", example: "We'll define KPIs to measure success of each phase.", exampleCn: "我们会定义KPI来衡量每阶段成功。" },
+  { word: "business case", phonetic: "/ˈbɪznɪs keɪs/", meaning: "商业论证", tag: "business", example: "The business case was approved by the board.", exampleCn: "商业论证已获董事会批准。" },
+  { word: "pain point", phonetic: "/peɪn pɔɪnt/", meaning: "痛点", tag: "business", example: "The main pain point is lack of real-time inventory.", exampleCn: "主要痛点是缺乏实时库存。" },
+  { word: "benchmark", phonetic: "/ˈbɛntʃmɑːrk/", meaning: "基准/标杆", tag: "business", example: "We'll use industry benchmarks to evaluate performance.", exampleCn: "用行业基准评估性能。" },
+  { word: "success criteria", phonetic: "/səkˈsɛs kraɪˈtɪriə/", meaning: "成功标准", tag: "business", example: "Success criteria include 99.9% uptime.", exampleCn: "成功标准包括99.9%正常运行时间。" },
+  { word: "outcome", phonetic: "/ˈaʊtkʌm/", meaning: "成果", tag: "business", example: "The expected outcome is 30% faster checkout.", exampleCn: "预期成果是结账速度提升30%。" },
+  { word: "impact", phonetic: "/ˈɪmpækt/", meaning: "影响", tag: "business", example: "This will have significant impact on operations.", exampleCn: "这将对运营产生重大影响。" },
+  { word: "benefit", phonetic: "/ˈbɛnɪfɪt/", meaning: "收益", tag: "business", example: "Key benefits include reduced costs and better CX.", exampleCn: "关键收益包括降低成本和改善体验。" },
+  { word: "efficiency", phonetic: "/ɪˈfɪʃənsi/", meaning: "效率", tag: "business", example: "Automation will improve operational efficiency.", exampleCn: "自动化将提高运营效率。" },
+  { word: "optimize", phonetic: "/ˈɒptɪmaɪz/", meaning: "优化", tag: "business", example: "We aim to optimize the supply chain.", exampleCn: "我们的目标是优化供应链。" },
+  { word: "streamline", phonetic: "/ˈstriːmlaɪn/", meaning: "精简流程", tag: "business", example: "The new system will streamline order processing.", exampleCn: "新系统将简化订单处理。" },
+  { word: "leverage", phonetic: "/ˈlɛvərɪdʒ/", meaning: "利用/借助", tag: "business", example: "We can leverage existing infrastructure.", exampleCn: "我们可以利用现有基础设施。" },
+  { word: "transform", phonetic: "/trænsˈfɔːrm/", meaning: "转型", tag: "business", example: "This project will transform retail operations.", exampleCn: "这个项目将变革零售运营。" },
+  // ── C. 范围与变更 (15) ──
+  { word: "scope creep", phonetic: "/skoʊp kriːp/", meaning: "范围蔓延", tag: "core", example: "We need to avoid scope creep.", exampleCn: "我们要避免范围蔓延。" },
+  { word: "change request", phonetic: "/tʃeɪndʒ rɪˈkwɛst/", meaning: "变更请求", tag: "core", example: "Please submit a formal change request.", exampleCn: "请提交正式变更请求。" },
+  { word: "change management", phonetic: "/tʃeɪndʒ ˈmænɪdʒmənt/", meaning: "变更管理", tag: "core", example: "Changes go through our change management process.", exampleCn: "变更通过我们的变更管理流程。" },
+  { word: "in scope", phonetic: "/ɪn skoʊp/", meaning: "范围内", tag: "core", example: "Loyalty integration is in scope for Phase 2.", exampleCn: "会员集成在第二阶段范围内。" },
+  { word: "out of scope", phonetic: "/aʊt əv skoʊp/", meaning: "范围外", tag: "core", example: "Hardware procurement is out of scope.", exampleCn: "硬件采购不在范围内。" },
+  { word: "sign-off", phonetic: "/saɪn ɒf/", meaning: "签字确认", tag: "core", example: "Without sign-off, we cannot proceed.", exampleCn: "没有签字确认无法继续。" },
+  { word: "approval", phonetic: "/əˈpruːvəl/", meaning: "审批", tag: "core", example: "We're waiting for client approval.", exampleCn: "我们在等客户审批。" },
+  { word: "requirement", phonetic: "/rɪˈkwaɪərmənt/", meaning: "需求", tag: "core", example: "Finalize requirements before development.", exampleCn: "开发前确定最终需求。" },
+  { word: "specification", phonetic: "/ˌspɛsɪfɪˈkeɪʃən/", meaning: "规格说明", tag: "core", example: "The technical spec will be ready next week.", exampleCn: "技术规格说明下周准备好。" },
+  { word: "acceptance criteria", phonetic: "/əkˈsɛptəns kraɪˈtɪriə/", meaning: "验收标准", tag: "core", example: "Each story must have clear acceptance criteria.", exampleCn: "每个故事必须有清晰验收标准。" },
+  { word: "feasibility", phonetic: "/ˌfiːzəˈbɪləti/", meaning: "可行性", tag: "core", example: "We need a feasibility study first.", exampleCn: "我们先需要做可行性研究。" },
+  { word: "prerequisite", phonetic: "/priːˈrɛkwɪzɪt/", meaning: "前提条件", tag: "core", example: "Network setup is a prerequisite for deployment.", exampleCn: "网络搭建是部署的前提条件。" },
+  { word: "prioritize", phonetic: "/praɪˈɒrɪtaɪz/", meaning: "排优先级", tag: "core", example: "Prioritize features based on business value.", exampleCn: "按业务价值对功能排优先级。" },
+  { word: "backlog", phonetic: "/ˈbæklɒɡ/", meaning: "待办列表", tag: "core", example: "The product backlog contains all features.", exampleCn: "产品待办列表包含所有功能。" },
+  { word: "traceability", phonetic: "/ˌtreɪsəˈbɪləti/", meaning: "可追溯性", tag: "core", example: "Traceability ensures nothing is missed in testing.", exampleCn: "可追溯性确保测试不遗漏。" },
+  // ── D. 计划与进度 (20) ──
+  { word: "phase", phonetic: "/feɪz/", meaning: "阶段", tag: "core", example: "The project is divided into three phases.", exampleCn: "项目分为三个阶段。" },
+  { word: "sprint", phonetic: "/sprɪnt/", meaning: "迭代周期", tag: "core", example: "Each sprint lasts two weeks.", exampleCn: "每个迭代周期两周。" },
+  { word: "iteration", phonetic: "/ˌɪtəˈreɪʃən/", meaning: "迭代", tag: "core", example: "We'll refine through multiple iterations.", exampleCn: "通过多次迭代完善。" },
+  { word: "deadline", phonetic: "/ˈdɛdlaɪn/", meaning: "截止日期", tag: "core", example: "The deadline for sign-off is this Friday.", exampleCn: "签字确认截止日期是本周五。" },
+  { word: "on track", phonetic: "/ɒn træk/", meaning: "按计划进行", tag: "core", example: "The project is on track for September go-live.", exampleCn: "项目按计划在9月上线。" },
+  { word: "behind schedule", phonetic: "/bɪˈhaɪnd ˈʃɛdjuːl/", meaning: "落后于计划", tag: "core", example: "Testing is behind schedule by one week.", exampleCn: "测试落后计划一周。" },
+  { word: "ahead of schedule", phonetic: "/əˈhɛd əv ˈʃɛdjuːl/", meaning: "提前于计划", tag: "core", example: "Development is ahead of schedule.", exampleCn: "开发进度提前。" },
+  { word: "buffer", phonetic: "/ˈbʌfər/", meaning: "缓冲期", tag: "core", example: "We built in a 2-week buffer before go-live.", exampleCn: "上线前预留了2周缓冲。" },
+  { word: "lead time", phonetic: "/liːd taɪm/", meaning: "前置时间", tag: "core", example: "Hardware lead time is 4 weeks.", exampleCn: "硬件前置时间是4周。" },
+  { word: "roadmap", phonetic: "/ˈroʊdmæp/", meaning: "路线图", tag: "core", example: "Here's the product roadmap for 12 months.", exampleCn: "这是12个月的产品路线图。" },
+  { word: "Gantt chart", phonetic: "/ɡænt tʃɑːrt/", meaning: "甘特图", tag: "core", example: "I'll share the Gantt chart with dependencies.", exampleCn: "我会分享含依赖关系的甘特图。" },
+  { word: "resource allocation", phonetic: "/rɪˈsɔːrs æləˈkeɪʃən/", meaning: "资源分配", tag: "core", example: "Resource allocation is critical for deadlines.", exampleCn: "资源分配对按时完成至关重要。" },
+  { word: "capacity", phonetic: "/kəˈpæsɪti/", meaning: "产能", tag: "core", example: "Evaluate team capacity before adding tasks.", exampleCn: "增加任务前评估团队产能。" },
+  { word: "velocity", phonetic: "/vəˈlɒsɪti/", meaning: "开发速度", tag: "core", example: "Our velocity is 30 story points per sprint.", exampleCn: "我们的速度是每迭代30故事点。" },
+  { word: "ETA", phonetic: "/iː tiː eɪ/", meaning: "预计完成时间", tag: "core", example: "What's the ETA for the bug fix?", exampleCn: "bug修复的预计时间？" },
+  { word: "parallel", phonetic: "/ˈpærəlɛl/", meaning: "并行的", tag: "core", example: "Run development and testing in parallel.", exampleCn: "开发和测试并行进行。" },
+  { word: "cutover", phonetic: "/ˈkʌtoʊvər/", meaning: "系统切换", tag: "tech", example: "The cutover plan includes data migration.", exampleCn: "切换方案包括数据迁移。" },
+  { word: "dry run", phonetic: "/draɪ rʌn/", meaning: "演练", tag: "tech", example: "Let's do a dry run of deployment this weekend.", exampleCn: "周末做一次部署演练。" },
+  { word: "go/no-go", phonetic: "/ɡoʊ noʊ ɡoʊ/", meaning: "通过/不通过", tag: "core", example: "The steering committee makes the go/no-go decision.", exampleCn: "指导委员会做通过/不通过决策。" },
+  { word: "sequential", phonetic: "/sɪˈkwɛnʃəl/", meaning: "顺序的", tag: "core", example: "These tasks must be completed sequentially.", exampleCn: "这些任务必须按顺序完成。" },
+  // ── E. 团队与组织 (20) ──
+  { word: "point of contact", phonetic: "/pɔɪnt əv ˈkɒntækt/", meaning: "对接人", tag: "business", example: "Who's the POC for technical issues?", exampleCn: "技术问题的对接人是谁？" },
+  { word: "steering committee", phonetic: "/ˈstɪərɪŋ kəˈmɪti/", meaning: "指导委员会", tag: "business", example: "The steering committee meets monthly.", exampleCn: "指导委员会每月开会。" },
+  { word: "governance", phonetic: "/ˈɡʌvərnəns/", meaning: "治理机制", tag: "business", example: "The governance model includes a change control board.", exampleCn: "治理模型含变更控制委员会。" },
+  { word: "RACI matrix", phonetic: "/ˈreɪsi/", meaning: "RACI矩阵", tag: "business", example: "The RACI clarifies who's responsible for each task.", exampleCn: "RACI明确每项任务的负责人。" },
+  { word: "accountable", phonetic: "/əˈkaʊntəbl/", meaning: "负责的", tag: "business", example: "The PM is accountable for overall delivery.", exampleCn: "PM对整体交付负责。" },
+  { word: "onboard", phonetic: "/ˈɒnbɔːrd/", meaning: "入场/加入", tag: "business", example: "Onboard two more developers next sprint.", exampleCn: "下迭代加入两名开发。" },
+  { word: "ramp up", phonetic: "/ræmp ʌp/", meaning: "逐步增加", tag: "business", example: "We'll ramp up the team in Phase 2.", exampleCn: "第二阶段逐步增加团队。" },
+  { word: "handover", phonetic: "/ˈhændoʊvər/", meaning: "交接", tag: "business", example: "Proper handover is essential when members change.", exampleCn: "成员变更时妥善交接至关重要。" },
+  { word: "knowledge transfer", phonetic: "/ˈnɒlɪdʒ ˈtrænsfɜːr/", meaning: "知识转移", tag: "business", example: "KT sessions before the team transition.", exampleCn: "团队过渡前进行知识转移。" },
+  { word: "cross-functional", phonetic: "/krɒs ˈfʌŋkʃənəl/", meaning: "跨职能的", tag: "business", example: "This needs a cross-functional team.", exampleCn: "这需要一个跨职能团队。" },
+  { word: "dedicated", phonetic: "/ˈdɛdɪkeɪtɪd/", meaning: "专职的", tag: "business", example: "We need a dedicated QA resource.", exampleCn: "需要一名专职QA。" },
+  { word: "bandwidth", phonetic: "/ˈbændwɪdθ/", meaning: "人力/精力", tag: "business", example: "No bandwidth for additional tasks now.", exampleCn: "目前没有精力承接额外任务。" },
+  { word: "counterpart", phonetic: "/ˈkaʊntərpɑːrt/", meaning: "对口角色", tag: "business", example: "Your counterpart is their IT director.", exampleCn: "你的对口人是他们的IT总监。" },
+  { word: "liaison", phonetic: "/liˈeɪzɒn/", meaning: "联络人", tag: "business", example: "She's the liaison between dev and business.", exampleCn: "她是开发和业务之间的联络人。" },
+  { word: "collaborate", phonetic: "/kəˈlæbəreɪt/", meaning: "协作", tag: "business", example: "Teams need to collaborate closely.", exampleCn: "团队需要紧密协作。" },
+  { word: "vendor", phonetic: "/ˈvɛndər/", meaning: "供应商", tag: "business", example: "Working with three third-party vendors.", exampleCn: "与三家第三方供应商合作。" },
+  { word: "SME", phonetic: "/ɛs ɛm iː/", meaning: "领域专家", tag: "business", example: "We need an SME from retail operations.", exampleCn: "需要零售运营的领域专家。" },
+  { word: "end user", phonetic: "/ɛnd ˈjuːzər/", meaning: "最终用户", tag: "business", example: "End user training before go-live.", exampleCn: "上线前进行最终用户培训。" },
+  { word: "delegate", phonetic: "/ˈdɛlɪɡeɪt/", meaning: "委派", tag: "business", example: "I'll delegate standups to the tech lead.", exampleCn: "我会把站会委派给技术负责人。" },
+  { word: "subcontractor", phonetic: "/ˈsʌbkɒntræktər/", meaning: "分包商", tag: "business", example: "Testing handled by a subcontractor.", exampleCn: "测试由分包商负责。" },
+  // ── F. 沟通与会议 (20) ──
+  { word: "cadence", phonetic: "/ˈkeɪdəns/", meaning: "节奏/频率", tag: "business", example: "Weekly cadence for status meetings.", exampleCn: "状态会议每周一次的节奏。" },
+  { word: "escalation", phonetic: "/ˌɛskəˈleɪʃən/", meaning: "升级上报", tag: "business", example: "Critical issues require escalation within 4 hours.", exampleCn: "关键问题需4小时内升级上报。" },
+  { word: "alignment", phonetic: "/əˈlaɪnmənt/", meaning: "对齐/一致", tag: "business", example: "Get alignment on next steps.", exampleCn: "就下一步达成一致。" },
+  { word: "follow up", phonetic: "/ˈfɒloʊ ʌp/", meaning: "跟进", tag: "business", example: "I'll follow up on pending requirements.", exampleCn: "我会跟进待确认的需求。" },
+  { word: "touch base", phonetic: "/tʌtʃ beɪs/", meaning: "碰一下", tag: "business", example: "Let me touch base with the tech team.", exampleCn: "让我跟技术团队碰一下。" },
+  { word: "loop in", phonetic: "/luːp ɪn/", meaning: "拉入/知会", tag: "business", example: "Loop in the security team.", exampleCn: "把安全团队拉入讨论。" },
+  { word: "take offline", phonetic: "/teɪk ˈɒflaɪn/", meaning: "会后单独讨论", tag: "business", example: "Let's take this offline.", exampleCn: "这个我们会后单独讨论。" },
+  { word: "circle back", phonetic: "/ˈsɜːrkl bæk/", meaning: "回过头来再谈", tag: "business", example: "I'll circle back after checking.", exampleCn: "确认后回过头来再谈。" },
+  { word: "heads up", phonetic: "/hɛdz ʌp/", meaning: "提前知会", tag: "business", example: "Heads up — we may reschedule the demo.", exampleCn: "提前知会——可能重新安排演示。" },
+  { word: "sync", phonetic: "/sɪŋk/", meaning: "同步沟通", tag: "business", example: "Quick sync before the client meeting.", exampleCn: "客户会议前快速同步一下。" },
+  { word: "debrief", phonetic: "/diːˈbriːf/", meaning: "复盘", tag: "business", example: "Debrief session after the presentation.", exampleCn: "演示后做一个复盘。" },
+  { word: "minutes", phonetic: "/ˈmɪnɪts/", meaning: "会议纪要", tag: "business", example: "I'll distribute minutes by end of day.", exampleCn: "今天结束前发出会议纪要。" },
+  { word: "status update", phonetic: "/ˈsteɪtəs ˈʌpdeɪt/", meaning: "状态更新", tag: "business", example: "Weekly status update every Friday.", exampleCn: "每周五发送状态更新。" },
+  { word: "recap", phonetic: "/ˈriːkæp/", meaning: "总结回顾", tag: "business", example: "Quick recap of today's discussion.", exampleCn: "快速总结今天的讨论。" },
+  { word: "clarify", phonetic: "/ˈklærɪfaɪ/", meaning: "澄清", tag: "business", example: "Could you clarify the requirement?", exampleCn: "能澄清一下这个需求吗？" },
+  { word: "elaborate", phonetic: "/ɪˈlæbəreɪt/", meaning: "详细说明", tag: "business", example: "Could you elaborate on the user flow?", exampleCn: "能详细说明用户流程吗？" },
+  { word: "consensus", phonetic: "/kənˈsɛnsəs/", meaning: "共识", tag: "business", example: "We need consensus on the approach.", exampleCn: "我们需要在方案上达成共识。" },
+  { word: "pushback", phonetic: "/ˈpʊʃbæk/", meaning: "反对意见", tag: "business", example: "Some pushback from the client on timeline.", exampleCn: "客户对时间线有反对意见。" },
+  { word: "buy-in", phonetic: "/ˈbaɪ ɪn/", meaning: "认同/支持", tag: "business", example: "Need buy-in from all stakeholders.", exampleCn: "需要所有干系人的认同。" },
+  { word: "on the same page", phonetic: "/ɒn ðə seɪm peɪdʒ/", meaning: "意见一致", tag: "business", example: "Make sure we're on the same page.", exampleCn: "确保大家意见一致。" },
+  // ── G. 风险与问题 (20) ──
+  { word: "risk", phonetic: "/rɪsk/", meaning: "风险", tag: "core", example: "We've identified 5 key risks.", exampleCn: "已识别5个关键风险。" },
+  { word: "risk register", phonetic: "/rɪsk ˈrɛdʒɪstər/", meaning: "风险登记册", tag: "core", example: "Risk register reviewed in each steering meeting.", exampleCn: "每次指导委员会评审风险登记册。" },
+  { word: "mitigation", phonetic: "/ˌmɪtɪˈɡeɪʃən/", meaning: "缓解", tag: "core", example: "Mitigation plan includes adding a buffer.", exampleCn: "缓解方案包括增加缓冲期。" },
+  { word: "contingency", phonetic: "/kənˈtɪndʒənsi/", meaning: "应急方案", tag: "core", example: "Contingency plan if vendor delivery is late.", exampleCn: "供应商延迟交付的应急方案。" },
+  { word: "blocker", phonetic: "/ˈblɒkər/", meaning: "阻塞项", tag: "core", example: "Missing API credentials are a blocker.", exampleCn: "缺少API凭证是阻塞项。" },
+  { word: "workaround", phonetic: "/ˈwɜːrkəraʊnd/", meaning: "临时方案", tag: "core", example: "Workaround while permanent fix is in progress.", exampleCn: "永久修复进行中的临时方案。" },
+  { word: "showstopper", phonetic: "/ˈʃoʊstɒpər/", meaning: "致命问题", tag: "core", example: "This bug is a showstopper.", exampleCn: "这个bug是致命问题。" },
+  { word: "bottleneck", phonetic: "/ˈbɒtlnɛk/", meaning: "瓶颈", tag: "core", example: "Approval process is the main bottleneck.", exampleCn: "审批流程是主要瓶颈。" },
+  { word: "issue log", phonetic: "/ˈɪʃuː lɒɡ/", meaning: "问题日志", tag: "core", example: "Log new issues immediately.", exampleCn: "立即记录新问题。" },
+  { word: "severity", phonetic: "/sɪˈvɛrɪti/", meaning: "严重程度", tag: "core", example: "This is severity-1 — immediate attention.", exampleCn: "一级严重——需立即处理。" },
+  { word: "root cause", phonetic: "/ruːt kɔːz/", meaning: "根本原因", tag: "tech", example: "Identify root cause before implementing fix.", exampleCn: "实施修复前找到根本原因。" },
+  { word: "post-mortem", phonetic: "/poʊst ˈmɔːrtəm/", meaning: "事后复盘", tag: "tech", example: "Schedule a post-mortem for this incident.", exampleCn: "安排一次事故复盘。" },
+  { word: "lesson learned", phonetic: "/ˈlɛsən lɜːrnd/", meaning: "经验教训", tag: "core", example: "Document lessons learned at phase end.", exampleCn: "阶段结束时记录经验教训。" },
+  { word: "proactive", phonetic: "/proʊˈæktɪv/", meaning: "主动的", tag: "business", example: "Be proactive in identifying risks.", exampleCn: "主动识别风险。" },
+  { word: "flag", phonetic: "/flæɡ/", meaning: "标记/提出", tag: "business", example: "I want to flag a potential risk.", exampleCn: "我想提出一个潜在风险。" },
+  { word: "trade-off", phonetic: "/ˈtreɪd ɒf/", meaning: "取舍", tag: "business", example: "Trade-off between speed and quality.", exampleCn: "速度和质量的取舍。" },
+  { word: "fallback", phonetic: "/ˈfɔːlbæk/", meaning: "后备方案", tag: "core", example: "Fallback is reverting to the old system.", exampleCn: "后备方案是回退到旧系统。" },
+  { word: "exposure", phonetic: "/ɪkˈspoʊʒər/", meaning: "风险敞口", tag: "core", example: "Risk exposure increases if vendor delays.", exampleCn: "供应商延迟则风险敞口增加。" },
+  { word: "probability", phonetic: "/ˌprɒbəˈbɪləti/", meaning: "可能性", tag: "core", example: "High probability of delay without data.", exampleCn: "没有数据则延误可能性很高。" },
+  { word: "mitigate", phonetic: "/ˈmɪtɪɡeɪt/", meaning: "缓解(v)", tag: "core", example: "Add testing resources to mitigate risk.", exampleCn: "增加测试资源来缓解风险。" },
+  // ── H. 技术与系统 (30) ──
+  { word: "go-live", phonetic: "/ɡoʊ laɪv/", meaning: "上线", tag: "tech", example: "Go-live plan includes rollback strategy.", exampleCn: "上线方案包含回退策略。" },
+  { word: "UAT", phonetic: "/juː eɪ tiː/", meaning: "用户验收测试", tag: "tech", example: "Client team participates in UAT.", exampleCn: "客户团队参与UAT。" },
+  { word: "SLA", phonetic: "/ɛs ɛl eɪ/", meaning: "服务等级协议", tag: "tech", example: "SLA guarantees 99.9% uptime.", exampleCn: "SLA保证99.9%运行时间。" },
+  { word: "deployment", phonetic: "/dɪˈplɔɪmənt/", meaning: "部署", tag: "tech", example: "Deployment window is Saturday night.", exampleCn: "部署窗口在周六晚上。" },
+  { word: "scalability", phonetic: "/ˌskeɪləˈbɪləti/", meaning: "可扩展性", tag: "tech", example: "Scalability for peak shopping seasons.", exampleCn: "购物旺季的可扩展性。" },
+  { word: "hypercare", phonetic: "/ˈhaɪpərker/", meaning: "超级保障期", tag: "tech", example: "4-week hypercare after go-live.", exampleCn: "上线后4周超级保障期。" },
+  { word: "rollback", phonetic: "/ˈroʊlbæk/", meaning: "回退", tag: "tech", example: "Execute rollback if deployment fails.", exampleCn: "部署失败则执行回退。" },
+  { word: "hotfix", phonetic: "/ˈhɒtfɪks/", meaning: "紧急修复", tag: "tech", example: "Push a hotfix for payment module.", exampleCn: "给支付模块推紧急修复。" },
+  { word: "regression", phonetic: "/rɪˈɡrɛʃən/", meaning: "功能退化", tag: "tech", example: "Regression found in checkout flow.", exampleCn: "在结账流程中发现退化。" },
+  { word: "sandbox", phonetic: "/ˈsændbɒks/", meaning: "沙箱环境", tag: "tech", example: "Test in sandbox environment first.", exampleCn: "先在沙箱环境中测试。" },
+  { word: "integration", phonetic: "/ˌɪntɪˈɡreɪʃən/", meaning: "集成", tag: "tech", example: "ERP integration in Phase 2.", exampleCn: "ERP集成在第二阶段。" },
+  { word: "API", phonetic: "/eɪ piː aɪ/", meaning: "应用程序接口", tag: "tech", example: "Need API docs to start integration.", exampleCn: "需要API文档开始对接。" },
+  { word: "cloud migration", phonetic: "/klaʊd maɪˈɡreɪʃən/", meaning: "云迁移", tag: "tech", example: "Cloud migration in three phases.", exampleCn: "云迁移分三个阶段。" },
+  { word: "downtime", phonetic: "/ˈdaʊntaɪm/", meaning: "停机时间", tag: "tech", example: "Minimize downtime during migration.", exampleCn: "迁移期间减少停机。" },
+  { word: "load testing", phonetic: "/loʊd ˈtɛstɪŋ/", meaning: "负载测试", tag: "tech", example: "Load testing simulates 10x traffic.", exampleCn: "负载测试模拟10倍流量。" },
+  { word: "latency", phonetic: "/ˈleɪtənsi/", meaning: "延迟", tag: "tech", example: "API latency under 200ms.", exampleCn: "API延迟200毫秒以内。" },
+  { word: "uptime", phonetic: "/ˈʌptaɪm/", meaning: "正常运行时间", tag: "tech", example: "Target 99.9% uptime.", exampleCn: "目标99.9%正常运行。" },
+  { word: "microservices", phonetic: "/ˈmaɪkroʊˌsɜːrvɪsɪz/", meaning: "微服务", tag: "tech", example: "Built on microservices architecture.", exampleCn: "基于微服务架构构建。" },
+  { word: "CI/CD", phonetic: "/siː aɪ siː diː/", meaning: "持续集成/部署", tag: "tech", example: "CI/CD pipeline automates testing.", exampleCn: "CI/CD流水线自动化测试。" },
+  { word: "monitoring", phonetic: "/ˈmɒnɪtərɪŋ/", meaning: "监控", tag: "tech", example: "Real-time monitoring for anomalies.", exampleCn: "实时监控异常。" },
+  { word: "environment", phonetic: "/ɪnˈvaɪrənmənt/", meaning: "环境", tag: "tech", example: "Three environments: dev, staging, production.", exampleCn: "三个环境：开发、预发布、生产。" },
+  { word: "staging", phonetic: "/ˈsteɪdʒɪŋ/", meaning: "预发布环境", tag: "tech", example: "Validate in staging before production.", exampleCn: "上生产前在预发布环境验证。" },
+  { word: "production", phonetic: "/prəˈdʌkʃən/", meaning: "生产环境", tag: "tech", example: "Never deploy untested code to production.", exampleCn: "永远不要部署未测试代码到生产。" },
+  { word: "performance", phonetic: "/pərˈfɔːrməns/", meaning: "性能", tag: "tech", example: "Performance must meet SLA.", exampleCn: "性能必须满足SLA。" },
+  { word: "throughput", phonetic: "/ˈθruːpʊt/", meaning: "吞吐量", tag: "tech", example: "Handle 1,000 transactions per second.", exampleCn: "处理每秒1000笔交易。" },
+  { word: "availability", phonetic: "/əˌveɪləˈbɪləti/", meaning: "可用性", tag: "tech", example: "High availability for POS system.", exampleCn: "POS系统高可用性。" },
+  { word: "failover", phonetic: "/ˈfeɪloʊvər/", meaning: "故障切换", tag: "tech", example: "Automatic failover for zero downtime.", exampleCn: "自动故障切换实现零停机。" },
+  { word: "redundancy", phonetic: "/rɪˈdʌndənsi/", meaning: "冗余", tag: "tech", example: "Built-in redundancy for failover.", exampleCn: "内置冗余实现故障切换。" },
+  { word: "containerization", phonetic: "/kənˌteɪnəraɪˈzeɪʃən/", meaning: "容器化", tag: "tech", example: "Containerization enables consistent deployment.", exampleCn: "容器化实现一致部署。" },
+  { word: "dashboard", phonetic: "/ˈdæʃbɔːrd/", meaning: "看板", tag: "tech", example: "Project dashboard shows real-time KPIs.", exampleCn: "项目看板展示实时KPI。" },
+  // ── I. 零售行业 (20) ──
+  { word: "POS system", phonetic: "/piː oʊ ɛs/", meaning: "收银系统", tag: "retail", example: "New POS supports online and offline.", exampleCn: "新POS支持线上线下。" },
+  { word: "omnichannel", phonetic: "/ˈɒmnɪˌtʃænəl/", meaning: "全渠道", tag: "retail", example: "Seamless omnichannel experience.", exampleCn: "无缝的全渠道体验。" },
+  { word: "inventory management", phonetic: "/ˈɪnvəntɔːri/", meaning: "库存管理", tag: "retail", example: "Real-time inventory prevents stockouts.", exampleCn: "实时库存防止缺货。" },
+  { word: "supply chain", phonetic: "/səˈplaɪ tʃeɪn/", meaning: "供应链", tag: "retail", example: "Supply chain disruptions are a major risk.", exampleCn: "供应链中断是重大风险。" },
+  { word: "SKU", phonetic: "/ɛs keɪ juː/", meaning: "库存量单位", tag: "retail", example: "Handle 50,000+ SKUs across stores.", exampleCn: "处理所有门店5万+SKU。" },
+  { word: "loyalty program", phonetic: "/ˈlɔɪəlti/", meaning: "会员计划", tag: "retail", example: "Loyalty integration in Phase 2.", exampleCn: "会员集成在第二阶段。" },
+  { word: "checkout", phonetic: "/ˈtʃɛkaʊt/", meaning: "结账", tag: "retail", example: "Optimize checkout to reduce wait time.", exampleCn: "优化结账减少等待时间。" },
+  { word: "promotion", phonetic: "/prəˈmoʊʃən/", meaning: "促销", tag: "retail", example: "Support complex promotion rules.", exampleCn: "支持复杂促销规则。" },
+  { word: "fulfillment", phonetic: "/fʊlˈfɪlmənt/", meaning: "订单履行", tag: "retail", example: "Nearest warehouse fulfillment saves time.", exampleCn: "最近仓库履行节省时间。" },
+  { word: "footfall", phonetic: "/ˈfʊtfɔːl/", meaning: "客流量", tag: "retail", example: "Footfall up 40% during holidays.", exampleCn: "假日客流量增40%。" },
+  { word: "stockout", phonetic: "/ˈstɒkaʊt/", meaning: "缺货", tag: "retail", example: "Stockouts cause revenue loss.", exampleCn: "缺货导致收入损失。" },
+  { word: "replenishment", phonetic: "/rɪˈplɛnɪʃmənt/", meaning: "补货", tag: "retail", example: "Automatic replenishment keeps shelves stocked.", exampleCn: "自动补货保持货架充足。" },
+  { word: "warehouse", phonetic: "/ˈwɛərhaʊs/", meaning: "仓库", tag: "retail", example: "Central warehouse serves 200 stores.", exampleCn: "中央仓库服务200家店。" },
+  { word: "barcode", phonetic: "/ˈbɑːrkoʊd/", meaning: "条形码", tag: "retail", example: "Every product needs a scannable barcode.", exampleCn: "每个产品需要可扫描条形码。" },
+  { word: "merchandising", phonetic: "/ˈmɜːrtʃəndaɪzɪŋ/", meaning: "商品陈列", tag: "retail", example: "Merchandising manages placement and pricing.", exampleCn: "商品陈列管理摆放和定价。" },
+  { word: "procurement", phonetic: "/prəˈkjʊərmənt/", meaning: "采购", tag: "retail", example: "Automate the procurement process.", exampleCn: "自动化采购流程。" },
+  { word: "margin", phonetic: "/ˈmɑːrdʒɪn/", meaning: "利润率", tag: "retail", example: "Protect margins during promotions.", exampleCn: "促销时保护利润率。" },
+  { word: "shrinkage", phonetic: "/ˈʃrɪŋkɪdʒ/", meaning: "损耗", tag: "retail", example: "Reducing shrinkage is a key objective.", exampleCn: "减少损耗是关键目标。" },
+  { word: "planogram", phonetic: "/ˈplænəɡræm/", meaning: "货架陈列图", tag: "retail", example: "Planogram defines shelf product layout.", exampleCn: "陈列图定义货架产品布局。" },
+  { word: "click and collect", phonetic: "/klɪk ænd kəˈlɛkt/", meaning: "线上下单门店自提", tag: "retail", example: "Click and collect is very popular.", exampleCn: "线上下单门店自提很流行。" },
+  // ── J. 商务与合同 (20) ──
+  { word: "SOW", phonetic: "/ɛs oʊ ˈdʌbljuː/", meaning: "工作说明书", tag: "business", example: "SOW defines scope, deliverables, timeline.", exampleCn: "SOW定义范围、交付物、时间线。" },
+  { word: "contract", phonetic: "/ˈkɒntrækt/", meaning: "合同", tag: "business", example: "Contract signed by both parties.", exampleCn: "合同已由双方签署。" },
+  { word: "budget", phonetic: "/ˈbʌdʒɪt/", meaning: "预算", tag: "business", example: "Budget includes dev and infrastructure costs.", exampleCn: "预算含开发和基础设施成本。" },
+  { word: "cost overrun", phonetic: "/kɒst ˈoʊvərʌn/", meaning: "成本超支", tag: "business", example: "Prevent cost overruns by controlling scope.", exampleCn: "通过控制范围防止超支。" },
+  { word: "invoice", phonetic: "/ˈɪnvɔɪs/", meaning: "发票", tag: "business", example: "Invoice sent after each milestone.", exampleCn: "每个里程碑后发送发票。" },
+  { word: "NDA", phonetic: "/ɛn diː eɪ/", meaning: "保密协议", tag: "business", example: "NDA signed before sharing details.", exampleCn: "分享细节前签署保密协议。" },
+  { word: "SaaS", phonetic: "/sæs/", meaning: "软件即服务", tag: "tech", example: "Delivered as a SaaS platform.", exampleCn: "以SaaS平台形式交付。" },
+  { word: "compliance", phonetic: "/kəmˈplaɪəns/", meaning: "合规", tag: "business", example: "Must comply with data protection regulations.", exampleCn: "必须符合数据保护法规。" },
+  { word: "audit", phonetic: "/ˈɔːdɪt/", meaning: "审计", tag: "business", example: "Security audit scheduled next month.", exampleCn: "安全审计安排在下月。" },
+  { word: "pilot", phonetic: "/ˈpaɪlət/", meaning: "试点", tag: "business", example: "Pilot in 5 stores before full rollout.", exampleCn: "全面推广前在5家店试点。" },
+  { word: "rollout", phonetic: "/ˈroʊlaʊt/", meaning: "推广", tag: "business", example: "Nationwide rollout takes 3 months.", exampleCn: "全国推广耗时3个月。" },
+  { word: "turnkey", phonetic: "/ˈtɜːrnkiː/", meaning: "交钥匙", tag: "business", example: "Delivering a turnkey solution.", exampleCn: "交付交钥匙方案。" },
+  { word: "proof of concept", phonetic: "/pruːf əv ˈkɒnsɛpt/", meaning: "概念验证 (POC)", tag: "tech", example: "Start with a POC to validate approach.", exampleCn: "先做概念验证来验证方案。" },
+  { word: "MVP", phonetic: "/ɛm viː piː/", meaning: "最小可行产品", tag: "tech", example: "MVP includes core checkout and inventory.", exampleCn: "MVP含核心结账和库存功能。" },
+  { word: "warranty", phonetic: "/ˈwɒrənti/", meaning: "保修期", tag: "business", example: "12-month warranty period.", exampleCn: "12个月保修期。" },
+  { word: "license", phonetic: "/ˈlaɪsəns/", meaning: "许可证", tag: "business", example: "500 user licenses needed.", exampleCn: "需要500个用户许可。" },
+  { word: "subscription", phonetic: "/səbˈskrɪpʃən/", meaning: "订阅", tag: "business", example: "SaaS subscription billed annually.", exampleCn: "SaaS订阅按年计费。" },
+  { word: "payment terms", phonetic: "/ˈpeɪmənt tɜːrmz/", meaning: "付款条件", tag: "business", example: "Net 30 days from invoice date.", exampleCn: "发票日期后30天内付款。" },
+  { word: "due diligence", phonetic: "/djuː ˈdɪlɪdʒəns/", meaning: "尽职调查", tag: "business", example: "Due diligence before vendor selection.", exampleCn: "选择供应商前做尽职调查。" },
+  { word: "scalable", phonetic: "/ˈskeɪləbl/", meaning: "可扩展的", tag: "tech", example: "Scalable solution that grows with business.", exampleCn: "能随业务增长扩展的方案。" },
+  // ── K. 项目流程与方法论 (20) ──
+  { word: "methodology", phonetic: "/ˌmɛθəˈdɒlədʒi/", meaning: "方法论", tag: "core", example: "We follow an agile methodology for this project.", exampleCn: "这个项目我们采用敏捷方法论。" },
+  { word: "agile", phonetic: "/ˈædʒaɪl/", meaning: "敏捷的/敏捷开发", tag: "core", example: "Our agile approach allows us to adapt quickly to changing requirements.", exampleCn: "我们的敏捷方法让我们能快速适应需求变化。" },
+  { word: "waterfall", phonetic: "/ˈwɔːtərfɔːl/", meaning: "瀑布式（传统开发流程）", tag: "core", example: "This project uses a hybrid of waterfall and agile.", exampleCn: "这个项目采用瀑布式和敏捷的混合模式。" },
+  { word: "scrum", phonetic: "/skrʌm/", meaning: "Scrum（敏捷框架）", tag: "core", example: "We run scrum with 2-week sprints and daily standups.", exampleCn: "我们运行Scrum，2周迭代加每日站会。" },
+  { word: "standup", phonetic: "/ˈstændʌp/", meaning: "站会（每日简会）", tag: "core", example: "The daily standup is a 15-minute sync to discuss blockers.", exampleCn: "每日站会是15分钟的同步，讨论阻塞项。" },
+  { word: "sprint planning", phonetic: "/sprɪnt ˈplænɪŋ/", meaning: "迭代计划会", tag: "core", example: "In sprint planning, we decide which user stories to include.", exampleCn: "在迭代计划会上我们决定包含哪些用户故事。" },
+  { word: "sprint review", phonetic: "/sprɪnt rɪˈvjuː/", meaning: "迭代评审会", tag: "core", example: "During the sprint review, we demo completed features to the client.", exampleCn: "在迭代评审会上，我们向客户演示完成的功能。" },
+  { word: "retrospective", phonetic: "/ˌrɛtrəˈspɛktɪv/", meaning: "回顾会（复盘）", tag: "core", example: "The retrospective helps us improve our process every sprint.", exampleCn: "回顾会帮助我们每个迭代改进流程。" },
+  { word: "user story", phonetic: "/ˈjuːzər ˈstɔːri/", meaning: "用户故事", tag: "core", example: "Each user story describes a feature from the end user perspective.", exampleCn: "每个用户故事从最终用户角度描述一个功能。" },
+  { word: "story point", phonetic: "/ˈstɔːri pɔɪnt/", meaning: "故事点（工作量度量）", tag: "core", example: "We estimate complexity using story points, not hours.", exampleCn: "我们用故事点而非小时来估算复杂度。" },
+  { word: "definition of done", phonetic: "/ˌdɛfɪˈnɪʃən əv dʌn/", meaning: "完成定义（DoD）", tag: "core", example: "The definition of done includes code review, testing, and documentation.", exampleCn: "完成定义包括代码评审、测试和文档。" },
+  { word: "code review", phonetic: "/koʊd rɪˈvjuː/", meaning: "代码评审", tag: "tech", example: "Every pull request must go through code review before merging.", exampleCn: "每个代码提交在合并前必须经过代码评审。" },
+  { word: "release", phonetic: "/rɪˈliːs/", meaning: "发布/版本发布", tag: "tech", example: "We plan a release every two weeks after sprint completion.", exampleCn: "我们计划每个迭代结束后两周发布一次。" },
+  { word: "demo", phonetic: "/ˈdɛmoʊ/", meaning: "演示", tag: "core", example: "We will demo the new features to the client every sprint.", exampleCn: "我们每个迭代向客户演示新功能。" },
+  { word: "feedback loop", phonetic: "/ˈfiːdbæk luːp/", meaning: "反馈循环", tag: "core", example: "Short feedback loops help us catch issues early.", exampleCn: "短反馈循环帮助我们尽早发现问题。" },
+  { word: "increment", phonetic: "/ˈɪŋkrɪmənt/", meaning: "增量（每个迭代交付的成果）", tag: "core", example: "Each sprint delivers a working increment of the product.", exampleCn: "每个迭代交付一个可工作的产品增量。" },
+  { word: "continuous improvement", phonetic: "/kənˈtɪnjuəs ɪmˈpruːvmənt/", meaning: "持续改进", tag: "core", example: "Continuous improvement is at the heart of our agile practice.", exampleCn: "持续改进是我们敏捷实践的核心。" },
+  { word: "quality assurance", phonetic: "/ˈkwɒləti əˈʃʊərəns/", meaning: "质量保证 (QA)", tag: "tech", example: "Quality assurance is integrated into every phase of development.", exampleCn: "质量保证融入开发的每个阶段。" },
+  { word: "sign-off process", phonetic: "/saɪn ɒf ˈprɒsɛs/", meaning: "签字确认流程", tag: "core", example: "The sign-off process requires approval from both PM and client.", exampleCn: "签字确认流程需要PM和客户双方审批。" },
+  { word: "deliverable review", phonetic: "/dɪˈlɪvərəbl rɪˈvjuː/", meaning: "交付物评审", tag: "core", example: "A deliverable review is conducted at each milestone.", exampleCn: "每个里程碑都进行交付物评审。" },
+  ]
+};
+
+const DIALOGUE_DATA = {
+  kickoff: [
+    {
+      title: "场景一：开场与项目介绍",
+      lines: [
+        { speaker: "PM", text: "Good morning everyone. Thank you for joining the <span class='highlight'>kickoff meeting</span> for the Cloud Retail Platform project. I'm the project manager from CloudTech, and I'll be your main <span class='highlight'>point of contact</span> throughout this engagement.", cn: "大家早上好。感谢参加云零售平台项目的启动会。我是CloudTech的项目经理，在整个项目过程中我将是大家的主要对接人。" },
+        { speaker: "PM", text: "Before we dive in, let me quickly go through today's <span class='highlight'>agenda</span>. We'll cover the project <span class='highlight'>objectives</span>, <span class='highlight'>scope</span>, <span class='highlight'>timeline</span>, team structure, and communication plan.", cn: "在开始之前，让我快速过一下今天的议程。我们会覆盖项目目标、范围、时间线、团队结构和沟通计划。" },
+        { speaker: "Client", text: "Sounds good. We also have a few questions about the <span class='highlight'>deployment</span> approach, if there's time.", cn: "听起来不错。如果有时间的话，我们还有一些关于部署方案的问题。" },
+        { speaker: "PM", text: "Absolutely, we'll have a Q&A session at the end. Let's make sure we cover everything.", cn: "当然，我们最后会有问答环节。确保我们把所有问题都覆盖到。" }
+      ]
+    },
+    {
+      title: "场景二：项目目标与价值",
+      lines: [
+        { speaker: "PM", text: "So, the primary <span class='highlight'>objective</span> of this project is to modernize your retail IT infrastructure by migrating your existing on-premise systems to our cloud platform.", cn: "那么，这个项目的首要目标是通过将您现有的本地系统迁移到我们的云平台，来实现零售IT基础设施的现代化。" },
+        { speaker: "PM", text: "The key business values include: improved <span class='highlight'>scalability</span> during peak seasons, real-time <span class='highlight'>inventory management</span> across all store locations, and a unified <span class='highlight'>omnichannel</span> customer experience.", cn: "核心业务价值包括：旺季期间更好的可扩展性、所有门店的实时库存管理，以及统一的全渠道客户体验。" },
+        { speaker: "Client", text: "That <span class='highlight'>aligns</span> with what we discussed earlier. One thing I want to confirm — does the scope cover the loyalty program integration as well?", cn: "这与我们之前讨论的一致。我想确认一点——范围是否也包括会员积分系统的集成？" },
+        { speaker: "PM", text: "Yes, the loyalty program integration is included in Phase 2. I'll go into more detail when we discuss the <span class='highlight'>scope</span>.", cn: "是的，会员积分系统集成包含在第二阶段。我们讨论范围的时候我会详细说明。" }
+      ]
+    },
+    {
+      title: "场景三：计划与里程碑",
+      lines: [
+        { speaker: "PM", text: "Let me walk you through the project <span class='highlight'>timeline</span>. The overall duration is 6 months, divided into three phases.", cn: "让我带大家过一下项目时间线。总体持续6个月，分为三个阶段。" },
+        { speaker: "PM", text: "Phase 1 is the foundation setup — infrastructure provisioning and core system migration. The <span class='highlight'>milestone</span> for Phase 1 is the completion of the pilot store deployment, targeted for the end of Month 2.", cn: "第一阶段是基础搭建——基础设施配置和核心系统迁移。第一阶段的里程碑是试点门店部署完成，目标在第2个月底。" },
+        { speaker: "PM", text: "Phase 2 covers the full rollout and integration, with <span class='highlight'>UAT</span> planned for Month 5. Phase 3 is <span class='highlight'>go-live</span> and the 4-week <span class='highlight'>hypercare</span> period.", cn: "第二阶段覆盖全面推广和集成，UAT计划在第5个月。第三阶段是上线和4周的超级保障期。" },
+        { speaker: "Client", text: "Month 5 for UAT — that's tight. Can we discuss the risk if there are delays?", cn: "第5个月做UAT——时间挺紧的。我们能讨论一下如果延期的风险吗？" },
+        { speaker: "PM", text: "Good point. We've built in a 2-week buffer before go-live specifically for that. I'll cover the <span class='highlight'>risk management</span> approach shortly.", cn: "好问题。我们在上线前特意预留了2周的缓冲期。我稍后会介绍风险管理的方案。" }
+      ]
+    },
+    {
+      title: "场景四：团队与沟通计划",
+      lines: [
+        { speaker: "PM", text: "Now let me introduce the team structure. On our side, the project is organized into three <span class='highlight'>workstreams</span>: development, testing, and cloud operations.", cn: "现在让我介绍团队结构。我们这边，项目分为三个工作线：开发、测试和云运维。" },
+        { speaker: "PM", text: "For the communication plan, I propose a weekly status meeting <span class='highlight'>cadence</span> — every Tuesday at 10 AM. We'll also have a monthly <span class='highlight'>steering committee</span> for executive-level <span class='highlight'>governance</span>.", cn: "关于沟通计划，我建议每周状态会议节奏——每周二上午10点。我们还会有月度指导委员会作为高管层面的项目治理。" },
+        { speaker: "PM", text: "For <span class='highlight'>escalation</span>, any critical issue should be raised within 4 hours. The escalation path is: project team → me → steering committee.", cn: "关于问题升级，任何关键问题应在4小时内上报。升级路径是：项目团队 → 我 → 指导委员会。" },
+        { speaker: "Client", text: "That works for us. Who's the <span class='highlight'>point of contact</span> for day-to-day technical questions?", cn: "这对我们来说没问题。日常技术问题的对接人是谁？" },
+        { speaker: "PM", text: "That would be our tech lead, David. I'll send out a contact list after this meeting with everyone's role and contact details.", cn: "是我们的技术负责人David。会后我会发出一份联系人清单，包含每个人的角色和联系方式。" }
+      ]
+    },
+    {
+      title: "场景五：项目流程与工作方式介绍",
+      lines: [
+        { speaker: "PM", text: "Now I'd like to walk you through our development <span class='highlight'>methodology</span>. We follow an <span class='highlight'>agile</span> approach using the <span class='highlight'>Scrum</span> framework. This means we work in short cycles called <span class='highlight'>sprints</span>, each lasting two weeks.", cn: "现在我想带大家了解我们的开发方法论。我们采用敏捷方法，使用Scrum框架。这意味着我们以称为迭代的短周期工作，每个迭代持续两周。" },
+        { speaker: "PM", text: "Each sprint follows a structured flow. It starts with <span class='highlight'>sprint planning</span>, where we select <span class='highlight'>user stories</span> from the <span class='highlight'>backlog</span> and estimate effort using <span class='highlight'>story points</span>. During the sprint, we hold daily <span class='highlight'>standups</span> — short 15-minute meetings to sync on progress and flag any <span class='highlight'>blockers</span>.", cn: "每个迭代遵循结构化的流程。从迭代计划会开始，我们从待办列表中选择用户故事，用故事点估算工作量。迭代期间我们每天开站会——15分钟的短会来同步进度和标记阻塞项。" },
+        { speaker: "PM", text: "At the end of each sprint, we do a <span class='highlight'>sprint review</span> where we <span class='highlight'>demo</span> the completed features to your team. This gives you a chance to provide <span class='highlight'>feedback</span> early, so we can adjust in the next sprint. After the review, we run a <span class='highlight'>retrospective</span> internally to identify what went well and what we can improve.", cn: "每个迭代结束时我们做迭代评审，向你们的团队演示完成的功能。这让你们有机会尽早提供反馈，以便我们在下一个迭代中调整。评审之后，我们内部做回顾会，识别哪些做得好、哪些可以改进。" },
+        { speaker: "Client", text: "That sounds good. So every two weeks we get to see working software and give feedback?", cn: "听起来不错。也就是说每两周我们都能看到可工作的软件并提供反馈？" },
+        { speaker: "PM", text: "Exactly. That's the core benefit of the agile approach — short <span class='highlight'>feedback loops</span> and <span class='highlight'>continuous improvement</span>. Each sprint delivers a working <span class='highlight'>increment</span>, so you'll see real progress every two weeks, not just at the end of the project.", cn: "没错。这就是敏捷方法的核心优势——短反馈循环和持续改进。每个迭代交付一个可工作的增量，所以你们每两周都能看到真实的进展，而不是只在项目结束时才看到。" },
+        { speaker: "Client", text: "What about <span class='highlight'>quality assurance</span>? How do you make sure each release is stable?", cn: "那质量保证呢？你们怎么确保每次发布是稳定的？" },
+        { speaker: "PM", text: "Great question. QA is integrated into every sprint, not treated as a separate phase. We have a clear <span class='highlight'>definition of done</span> that includes <span class='highlight'>code review</span>, automated testing, and manual testing. No feature is considered done until it passes all these checks. Before any <span class='highlight'>release</span> to production, we also run <span class='highlight'>regression</span> testing to make sure existing features aren't affected.", cn: "好问题。QA融入每个迭代，而不是作为单独的阶段。我们有清晰的完成定义，包括代码评审、自动化测试和手动测试。功能在通过所有这些检查之前不算完成。在发布到生产环境之前，我们还会运行回归测试，确保现有功能不受影响。" },
+        { speaker: "Client", text: "And what does the <span class='highlight'>sign-off process</span> look like for each milestone?", cn: "那每个里程碑的签字确认流程是什么样的？" },
+        { speaker: "PM", text: "At each <span class='highlight'>milestone</span>, we conduct a formal <span class='highlight'>deliverable review</span>. We present the completed work, you verify it meets the <span class='highlight'>acceptance criteria</span>, and then we get your <span class='highlight'>sign-off</span> before moving to the next phase. This ensures alignment at every step.", cn: "在每个里程碑，我们进行正式的交付物评审。我们展示完成的工作，你们验证是否符合验收标准，然后我们获得你们的签字确认再进入下一阶段。这确保每一步都保持一致。" }
+      ]
+    }
+  ]
+};
+
+const TEMPLATE_DATA = {
+  kickoff: [
+    {
+      title: "开场白 — 自我介绍与议程",
+      en: "Good morning/afternoon everyone. Thank you for joining today's <span class='blank' data-answer='kickoff meeting'>______</span>. My name is <span class='blank' data-answer='[Your Name]'>______</span>, and I'm the <span class='blank' data-answer='project manager'>______</span> from <span class='blank' data-answer='[Company Name]'>______</span>. I'll be your main point of contact throughout this project. Let me walk you through today's agenda — we'll cover the project objectives, scope, timeline, team structure, and communication plan.",
+      cn: "大家早上/下午好。感谢参加今天的启动会。我是[公司名]的项目经理[你的名字]。在整个项目过程中我将是大家的主要对接人。让我带大家过一下今天的议程——我们会覆盖项目目标、范围、时间线、团队结构和沟通计划。",
+      tips: "开场要简洁自信，不用过多寒暄。直接进入议程是最专业的做法。"
+    },
+    {
+      title: "项目目标与价值",
+      en: "The primary <span class='blank' data-answer='objective'>______</span> of this project is to <span class='blank' data-answer='[describe the goal]'>______</span>. The key business values include: first, <span class='blank' data-answer='[value 1]'>______</span>; second, <span class='blank' data-answer='[value 2]'>______</span>; and third, <span class='blank' data-answer='[value 3]'>______</span>. This will help your business achieve <span class='blank' data-answer='[expected outcome]'>______</span>.",
+      cn: "这个项目的首要目标是[描述目标]。核心业务价值包括：第一，[价值1]；第二，[价值2]；第三，[价值3]。这将帮助您的业务实现[预期成果]。",
+      tips: "价值描述要站在客户视角，用业务语言而非技术语言。例如说 'reduce checkout time' 而非 'optimize API latency'。"
+    },
+    {
+      title: "项目范围说明",
+      en: "Let me now define the project <span class='blank' data-answer='scope'>______</span>. The project covers the following areas: <span class='blank' data-answer='[list key areas]'>______</span>. To set clear expectations, here's what is <strong>not</strong> included in the current scope: <span class='blank' data-answer='[out of scope items]'>______</span>. Any changes to the scope will go through our <span class='blank' data-answer='change management'>______</span> process.",
+      cn: "现在让我来定义项目范围。项目覆盖以下领域：[列出关键领域]。为了设定清晰的预期，以下是当前范围不包含的内容：[范围外内容]。任何范围变更都将通过我们的变更管理流程。",
+      tips: "范围说明时一定要提 'out of scope'，这是避免后续范围蔓延（scope creep）的关键。"
+    },
+    {
+      title: "时间线与里程碑",
+      en: "The overall project <span class='blank' data-answer='timeline'>______</span> is <span class='blank' data-answer='[duration]'>______</span>, divided into <span class='blank' data-answer='[number]'>______</span> phases. The key <span class='blank' data-answer='milestones'>______</span> are: Phase 1 completion by <span class='blank' data-answer='[date]'>______</span>, UAT by <span class='blank' data-answer='[date]'>______</span>, and <span class='blank' data-answer='go-live'>______</span> targeted for <span class='blank' data-answer='[date]'>______</span>.",
+      cn: "项目总时间线为[时长]，分为[数字]个阶段。关键里程碑为：第一阶段在[日期]完成，UAT在[日期]，上线目标为[日期]。",
+      tips: "提到日期时说 'targeted for' 比 'will be on' 更灵活，给自己留余地。"
+    },
+    {
+      title: "团队组织架构",
+      en: "On our side, the project team is organized into <span class='blank' data-answer='[number]'>______</span> <span class='blank' data-answer='workstreams'>______</span>: <span class='blank' data-answer='[list workstreams]'>______</span>. I will be the overall project manager, and <span class='blank' data-answer='[name]'>______</span> will be the technical lead. On your side, we'll need a dedicated <span class='blank' data-answer='point of contact'>______</span> for each workstream.",
+      cn: "我们这边，项目团队分为[数字]个工作线：[列出工作线]。我将担任整体项目经理，[姓名]将担任技术负责人。你们那边，我们需要每个工作线有一个专门的对接人。",
+      tips: "介绍完自己团队后，一定要提对客户方的人员需求——这是推动客户投入资源的好时机。"
+    },
+    {
+      title: "沟通计划",
+      en: "For the communication plan, I suggest the following <span class='blank' data-answer='cadence'>______</span>: a weekly status meeting every <span class='blank' data-answer='[day]'>______</span>, a monthly steering committee meeting, and ad-hoc technical discussions as needed. For <span class='blank' data-answer='escalation'>______</span>, any critical issue should be raised within <span class='blank' data-answer='[hours]'>______</span> hours.",
+      cn: "关于沟通计划，我建议以下节奏：每[星期几]的周状态会议，每月一次指导委员会会议，以及按需的临时技术讨论。关于问题升级，任何关键问题应在[小时数]小时内上报。",
+      tips: "沟通计划讲完后可以问一句 'Does this cadence work for your team?' 体现尊重对方。"
+    },
+    {
+      title: "收尾与Q&A",
+      en: "That covers the main topics for today. Before we wrap up, does anyone have any questions or concerns? ... Great, so to summarize the <span class='blank' data-answer='action items'>______</span>: <span class='blank' data-answer='[list actions]'>______</span>. I'll send out the meeting minutes by end of day. Thank you everyone for your time.",
+      cn: "以上是今天的主要内容。在结束之前，大家有什么问题或疑虑吗？……好的，总结一下行动项：[列出行动项]。我会在今天结束前发出会议纪要。感谢大家的时间。",
+      tips: "最后一定要总结 action items 并明确 owner 和 deadline，这是项目经理的基本功。"
+    },
+    {
+      title: "项目流程与工作方式",
+      en: "Now let me explain how we work. We follow an agile methodology using the Scrum framework, which means we work in short two-week cycles called sprints. Each sprint follows a clear structure: it starts with sprint planning, where we select user stories from the product backlog and estimate effort using story points. During the sprint, we hold daily standups — short 15-minute syncs to track progress and flag blockers. At the end of each sprint, we conduct a sprint review to demo completed features to your team. This gives you a chance to provide feedback early so we can adjust in the next cycle. After the review, we run a retrospective internally to continuously improve our process. For quality assurance, we have a strict definition of done — every feature must pass code review, automated testing, and manual QA before it is considered complete. We also run regression testing before each production release. At each milestone, we conduct a formal deliverable review. We present the completed work, you verify it against the acceptance criteria, and we get your sign-off before proceeding to the next phase.",
+      cn: "现在让我解释我们的工作方式。我们采用敏捷方法论，使用Scrum框架，也就是说我们以两周一个迭代的短周期工作。每个迭代遵循清晰的结构：从迭代计划会开始，我们从产品待办列表中选择用户故事，用故事点估算工作量。迭代期间每天开站会——15分钟的短会来追踪进度和标记阻塞项。每个迭代结束时我们做迭代评审，向你们团队演示完成的功能。这让你们有机会尽早提供反馈，以便我们在下一个周期中调整。评审后我们内部做回顾会来持续改进流程。质量保证方面，我们有严格的完成定义——每个功能必须通过代码评审、自动化测试和手动QA才算完成。每次生产发布前我们还会做回归测试。在每个里程碑，我们进行正式的交付物评审。我们展示完成的工作，你们对照验收标准验证，签字确认后再进入下一阶段。",
+      tips: "讲项目流程时用「This means...」解释专业术语让客户容易理解，用「This gives you...」强调客户的参与感和获益。"
+    }
+  ]
+};
+
+const SPEAKING_DATA = {
+  kickoff: [
+    {
+      scenario: "场景1：开场自我介绍",
+      prompt: "你是CloudTech的项目经理，正在启动一个为新加坡某连锁超市做的云零售平台项目。请用英语做一个开场介绍，包含自我介绍和今天的议程。",
+      reference: "Good morning everyone. Thank you for joining today's kickoff meeting for the Cloud Retail Platform project. My name is [Your Name], and I'm the project manager from CloudTech. I'll be your main point of contact throughout this engagement. Today's agenda covers five topics: project objectives, scope, timeline, team structure, and our communication plan. Let's get started.",
+      cn: "大家早上好。感谢参加今天的云零售平台项目启动会。我是CloudTech的项目经理[你的名字]。在整个项目过程中我将是大家的主要对接人。今天的议程涵盖五个话题：项目目标、范围、时间线、团队结构和沟通计划。让我们开始吧。"
+    },
+    {
+      scenario: "场景2：介绍项目目标和价值",
+      prompt: "客户是一家拥有200家门店的连锁超市。请用英语介绍项目目标（系统上云）和三个核心业务价值。",
+      reference: "The primary objective of this project is to migrate your retail operations from on-premise infrastructure to our cloud platform. This will deliver three key business values. First, improved scalability — your system will automatically handle traffic spikes during peak shopping periods like Black Friday or Chinese New Year. Second, real-time inventory visibility across all 200 store locations, reducing stockout rates. And third, a unified omnichannel experience that seamlessly connects your physical stores with your online channels.",
+      cn: "这个项目的首要目标是将你们的零售运营从本地基础设施迁移到我们的云平台。这将带来三个核心业务价值。第一，更好的可扩展性——系统将自动应对购物高峰期的流量激增。第二，200家门店的实时库存可见性，降低缺货率。第三，统一的全渠道体验，无缝连接实体门店和线上渠道。"
+    },
+    {
+      scenario: "场景3：解释项目范围",
+      prompt: "请用英语说明项目范围，包含范围内的内容和明确的范围外内容。",
+      reference: "Let me define the project scope. The scope covers four main areas: POS system migration, inventory management system, customer loyalty program integration, and the analytics dashboard. To be clear about what's not in scope — the hardware procurement for individual stores and the third-party logistics integration are excluded from this phase. If we need to add anything, it will go through our formal change management process.",
+      cn: "让我定义项目范围。范围覆盖四个主要领域：POS系统迁移、库存管理系统、客户忠诚度计划集成和分析仪表盘。明确说明不在范围内的——各门店的硬件采购和第三方物流集成不包含在本阶段。如果需要增加任何内容，将通过我们正式的变更管理流程。"
+    },
+    {
+      scenario: "场景4：回答客户关于延期风险的提问",
+      prompt: "客户问：'如果UAT发现很多问题导致延期怎么办？' 请用英语回答。",
+      reference: "That's a great question. We've anticipated this risk and built in a two-week buffer between the UAT completion and the go-live date. Additionally, our testing strategy includes continuous testing throughout the development phase, not just at the end. This means we catch and fix issues early, reducing the risk of major surprises during UAT. If, despite these measures, we do face significant delays, the escalation path would be to bring it to the steering committee for a go/no-go decision.",
+      cn: "这是个好问题。我们已经预见到这个风险，在UAT完成和上线日期之间预留了两周的缓冲期。此外，我们的测试策略包括整个开发阶段的持续测试，而不仅仅是最后。这意味着我们能尽早发现和修复问题，减少UAT期间出现重大意外的风险。如果尽管有这些措施仍然面临重大延期，升级路径是提交给指导委员会做go/no-go决定。"
+    },
+    {
+      scenario: "场景5：介绍沟通计划并结束会议",
+      prompt: "请用英语介绍项目的沟通计划（周会、月度指导委员会、问题升级机制），然后做一个简短的会议收尾。",
+      reference: "For the communication plan, I suggest the following cadence. We'll have a weekly status meeting every Tuesday at 10 AM — I'll share an agenda the day before. On a monthly basis, we'll have a steering committee meeting for executive-level governance and decision-making. For day-to-day technical questions, please reach out to our tech lead David directly. Regarding escalation, any critical issue should be raised within 4 hours through the escalation channel. I'll send out the detailed escalation matrix after this meeting. That covers everything on our agenda today. Any final questions? ... Great. To summarize the action items: I'll distribute the meeting minutes and contact list by end of day, and we'll need your team to confirm the project sponsors by this Friday. Thank you everyone for a productive kickoff. Looking forward to working with you.",
+      cn: "关于沟通计划，我建议以下节奏。我们每周二上午10点开周状态会——我会在前一天分享议程。每月会有一次指导委员会会议用于高管层面的治理和决策。日常技术问题请直接联系我们的技术负责人David。关于问题升级，任何关键问题应在4小时内通过升级渠道上报。会后我会发出详细的升级矩阵。以上是今天议程的全部内容。还有最后的问题吗？……好的。总结行动项：我会在今天结束前发出会议纪要和联系人清单，你们团队需要在本周五前确认项目发起人。感谢大家高效的启动会。期待与你们合作。"
+    },
+    {
+      scenario: "场景6：介绍项目开发流程和工作方式",
+      prompt: "客户想了解你们团队的开发方式。请用英语介绍敏捷/Scrum流程，包括迭代周期、关键会议（站会、计划会、评审会、回顾会），以及客户如何参与反馈。",
+      reference: "For this project, we follow an agile methodology using the Scrum framework. We work in two-week sprints. Each sprint starts with a sprint planning session where we select user stories from the product backlog and estimate the effort using story points. During the sprint, our team holds daily standups — these are short 15-minute meetings to sync on progress and raise any blockers. At the end of each sprint, we conduct a sprint review. This is where we demo the completed features to your team. You'll be able to see working software every two weeks and provide immediate feedback. We then adjust priorities for the next sprint based on your input. After the demo, we run an internal retrospective to continuously improve our process. This agile approach gives us short feedback loops, which means issues are caught early and the product evolves in the direction that best serves your business needs.",
+      cn: "这个项目我们采用敏捷方法论，使用Scrum框架。我们以两周为一个迭代。每个迭代从迭代计划会开始，我们从产品待办列表中选择用户故事并用故事点估算工作量。迭代期间我们团队每天开站会——15分钟的短会来同步进度和提出阻塞项。每个迭代结束时我们做迭代评审。在评审会上我们向你们团队演示完成的功能。你们每两周都能看到可工作的软件并立即提供反馈。然后我们根据你们的意见调整下一个迭代的优先级。演示后我们做内部回顾会来持续改进流程。这种敏捷方法给我们提供了短反馈循环，意味着问题能尽早被发现，产品按最符合你们业务需求的方向演进。"
+    },
+    {
+      scenario: "场景7：回答客户关于质量保证流程的提问",
+      prompt: "客户问：'你们怎么确保每次发布的质量？质量保证流程是怎样的？' 请用英语回答，涵盖完成定义、代码评审、测试策略和里程碑签字确认流程。",
+      reference: "That's a great question, and quality is something we take very seriously. We have a strict definition of done for every feature. Before anything is marked as complete, it must pass three checks: code review by a senior developer, automated unit and integration tests, and manual QA testing. We also run regression testing before every production release to make sure new changes don't break existing functionality. For each milestone, the quality gate includes a formal deliverable review. We present the completed work, your team verifies it against the agreed acceptance criteria, and we get your sign-off before moving to the next phase. If any issues are found during UAT, they're logged, prioritized, and fixed within the current sprint. Critical bugs get a hotfix within 24 hours. This multi-layered approach ensures that what goes to production is stable and meets your expectations.",
+      cn: "这是个好问题，质量是我们非常重视的。我们对每个功能都有严格的完成定义。在标记为完成之前，必须通过三项检查：高级开发的代码评审、自动化单元和集成测试、手动QA测试。我们还在每次生产发布前运行回归测试，确保新改动不会破坏现有功能。在每个里程碑，质量关口包括正式的交付物评审。我们展示完成的工作，你们团队对照约定的验收标准验证，然后我们获得签字确认再进入下一阶段。如果在UAT期间发现问题，会被记录、排优先级并在当前迭代内修复。严重bug在24小时内提供紧急修复。这种多层保障确保上线的内容是稳定的并且符合你们的预期。"
+    }
+  ]
+};
+
+const QUIZ_DATA = {
+  kickoff: [
+    { q: "项目启动会用英语怎么说？", options: ["standup meeting", "kickoff meeting", "retrospective meeting", "steering meeting"], answer: 1 },
+    { q: "'利益相关者/干系人' 的英文是？", options: ["shareholder", "stakeholder", "placeholder", "stockholder"], answer: 1 },
+    { q: "以下哪个表达用于介绍项目范围？", options: ["Let me walk you through the project scope.", "Let me show you the project budget.", "Let me introduce the project team.", "Let me explain the project risk."], answer: 0 },
+    { q: "'可交付成果' 英文是？", options: ["deadline", "milestone", "deliverable", "objective"], answer: 2 },
+    { q: "会议中想说'让我来过一下时间线'，最自然的表达是？", options: ["Let me talk the timeline.", "Let me walk you through the timeline.", "Let me say the timeline to you.", "Let me speak about the timeline for you."], answer: 1 },
+    { q: "'每周一次的会议节奏' 中的'节奏'用英文怎么说？", options: ["rhythm", "cadence", "frequency", "beat"], answer: 1 },
+    { q: "客户问了一个你暂时回答不了的问题，最合适的回应是？", options: ["I don't know.", "Let me check with the team and get back to you by end of day.", "Maybe.", "I'll think about it."], answer: 1 },
+    { q: "'问题升级路径' 中的 '升级' 英文是？", options: ["upgrade", "update", "escalation", "elevation"], answer: 2 },
+    { q: "UAT 的全称是？", options: ["User Acceptance Testing", "User Access Testing", "Universal Application Testing", "User Approval Testing"], answer: 0 },
+    { q: "会议结尾总结行动项，最专业的表达是？", options: ["So, what should we do next?", "To summarize the action items...", "OK, meeting done.", "Let's see what happens."], answer: 1 },
+  ]
+};
+
+// ============================================================
+// APP STATE
+// ============================================================
+let currentTab = 'roadmap';
+let currentTopic = 'kickoff';
+let quizIndex = 0;
+let quizScore = 0;
+let quizAnswered = false;
+let studyStartTime = Date.now();
+let masteredWordsSet = new Set();     // words marked as mastered
+let unmasteredWordsSet = new Set();   // words marked as not mastered
+let reviewWords = {};                 // topic -> array of review words from previous topics
+
+// Load progress from localStorage
+function loadProgress() {
+  try {
+    const saved = localStorage.getItem('pm-english-progress-v2');
+    if (saved) {
+      const data = JSON.parse(saved);
+      masteredWordsSet = new Set(data.mastered || []);
+      unmasteredWordsSet = new Set(data.unmastered || []);
+      reviewWords = data.reviewWords || {};
+      document.getElementById('masteredWords').textContent = masteredWordsSet.size;
+      if (data.streak) document.getElementById('streakDays').textContent = data.streak;
+    }
+  } catch(e) {}
+}
+
+function saveProgress() {
+  try {
+    localStorage.setItem('pm-english-progress-v2', JSON.stringify({
+      mastered: [...masteredWordsSet],
+      unmastered: [...unmasteredWordsSet],
+      reviewWords: reviewWords,
+      streak: parseInt(document.getElementById('streakDays').textContent),
+      lastDate: new Date().toDateString()
+    }));
+  } catch(e) {}
+}
+
+// Timer
+setInterval(() => {
+  const mins = Math.floor((Date.now() - studyStartTime) / 60000);
+  document.getElementById('todayMinutes').textContent = mins;
+}, 30000);
+
+// ============================================================
+// NAV
+// ============================================================
+document.querySelectorAll('.nav-tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+    tab.classList.add('active');
+    currentTab = tab.dataset.tab;
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById('sec-' + currentTab).classList.add('active');
+  });
+});
+
+// Topic switch
+function switchTopic(topic) {
+  if (document.querySelector(`.topic-chip[data-topic="${topic}"]`)?.classList.contains('locked')) return;
+  document.querySelectorAll('.topic-chip').forEach(c => c.classList.remove('active'));
+  document.querySelector(`.topic-chip[data-topic="${topic}"]`).classList.add('active');
+  currentTopic = topic;
+  renderAll();
+}
+document.querySelectorAll('.topic-chip').forEach(chip => {
+  chip.addEventListener('click', () => switchTopic(chip.dataset.topic));
+});
+
+// ============================================================
+// GET COMBINED VOCAB (topic words + review words from prev topics)
+// ============================================================
+function getCombinedVocab() {
+  const topicWords = (VOCAB_DATA[currentTopic] || []).map(v => ({ ...v, isReview: false }));
+  const revWords = (reviewWords[currentTopic] || []).map(v => ({ ...v, isReview: true }));
+  return [...revWords, ...topicWords];
+}
+
+// ============================================================
+// RENDER FUNCTIONS
+// ============================================================
+
+function renderVocab() {
+  const grid = document.getElementById('vocabGrid');
+  const allWords = getCombinedVocab();
+  
+  grid.innerHTML = allWords.map((v, i) => {
+    const wordKey = v.word;
+    const isMastered = masteredWordsSet.has(wordKey);
+    const isUnmastered = unmasteredWordsSet.has(wordKey);
+    const statusClass = isMastered ? 'mastered' : (isUnmastered ? 'not-mastered' : '');
+    
+    // Make meaningful words in example clickable
+    const highlightedExample = highlightExampleWords(v.example, wordKey);
+    
+    return `
+    <div class="vocab-card ${statusClass}" onclick="flipCard(this, event)" data-tag="${v.tag}" data-index="${i}" data-word="${wordKey}" data-mastery="${isMastered ? 'mastered' : (isUnmastered ? 'unmastered' : 'none')}" data-review="${v.isReview ? 'true' : 'false'}">
+      <span class="vocab-tag ${v.tag}">${v.tag === 'core' ? '核心' : v.tag === 'business' ? '商务' : v.tag === 'tech' ? '技术' : '零售'}</span>
+      <div class="vocab-word-row">
+        <div class="vocab-word">${v.word}</div>
+        <button class="vocab-play-btn" onclick="event.stopPropagation(); playWord('${v.word.replace(/'/g, "\\'")}', this)" title="播放发音">🔊</button>
+      </div>
+      <div class="vocab-phonetic">${v.phonetic}</div>
+      <div class="vocab-meaning">${v.meaning}</div>
+      <div class="vocab-examples">
+        <div class="vocab-example-item">
+          <div class="vocab-example-en">
+            ${highlightedExample}
+            <button class="vocab-example-play" onclick="event.stopPropagation(); playSentenceTTS(\`${v.example.replace(/`/g, '\\`')}\`, this)">🔊</button>
+          </div>
+          <div class="vocab-example-cn">${v.exampleCn}</div>
+        </div>
+      </div>
+      <div class="vocab-mastery">
+        <button class="mastery-btn got-it" onclick="event.stopPropagation(); markMastery('${wordKey.replace(/'/g, "\\'")}', true, this)">✅ 已掌握</button>
+        <button class="mastery-btn not-yet" onclick="event.stopPropagation(); markMastery('${wordKey.replace(/'/g, "\\'")}', false, this)">❌ 未掌握</button>
+      </div>
+      <div class="vocab-speed-control">
+        <span>语速:</span>
+        <button class="speed-btn" onclick="event.stopPropagation(); setSpeechRate(0.6, this.parentElement)">慢速</button>
+        <button class="speed-btn active" onclick="event.stopPropagation(); setSpeechRate(0.85, this.parentElement)">正常</button>
+        <button class="speed-btn" onclick="event.stopPropagation(); setSpeechRate(1.1, this.parentElement)">快速</button>
+      </div>
+    </div>`;
+  }).join('');
+
+  updateVocabStats();
+}
+
+// ============================================================
+// EXAMPLE KEYWORD HIGHLIGHTING & ADD TO VOCAB
+// ============================================================
+const STOP_WORDS = new Set(['a','an','the','is','are','was','were','be','been','being','have','has','had',
+  'do','does','did','will','would','shall','should','may','might','must','can','could',
+  'i','you','he','she','it','we','they','me','him','her','us','them','my','your','his',
+  'its','our','their','this','that','these','those','am','if','or','and','but','not',
+  'no','so','as','at','by','for','in','of','on','to','up','with','from','into','than',
+  'all','also','just','very','too','much','more','most','some','any','each','every',
+  'both','few','other','such','only','own','same','then','when','what','how','who',
+  'which','where','there','here','about','after','before','between','over','under',
+  'out','off','down','let','get','got','need','make','made','take','two','three',
+  'new','one','first','last']);
+
+// Words already in current topic vocab
+function getExistingVocabWords() {
+  const allWords = getCombinedVocab();
+  const existing = new Set();
+  allWords.forEach(v => {
+    v.word.toLowerCase().split(/\s+/).forEach(w => existing.add(w.replace(/[^a-z-]/g, '')));
+    existing.add(v.word.toLowerCase());
+  });
+  return existing;
+}
+
+function highlightExampleWords(sentence, currentWord) {
+  const existingWords = getExistingVocabWords();
+  const currentWordParts = new Set(currentWord.toLowerCase().split(/\s+/).map(w => w.replace(/[^a-z-]/g, '')));
+  
+  return sentence.replace(/([a-zA-Z][-a-zA-Z]*)/g, (match) => {
+    const lower = match.toLowerCase();
+    // Skip stop words, very short words, and the current card's own word
+    if (STOP_WORDS.has(lower) || match.length <= 2 || currentWordParts.has(lower)) {
+      return match;
+    }
+    
+    const isInVocab = existingWords.has(lower);
+    const addedClass = isInVocab ? ' added' : '';
+    const tooltipText = isInVocab ? '✅ 已在词库中' : '➕ 点击加入本主题词库';
+    
+    return `<span class="example-keyword${addedClass}" onclick="event.stopPropagation(); addWordFromExample('${match.replace(/'/g, "\\'")}', event)" title="">${match}<span class="keyword-tooltip">${tooltipText}</span></span>`;
+  });
+}
+
+// Custom word bank: user-added words from examples
+let customWords = {};
+function loadCustomWords() {
+  try {
+    const saved = localStorage.getItem('pm-english-custom-words');
+    if (saved) customWords = JSON.parse(saved);
+  } catch(e) {}
+}
+function saveCustomWords() {
+  try { localStorage.setItem('pm-english-custom-words', JSON.stringify(customWords)); } catch(e) {}
+}
+loadCustomWords();
+
+function addWordFromExample(word, event) {
+  const lower = word.toLowerCase();
+  const existingWords = getExistingVocabWords();
+  
+  // Already in vocab
+  if (existingWords.has(lower)) {
+    showToast(`"${word}" 已在当前词库中 ✅`);
+    return;
+  }
+  
+  // Check if already added as custom word
+  if (!customWords[currentTopic]) customWords[currentTopic] = [];
+  if (customWords[currentTopic].find(w => w.word.toLowerCase() === lower)) {
+    showToast(`"${word}" 已添加过了 ✅`);
+    return;
+  }
+  
+  showToast(`⏳ 正在查询 "${word}" 的释义...`);
+  
+  // Find the source example sentence (the sentence this word was clicked from)
+  let sourceSentence = '';
+  let sourceSentenceCn = '';
+  if (event) {
+    const exampleItem = event.target.closest('.vocab-example-item');
+    if (exampleItem) {
+      const enEl = exampleItem.querySelector('.vocab-example-en');
+      const cnEl = exampleItem.querySelector('.vocab-example-cn');
+      if (enEl) sourceSentence = enEl.textContent.replace('🔊', '').trim();
+      if (cnEl) sourceSentenceCn = cnEl.textContent.trim();
+    }
+  }
+  
+  // Query free dictionary API for word info
+  fetchWordInfo(lower).then(info => {
+    // Format meaning: Chinese first (like existing words), English as supplement
+    let displayMeaning = '';
+    if (info.meaningCn) {
+      displayMeaning = info.meaningCn;
+      if (info.meaningEn) displayMeaning += ` (${info.meaningEn})`;
+    } else if (info.meaningEn) {
+      displayMeaning = info.meaningEn;
+    } else {
+      displayMeaning = '（查询中…请稍后刷新）';
+    }
+
+    const newWord = {
+      word: lower,
+      phonetic: info.phonetic || '',
+      meaning: displayMeaning,
+      tag: 'core',
+      example: info.example || sourceSentence || `The word "${lower}" is commonly used in business contexts.`,
+      exampleCn: sourceSentenceCn || ''
+    };
+    
+    // Save to custom words
+    customWords[currentTopic].push(newWord);
+    saveCustomWords();
+    
+    // Add to VOCAB_DATA
+    if (!VOCAB_DATA[currentTopic]) VOCAB_DATA[currentTopic] = [];
+    VOCAB_DATA[currentTopic].push(newWord);
+    
+    showToast(`✅ "${lower}" 已加入词库！${info.meaning ? '' : '（释义待补充）'}`);
+    renderVocab();
+    // Re-apply current filters so user stays in their view (e.g. "hide mastered")
+    applyVocabFilters();
+  });
+}
+
+// Fetch word info from multiple sources
+async function fetchWordInfo(word) {
+  const result = { phonetic: '', meaningEn: '', meaningCn: '', example: '' };
+  
+  // Run both requests in parallel for speed
+  const [dictResult, transResult] = await Promise.allSettled([
+    fetchEnglishDict(word),
+    fetchChineseTranslation(word)
+  ]);
+  
+  if (dictResult.status === 'fulfilled' && dictResult.value) {
+    Object.assign(result, dictResult.value);
+  }
+  if (transResult.status === 'fulfilled' && transResult.value) {
+    result.meaningCn = transResult.value;
+  }
+  
+  return result;
+}
+
+// English dictionary: phonetic + definition + example
+async function fetchEnglishDict(word) {
+  try {
+    const resp = await fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${encodeURIComponent(word)}`);
+    if (!resp.ok) return null;
+    const data = await resp.json();
+    if (!data || !data[0]) return null;
+    const entry = data[0];
+    const r = { phonetic: '', meaningEn: '', example: '' };
+    r.phonetic = entry.phonetic || '';
+    if (!r.phonetic && entry.phonetics) {
+      const ph = entry.phonetics.find(p => p.text);
+      if (ph) r.phonetic = ph.text;
+    }
+    if (entry.meanings && entry.meanings.length > 0) {
+      const parts = [];
+      for (const m of entry.meanings.slice(0, 2)) {
+        const defs = m.definitions.slice(0, 1).map(d => d.definition);
+        parts.push(defs.join('; '));
+        if (!r.example) {
+          for (const d of m.definitions) {
+            if (d.example) { r.example = d.example; break; }
+          }
+        }
+      }
+      r.meaningEn = parts.join('; ');
+    }
+    return r;
+  } catch(e) { return null; }
+}
+
+// Chinese translation using MyMemory API (free, CORS-friendly)
+async function fetchChineseTranslation(word) {
+  try {
+    const resp = await fetch(`https://api.mymemory.translated.net/get?q=${encodeURIComponent(word)}&langpair=en|zh-CN`);
+    if (!resp.ok) return '';
+    const data = await resp.json();
+    if (data && data.responseData && data.responseData.translatedText) {
+      const t = data.responseData.translatedText;
+      // Skip if it just returned the same word or garbage
+      if (t && t.toLowerCase() !== word.toLowerCase() && !t.includes('NO QUERY')) {
+        return t;
+      }
+    }
+  } catch(e) {}
+  return '';
+}
+
+function showToast(msg) {
+  const toast = document.getElementById('addWordToast');
+  toast.textContent = msg;
+  toast.classList.add('show');
+  clearTimeout(toast._timer);
+  toast._timer = setTimeout(() => toast.classList.remove('show'), 2500);
+}
+
+function flipCard(el, event) {
+  if (event && (event.target.closest('.vocab-play-btn') || event.target.closest('.vocab-example-play') || event.target.closest('.speed-btn') || event.target.closest('.mastery-btn'))) return;
+  el.classList.toggle('flipped');
+}
+
+// ============================================================
+// MASTERY SYSTEM
+// ============================================================
+function markMastery(word, mastered, btnEl) {
+  const card = btnEl.closest('.vocab-card');
+  
+  if (mastered) {
+    masteredWordsSet.add(word);
+    unmasteredWordsSet.delete(word);
+    card.classList.add('mastered');
+    card.classList.remove('not-mastered');
+    card.dataset.mastery = 'mastered';
+    // Remove from review if it was a review word
+    removeFromReview(word);
+  } else {
+    unmasteredWordsSet.add(word);
+    masteredWordsSet.delete(word);
+    card.classList.add('not-mastered');
+    card.classList.remove('mastered');
+    card.dataset.mastery = 'unmastered';
+    // Add to next topic's review list
+    addToNextTopicReview(word);
+  }
+  
+  document.getElementById('masteredWords').textContent = masteredWordsSet.size;
+  updateVocabStats();
+  saveProgress();
+}
+
+function addToNextTopicReview(word) {
+  // Find the word data
+  const allWords = getCombinedVocab();
+  const wordData = allWords.find(v => v.word === word);
+  if (!wordData) return;
+  
+  // Determine next topic
+  const topicOrder = ['kickoff', 'meeting', 'requirement', 'technical', 'progress', 'risk', 'agile', 'operations', 'presentation', 'business'];
+  const currentIdx = topicOrder.indexOf(currentTopic);
+  const nextTopic = topicOrder[currentIdx + 1];
+  if (!nextTopic) return; // No next topic
+  
+  if (!reviewWords[nextTopic]) reviewWords[nextTopic] = [];
+  // Avoid duplicates
+  if (!reviewWords[nextTopic].find(v => v.word === word)) {
+    reviewWords[nextTopic].push({
+      word: wordData.word,
+      phonetic: wordData.phonetic,
+      meaning: wordData.meaning,
+      tag: wordData.tag,
+      example: wordData.example,
+      exampleCn: wordData.exampleCn
+    });
+  }
+  saveProgress();
+}
+
+function removeFromReview(word) {
+  // Remove from current topic's review list
+  if (reviewWords[currentTopic]) {
+    reviewWords[currentTopic] = reviewWords[currentTopic].filter(v => v.word !== word);
+    saveProgress();
+  }
+}
+
+function updateVocabStats() {
+  const allWords = getCombinedVocab();
+  const total = allWords.length;
+  const topicWords = (VOCAB_DATA[currentTopic] || []);
+  const revWords = reviewWords[currentTopic] || [];
+  
+  let masteredCount = 0, unmasteredCount = 0, reviewCount = revWords.length;
+  allWords.forEach(v => {
+    if (masteredWordsSet.has(v.word)) masteredCount++;
+    else if (unmasteredWordsSet.has(v.word)) unmasteredCount++;
+  });
+  
+  document.getElementById('vocabTotal').textContent = total;
+  document.getElementById('vocabMastered').textContent = masteredCount;
+  document.getElementById('vocabUnmastered').textContent = unmasteredCount;
+  document.getElementById('vocabReview').textContent = reviewCount;
+  
+  const pct = total > 0 ? Math.round(masteredCount / total * 100) : 0;
+  document.getElementById('vocabProgressFill').style.width = pct + '%';
+  
+  // Review banner
+  const banner = document.getElementById('reviewBanner');
+  if (reviewCount > 0) {
+    banner.style.display = 'flex';
+    document.getElementById('reviewCount').textContent = reviewCount;
+  } else {
+    banner.style.display = 'none';
+  }
+}
+
+// ============================================================
+// FILTER VOCAB
+// ============================================================
+let currentVocabFilter = 'all';
+let currentVocabTagFilter = 'all';
+
+function filterVocab(filter, btnEl) {
+  currentVocabFilter = filter;
+  // Highlight active button
+  if (btnEl) {
+    document.querySelectorAll('.vocab-filter-btns .btn').forEach(b => b.classList.remove('vocab-filter-active'));
+    btnEl.classList.add('vocab-filter-active');
+  }
+  applyVocabFilters();
+}
+
+function filterVocabTag(tag) {
+  currentVocabTagFilter = tag;
+  applyVocabFilters();
+}
+
+function applyVocabFilters() {
+  document.querySelectorAll('.vocab-card').forEach(card => {
+    let showByStatus = true;
+    let showByTag = true;
+    
+    // Status filter
+    if (currentVocabFilter === 'mastered') showByStatus = card.dataset.mastery === 'mastered';
+    else if (currentVocabFilter === 'unmastered') showByStatus = card.dataset.mastery === 'unmastered';
+    else if (currentVocabFilter === 'hide-mastered') showByStatus = card.dataset.mastery !== 'mastered';
+    else if (currentVocabFilter === 'review') showByStatus = card.dataset.review === 'true';
+    
+    // Tag filter
+    if (currentVocabTagFilter !== 'all') showByTag = card.dataset.tag === currentVocabTagFilter;
+    
+    card.style.display = (showByStatus && showByTag) ? '' : 'none';
+  });
+}
+
+// ============================================================
+// TTS (Text-to-Speech) - Optimized for natural pronunciation
+// ============================================================
+let speechRate = 0.85;
+let currentAudio = null;
+
+// Play a single word using dictionary pronunciation API (more natural)
+function playWordAudio(word, btnEl) {
+  // Stop any ongoing audio
+  if (currentAudio) { currentAudio.pause(); currentAudio = null; }
+  window.speechSynthesis.cancel();
+
+  if (btnEl) btnEl.classList.add('playing');
+
+  // Try dictionary API first (real human pronunciation)
+  const cleanWord = word.toLowerCase().replace(/[^a-z\s-]/g, '').trim();
+  // Try multiple free pronunciation sources
+  const sources = [
+    `https://dict.youdao.com/dictvoice?audio=${encodeURIComponent(cleanWord)}&type=2`,
+    `https://dict.youdao.com/dictvoice?audio=${encodeURIComponent(cleanWord)}&type=1`
+  ];
+
+  let sourceIdx = 0;
+  function tryNextSource() {
+    if (sourceIdx >= sources.length) {
+      // Fallback to TTS
+      playSentenceTTS(word, btnEl);
+      return;
+    }
+    const audio = new Audio(sources[sourceIdx]);
+    currentAudio = audio;
+    audio.onended = () => { if (btnEl) btnEl.classList.remove('playing'); currentAudio = null; };
+    audio.onerror = () => { sourceIdx++; tryNextSource(); };
+    audio.play().catch(() => { sourceIdx++; tryNextSource(); });
+  }
+  tryNextSource();
+}
+
+// Play a sentence (unified entry point for vocab examples etc.)
+// Delegates to the new Google TTS engine with role support
+function playSentenceTTS(text, btnEl) {
+  if (btnEl) btnEl.classList.add('playing');
+  playSentenceGoogleTTS(text, () => {
+    if (btnEl) btnEl.classList.remove('playing');
+  });
+}
+
+function splitTextIntoChunks(text, maxLen) {
+  if (text.length <= maxLen) return [text];
+  
+  const chunks = [];
+  let remaining = text;
+  
+  while (remaining.length > 0) {
+    if (remaining.length <= maxLen) {
+      chunks.push(remaining);
+      break;
+    }
+    let splitAt = -1;
+    const searchRange = remaining.substring(0, maxLen);
+    const sentenceEnd = Math.max(
+      searchRange.lastIndexOf('. '),
+      searchRange.lastIndexOf('? '),
+      searchRange.lastIndexOf('! '),
+      searchRange.lastIndexOf('; ')
+    );
+    if (sentenceEnd > maxLen * 0.3) {
+      splitAt = sentenceEnd + 2;
+    } else {
+      const commaPos = searchRange.lastIndexOf(', ');
+      if (commaPos > maxLen * 0.3) {
+        splitAt = commaPos + 2;
+      } else {
+        const spacePos = searchRange.lastIndexOf(' ');
+        splitAt = spacePos > 0 ? spacePos + 1 : maxLen;
+      }
+    }
+    chunks.push(remaining.substring(0, splitAt).trim());
+    remaining = remaining.substring(splitAt).trim();
+  }
+  
+  return chunks;
+}
+
+// Smart play: short text = dictionary audio, long text = Google TTS
+function playWord(text, btnEl) {
+  const wordCount = text.trim().split(/\s+/).length;
+  if (wordCount <= 3) {
+    playWordAudio(text, btnEl);
+  } else {
+    playSentenceTTS(text, btnEl);
+  }
+}
+
+function setSpeechRate(rate, container) {
+  speechRate = rate;
+  if (container) {
+    container.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+    const btns = container.querySelectorAll('.speed-btn');
+    if (rate <= 0.6) btns[0]?.classList.add('active');
+    else if (rate <= 0.85) btns[1]?.classList.add('active');
+    else btns[2]?.classList.add('active');
+  }
+}
+
+
+
+
+
+function renderDialogue() {
+  const container = document.getElementById('dialogueContainer');
+  const data = DIALOGUE_DATA[currentTopic] || [];
+  container.innerHTML = data.map((scene, si) => {
+    // Collect all plain text from this scene for full playback
+    const allText = scene.lines.map(l => l.text.replace(/<[^>]*>/g, '')).join('. ');
+    return `
+    <div class="listen-section" id="scene-${si}">
+      <h3 style="font-size:16px;font-weight:700;margin-bottom:8px;">${scene.title}</h3>
+      <div class="scene-play-bar">
+        <button class="scene-play-btn" onclick="playSceneSequential(${si}, this)" id="scene-play-${si}">🔊 播放整段对话</button>
+        <button class="scene-play-btn outline" onclick="stopScenePlay()" id="scene-stop-${si}" style="display:none;">⏹ 停止</button>
+      </div>
+      <div class="listen-dialogue">
+        ${scene.lines.map((line, li) => {
+          const role = line.speaker === 'PM' ? 'pm' : 'client';
+          return `
+          <div class="dialogue-line" id="line-${si}-${li}" data-role="${role}" data-scene="${si}" data-line="${li}" onclick="if(!event.target.closest('.line-play-btn'))this.classList.toggle('show-translation')">
+            <button class="line-play-btn" onclick="event.stopPropagation(); playDialogueLineByIdx(${si}, ${li}, this)" title="播放本句">🔊</button>
+            <span class="dialogue-speaker ${line.speaker === 'Client' ? 'client' : ''}">${line.speaker === 'PM' ? '你(PM)' : '客户'}</span>
+            <div>
+              <div class="dialogue-text">${line.text}</div>
+              <div class="dialogue-translation">💬 ${line.cn}</div>
+            </div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ============================================================
+// DIALOGUE PLAYBACK - Sequential scene play with Google TTS
+// ============================================================
+let scenePlayState = { playing: false, sceneIdx: -1, lineIdx: -1, aborted: false };
+
+// Play a single dialogue line by scene/line index (avoids inline text escaping issues)
+function playDialogueLineByIdx(sceneIdx, lineIdx, btnEl) {
+  const data = DIALOGUE_DATA[currentTopic] || [];
+  const scene = data[sceneIdx];
+  if (!scene || !scene.lines[lineIdx]) return;
+  
+  const line = scene.lines[lineIdx];
+  const plainText = line.text.replace(/<[^>]*>/g, '');
+  const role = line.speaker === 'PM' ? 'pm' : 'client';
+  const lineId = `line-${sceneIdx}-${lineIdx}`;
+  const audioId = `s${sceneIdx + 1}-${lineIdx}`;
+  
+  playDialogueLine(plainText, btnEl, lineId, role, audioId);
+}
+
+function playDialogueLine(text, btnEl, lineId, role, audioId) {
+  // Stop any ongoing playback
+  stopScenePlay();
+  
+  // CRITICAL: Reset aborted state so new playback can proceed
+  scenePlayState.aborted = false;
+  
+  // Highlight the line
+  document.querySelectorAll('.dialogue-line.now-playing').forEach(el => el.classList.remove('now-playing'));
+  if (lineId) {
+    const lineEl = document.getElementById(lineId);
+    if (lineEl) lineEl.classList.add('now-playing');
+  }
+  
+  if (btnEl) btnEl.classList.add('playing');
+  
+  playSentenceGoogleTTS(text, () => {
+    if (btnEl) btnEl.classList.remove('playing');
+    if (lineId) {
+      const lineEl = document.getElementById(lineId);
+      if (lineEl) lineEl.classList.remove('now-playing');
+    }
+  }, role, audioId);
+}
+
+function playSceneSequential(sceneIdx, btnEl) {
+  const data = DIALOGUE_DATA[currentTopic] || [];
+  if (!data[sceneIdx]) return;
+  
+  // Stop any previous playback
+  stopScenePlay();
+  
+  scenePlayState = { playing: true, sceneIdx: sceneIdx, lineIdx: 0, aborted: false };
+  
+  // Show stop button, update play button
+  if (btnEl) btnEl.classList.add('playing');
+  const stopBtn = document.getElementById('scene-stop-' + sceneIdx);
+  if (stopBtn) stopBtn.style.display = '';
+  
+  playNextLineInScene();
+}
+
+function playNextLineInScene() {
+  if (scenePlayState.aborted || !scenePlayState.playing) return;
+  
+  const data = DIALOGUE_DATA[currentTopic] || [];
+  const scene = data[scenePlayState.sceneIdx];
+  if (!scene || scenePlayState.lineIdx >= scene.lines.length) {
+    // Done playing all lines
+    finishScenePlay();
+    return;
+  }
+  
+  const si = scenePlayState.sceneIdx;
+  const li = scenePlayState.lineIdx;
+  const line = scene.lines[li];
+  const plainText = line.text.replace(/<[^>]*>/g, '');
+  const lineId = `line-${si}-${li}`;
+  const role = line.speaker === 'PM' ? 'pm' : 'client';
+  const audioId = `s${si + 1}-${li}`;
+  
+  // Highlight current line
+  document.querySelectorAll('.dialogue-line.now-playing').forEach(el => el.classList.remove('now-playing'));
+  const lineEl = document.getElementById(lineId);
+  if (lineEl) {
+    lineEl.classList.add('now-playing');
+    lineEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+  
+  // Highlight line play button
+  const lineBtn = lineEl?.querySelector('.line-play-btn');
+  if (lineBtn) lineBtn.classList.add('playing');
+  
+  playSentenceGoogleTTS(plainText, () => {
+    // Un-highlight
+    if (lineBtn) lineBtn.classList.remove('playing');
+    if (lineEl) lineEl.classList.remove('now-playing');
+    
+    // Move to next line after a short pause
+    if (!scenePlayState.aborted) {
+      scenePlayState.lineIdx++;
+      setTimeout(() => playNextLineInScene(), 400);
+    }
+  }, role, audioId);
+}
+
+function stopScenePlay() {
+  scenePlayState.aborted = true;
+  scenePlayState.playing = false;
+  
+  // Stop audio
+  if (currentAudio) { currentAudio.pause(); currentAudio = null; }
+  window.speechSynthesis.cancel();
+  
+  // Clean up UI
+  document.querySelectorAll('.dialogue-line.now-playing').forEach(el => el.classList.remove('now-playing'));
+  document.querySelectorAll('.line-play-btn.playing').forEach(el => el.classList.remove('playing'));
+  document.querySelectorAll('.scene-play-btn.playing').forEach(el => el.classList.remove('playing'));
+  document.querySelectorAll('[id^="scene-stop-"]').forEach(el => el.style.display = 'none');
+}
+
+function finishScenePlay() {
+  scenePlayState.playing = false;
+  document.querySelectorAll('.scene-play-btn.playing').forEach(el => el.classList.remove('playing'));
+  document.querySelectorAll('[id^="scene-stop-"]').forEach(el => el.style.display = 'none');
+  document.querySelectorAll('.dialogue-line.now-playing').forEach(el => el.classList.remove('now-playing'));
+}
+
+// Google TTS with callback (core audio engine for dialogues)
+// role: 'pm' = US English (male-like), 'client' = UK English (different voice)
+// Google Translate TTS uses different voice actors for different language variants
+const ROLE_VOICE_MAP = {
+  pm: 'en-US',
+  client: 'en-GB',
+};
+
+// ============================================================
+// VOICE ENGINE: Pre-generated MP3 (Edge Neural) > Web Speech API fallback
+// ============================================================
+
+// Primary: Play pre-generated MP3 audio files (Edge Neural TTS, highest quality)
+function playSentenceGoogleTTS(text, onDone, role, audioId) {
+  if (currentAudio) { currentAudio.pause(); currentAudio = null; }
+  window.speechSynthesis.cancel();
+  
+  // Try pre-generated MP3 first
+  if (audioId) {
+    const mp3Url = `audio/${audioId}/audio.mp3`;
+    const audio = new Audio(mp3Url);
+    currentAudio = audio;
+    
+    audio.playbackRate = speechRate <= 0.6 ? 0.7 : (speechRate >= 1.1 ? 1.25 : 1.0);
+    
+    audio.onended = () => { currentAudio = null; if (onDone) onDone(); };
+    audio.onerror = () => {
+      currentAudio = null;
+      // Fallback to Web Speech API
+      playWithWebSpeech(text, onDone, role);
+    };
+    audio.play().catch(() => playWithWebSpeech(text, onDone, role));
+    return;
+  }
+  
+  // No audioId — use Web Speech API directly
+  playWithWebSpeech(text, onDone, role);
+}
+
+// Fallback: Web Speech API
+function playWithWebSpeech(text, onDone, role) {
+  window.speechSynthesis.cancel();
+  const cleanText = text.replace(/["""]/g, '').trim();
+  const lang = (role === 'client') ? 'en-GB' : 'en-US';
+  
+  const utterance = new SpeechSynthesisUtterance(cleanText);
+  utterance.lang = lang;
+  utterance.rate = speechRate;
+  utterance.pitch = (role === 'client') ? 1.2 : 0.85;
+  utterance.volume = 1.0;
+  
+  const voices = window.speechSynthesis.getVoices();
+  const voice = (lang === 'en-GB')
+    ? voices.find(v => v.lang === 'en-GB') || voices.find(v => v.lang.startsWith('en'))
+    : voices.find(v => v.lang === 'en-US') || voices.find(v => v.lang.startsWith('en'));
+  if (voice) utterance.voice = voice;
+  
+  utterance.onend = () => { if (onDone) onDone(); };
+  utterance.onerror = () => { if (onDone) onDone(); };
+  window.speechSynthesis.speak(utterance);
+}
+
+function toggleAllTranslations(show) {
+  document.querySelectorAll('.dialogue-line').forEach(el => {
+    if (show) el.classList.add('show-translation');
+    else el.classList.remove('show-translation');
+  });
+}
+
+function highlightKeywords() {
+  document.querySelectorAll('.highlight').forEach(el => {
+    el.style.background = el.style.background ? '' : '#fde68a';
+    el.style.fontWeight = el.style.fontWeight === '700' ? '' : '700';
+  });
+}
+
+function renderTemplates() {
+  const container = document.getElementById('templateContainer');
+  const data = TEMPLATE_DATA[currentTopic] || [];
+  container.innerHTML = data.map((t, i) => `
+    <div class="template-block">
+      <div class="template-header" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? '' : 'none'">
+        <span>${t.title}</span>
+        <span style="color:var(--text-secondary);font-size:20px;">▾</span>
+      </div>
+      <div class="template-body" ${i > 0 ? 'style="display:none"' : ''}>
+        <div class="template-en">${t.en}</div>
+        <div style="display:flex;gap:8px;margin:12px 0;">
+          <button class="btn btn-sm btn-ghost" onclick="toggleCn(this)">👁️ 查看中文</button>
+          <button class="btn btn-sm btn-ghost" onclick="revealBlanks(this)">💡 显示答案</button>
+        </div>
+        <div class="template-cn">${t.cn}</div>
+        <div class="template-tips"><strong>💡 Tips：</strong>${t.tips}</div>
+      </div>
+    </div>
+  `).join('');
+
+  // Blank click handler
+  document.querySelectorAll('.blank').forEach(blank => {
+    blank.addEventListener('click', () => {
+      if (!blank.classList.contains('filled')) {
+        blank.textContent = blank.dataset.answer;
+        blank.classList.add('filled');
+      } else {
+        blank.textContent = '______';
+        blank.classList.remove('filled');
+      }
+    });
+  });
+}
+
+function toggleCn(btn) {
+  const cn = btn.parentElement.nextElementSibling;
+  cn.style.display = cn.style.display === 'none' || !cn.style.display ? 'block' : 'none';
+}
+
+function revealBlanks(btn) {
+  const body = btn.closest('.template-body');
+  body.querySelectorAll('.blank').forEach(b => {
+    b.textContent = b.dataset.answer;
+    b.classList.add('filled');
+  });
+}
+
+function renderSpeaking() {
+  const container = document.getElementById('speakingContainer');
+  const data = SPEAKING_DATA[currentTopic] || [];
+  container.innerHTML = data.map((s, i) => `
+    <div style="margin-bottom:24px;">
+      <div class="speak-prompt">
+        <div class="scenario">${s.scenario}</div>
+        <div class="prompt-text">🎯 ${s.prompt}</div>
+      </div>
+      <div style="display:flex;gap:8px;margin-bottom:12px;">
+        <button class="btn btn-sm btn-success" onclick="toggleRef(${i})">📝 查看参考答案</button>
+        <button class="btn btn-sm btn-ghost" onclick="toggleRefCn(${i})">💬 查看中文</button>
+      </div>
+      <div class="speak-reference" id="ref-${i}">
+        <h4>✅ 参考答案</h4>
+        <p>${s.reference}</p>
+        <p class="cn" id="refcn-${i}" style="display:none;">${s.cn}</p>
+      </div>
+    </div>
+  `).join('');
+}
+
+function toggleRef(i) {
+  document.getElementById('ref-' + i).classList.toggle('show');
+}
+function toggleRefCn(i) {
+  const el = document.getElementById('refcn-' + i);
+  const ref = document.getElementById('ref-' + i);
+  if (!ref.classList.contains('show')) ref.classList.add('show');
+  el.style.display = el.style.display === 'none' ? 'block' : 'none';
+}
+
+function renderQuiz() {
+  const data = QUIZ_DATA[currentTopic] || [];
+  if (!data.length) return;
+  const q = data[quizIndex];
+  const container = document.getElementById('quizContainer');
+  container.innerHTML = `
+    <div class="quiz-question">${quizIndex + 1}. ${q.q}</div>
+    <div class="quiz-options">
+      ${q.options.map((opt, i) => `
+        <div class="quiz-option" data-idx="${i}" onclick="selectQuizOption(this)">
+          <span class="letter">${String.fromCharCode(65 + i)}</span>
+          <span>${opt}</span>
+        </div>
+      `).join('')}
+    </div>
+  `;
+  document.getElementById('quizProgress').style.width = ((quizIndex) / data.length * 100) + '%';
+  document.getElementById('quizProgressText').textContent = `第 ${quizIndex + 1} 题 / 共 ${data.length} 题`;
+  document.getElementById('quizSubmitBtn').style.display = '';
+  document.getElementById('quizNextBtn').style.display = 'none';
+  document.getElementById('quizResult').className = 'quiz-result';
+  document.getElementById('quizResult').innerHTML = '';
+  quizAnswered = false;
+}
+
+function selectQuizOption(el) {
+  if (quizAnswered) return;
+  document.querySelectorAll('.quiz-option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function submitQuiz() {
+  if (quizAnswered) return;
+  const selected = document.querySelector('.quiz-option.selected');
+  if (!selected) { alert('请先选择一个答案'); return; }
+
+  quizAnswered = true;
+  const data = QUIZ_DATA[currentTopic];
+  const q = data[quizIndex];
+  const idx = parseInt(selected.dataset.idx);
+  const resultEl = document.getElementById('quizResult');
+
+  document.querySelectorAll('.quiz-option').forEach((o, i) => {
+    if (i === q.answer) o.classList.add('correct');
+    if (i === idx && i !== q.answer) o.classList.add('wrong');
+  });
+
+  if (idx === q.answer) {
+    quizScore++;
+    resultEl.className = 'quiz-result show correct-result';
+    resultEl.innerHTML = '✅ 正确！';
+  } else {
+    resultEl.className = 'quiz-result show wrong-result';
+    resultEl.innerHTML = `❌ 正确答案是 ${String.fromCharCode(65 + q.answer)}: ${q.options[q.answer]}`;
+  }
+
+  document.getElementById('quizSubmitBtn').style.display = 'none';
+  if (quizIndex < data.length - 1) {
+    document.getElementById('quizNextBtn').style.display = '';
+  } else {
+    // Show final result
+    const pct = Math.round(quizScore / data.length * 100);
+    document.getElementById('quizFinalResult').style.display = 'block';
+    document.getElementById('quizFinalResult').innerHTML = `
+      <div class="card" style="background:${pct >= 70 ? '#ecfdf5' : '#fffbeb'};text-align:center;padding:30px;">
+        <div style="font-size:48px;margin-bottom:12px;">${pct >= 90 ? '🎉' : pct >= 70 ? '👍' : '💪'}</div>
+        <div style="font-size:24px;font-weight:700;margin-bottom:8px;">得分：${quizScore}/${data.length} (${pct}%)</div>
+        <div style="font-size:14px;color:var(--text-secondary);margin-bottom:16px;">
+          ${pct >= 90 ? '太棒了！你已经很好地掌握了启动会相关词汇和表达！' :
+            pct >= 70 ? '不错！再复习几遍词汇卡片会更好。' :
+            '继续加油！建议回去复习词汇卡片和话术模板。'}
+        </div>
+        <button class="btn btn-primary" onclick="resetQuiz()">🔄 重新测试</button>
+      </div>
+    `;
+    document.getElementById('quizProgress').style.width = '100%';
+  }
+}
+
+function nextQuiz() {
+  quizIndex++;
+  renderQuiz();
+}
+
+function resetQuiz() {
+  quizIndex = 0;
+  quizScore = 0;
+  document.getElementById('quizFinalResult').style.display = 'none';
+  renderQuiz();
+}
+
+// ============================================================
+// RENDER ALL
+// ============================================================
+function renderAll() {
+  renderVocab();
+  renderDialogue();
+  renderTemplates();
+  renderSpeaking();
+  quizIndex = 0;
+  quizScore = 0;
+  renderQuiz();
+}
+
+// ============================================================
+// EXPORT REVIEW CARDS AS IMAGE
+// ============================================================
+function exportReviewCards() {
+  const btn = document.getElementById('exportReviewBtn');
+  btn.textContent = '⏳ 正在生成图片...';
+  btn.disabled = true;
+
+  // Get unmastered words
+  const allWords = getCombinedVocab();
+  const reviewWords = allWords.filter(v => !masteredWordsSet.has(v.word));
+
+  if (reviewWords.length === 0) {
+    btn.textContent = '🎉 所有词汇已掌握！无需导出';
+    setTimeout(() => { btn.textContent = '📸 导出待复习生词卡（过滤已掌握）'; btn.disabled = false; }, 2000);
+    return;
+  }
+
+  // Build offscreen HTML for the card image
+  const container = document.createElement('div');
+  container.style.cssText = 'position:absolute;left:-9999px;top:0;width:420px;font-family:-apple-system,PingFang SC,Microsoft YaHei,system-ui,sans-serif;background:#f0f4f8;padding:0;';
+  
+  container.innerHTML = `
+    <div style="background:linear-gradient(135deg,#dc2626,#ef4444);color:#fff;padding:24px 20px 18px;text-align:center">
+      <div style="font-size:18px;font-weight:800">🔄 待复习生词卡</div>
+      <div style="font-size:12px;opacity:.85;margin-top:4px">主题1 · 项目启动会 · 已过滤掌握词汇</div>
+      <div style="font-size:28px;font-weight:900;margin-top:8px">${reviewWords.length}<span style="font-size:13px;font-weight:400;opacity:.8"> 个待复习</span></div>
+    </div>
+    <div style="padding:10px 12px;display:flex;flex-wrap:wrap;gap:8px">
+      ${reviewWords.map((w, i) => `
+        <div style="background:#fff;border-radius:10px;padding:8px 12px;border-left:4px solid #ef4444;flex:1 1 calc(50% - 4px);min-width:0;max-width:calc(50% - 4px)">
+          <div style="color:#cbd5e1;font-size:10px;font-weight:700">#${i+1}</div>
+          <div style="font-size:14px;font-weight:700;color:#1e40af;word-break:break-word">${w.word}</div>
+          <span style="font-size:10px;color:#94a3b8;display:block">${w.phonetic}</span>
+          <div style="font-size:12px;color:#475569;margin-top:1px">${w.meaning}</div>
+        </div>
+      `).join('')}
+    </div>
+    <div style="text-align:center;padding:16px;font-size:10px;color:#94a3b8">PM English Pro · ${new Date().toLocaleDateString('zh-CN')} 导出 💪</div>
+  `;
+  document.body.appendChild(container);
+
+  // Load html2canvas and capture
+  const script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js';
+  script.onload = async () => {
+    try {
+      const canvas = await html2canvas(container, { scale: 2, backgroundColor: '#f0f4f8', useCORS: true });
+      const link = document.createElement('a');
+      link.download = `review-cards-${reviewWords.length}words-${new Date().toISOString().slice(0,10)}.png`;
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+      btn.textContent = `✅ 已导出 ${reviewWords.length} 个待复习词（已过滤 ${masteredWordsSet.size} 个已掌握）`;
+    } catch(e) {
+      btn.textContent = '❌ 导出失败，请重试';
+      console.error(e);
+    }
+    document.body.removeChild(container);
+    setTimeout(() => { btn.textContent = '📸 导出待复习生词卡（过滤已掌握）'; btn.disabled = false; }, 3000);
+  };
+  script.onerror = () => {
+    btn.textContent = '❌ 加载导出库失败，请检查网络';
+    document.body.removeChild(container);
+    setTimeout(() => { btn.textContent = '📸 导出待复习生词卡（过滤已掌握）'; btn.disabled = false; }, 3000);
+  };
+  document.head.appendChild(script);
+}
+
+// Init
+loadProgress();
+renderAll();
+</script>
+<div class="add-word-toast" id="addWordToast"></div>
+</body>
+</html>
