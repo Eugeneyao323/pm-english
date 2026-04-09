@@ -490,6 +490,68 @@
   }
   .toggle input:checked + .slider { background:var(--primary); }
   .toggle input:checked + .slider:before { transform:translateX(20px); }
+
+  /* ===== V2.0 NEW MODULES ===== */
+  /* Shadowing */
+  .shadow-line{background:var(--card);border:1px solid var(--border);border-radius:10px;padding:16px;margin-bottom:12px;transition:all .3s}
+  .shadow-line.active-line{border-color:var(--primary);background:#eff6ff}
+  .shadow-line .original{font-size:15px;line-height:1.7;margin-bottom:8px}
+  .shadow-line .shadow-btns{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+  .shadow-line .shadow-result{margin-top:10px;padding:10px;border-radius:8px;font-size:13px;line-height:1.6}
+  .shadow-line .shadow-result.good{background:#ecfdf5;color:#065f46;border:1px solid #a7f3d0}
+  .shadow-line .shadow-result.fair{background:#fffbeb;color:#92400e;border:1px solid #fde68a}
+  .shadow-line .shadow-result.poor{background:#fef2f2;color:#991b1b;border:1px solid #fecaca}
+  .mic-btn{padding:8px 16px;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;border:2px solid var(--danger);background:#fff;color:var(--danger);transition:all .2s;display:inline-flex;align-items:center;gap:6px}
+  .mic-btn:hover{background:#fef2f2}
+  .mic-btn.recording{background:var(--danger);color:#fff;animation:pulse-play 1s infinite}
+  .score-badge{display:inline-block;padding:4px 12px;border-radius:12px;font-size:13px;font-weight:700}
+  .score-badge.high{background:#ecfdf5;color:#065f46}
+  .score-badge.mid{background:#fffbeb;color:#92400e}
+  .score-badge.low{background:#fef2f2;color:#991b1b}
+  /* Roleplay */
+  .rp-chat{background:#f8fafc;border-radius:10px;border:1px solid var(--border);padding:16px;margin-bottom:12px;max-height:500px;overflow-y:auto}
+  .rp-msg{display:flex;gap:10px;margin-bottom:14px;max-width:90%}
+  .rp-msg.system{margin:0 auto 14px;max-width:100%;justify-content:center}
+  .rp-msg.system .rp-bubble{background:#f1f5f9;color:var(--text-secondary);font-size:12px;text-align:center;border:none}
+  .rp-msg.client{margin-right:auto}
+  .rp-msg.pm{margin-left:auto;flex-direction:row-reverse}
+  .rp-avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0}
+  .rp-msg.client .rp-avatar{background:var(--accent);color:#fff}
+  .rp-msg.pm .rp-avatar{background:var(--primary);color:#fff}
+  .rp-bubble{padding:10px 14px;border-radius:12px;font-size:14px;line-height:1.6}
+  .rp-msg.client .rp-bubble{background:#fff;border:1px solid var(--border)}
+  .rp-msg.pm .rp-bubble{background:var(--primary);color:#fff}
+  .rp-msg.pm .rp-bubble.user-said{background:#3b82f6}
+  .rp-msg.pm .rp-bubble.ref-answer{background:#e0e7ff;color:var(--text);border:1px dashed var(--primary-light);font-size:13px}
+  .rp-input-area{display:flex;gap:8px;margin-top:12px}
+  .rp-waiting{padding:20px;text-align:center;color:var(--text-secondary);font-size:14px}
+  /* Recite */
+  .recite-text{font-size:16px;line-height:2.2;padding:20px;background:#fffbeb;border-radius:10px;border-left:4px solid var(--accent)}
+  .recite-blank{display:inline-block;min-width:60px;border-bottom:2px dashed var(--primary);color:transparent;background:#e0e7ff;border-radius:3px;padding:0 6px;cursor:text;transition:all .2s;text-align:center;font-weight:600}
+  .recite-blank:focus{outline:none;border-bottom-color:var(--accent);background:#fef3c7;color:var(--text)}
+  .recite-blank.correct{background:#ecfdf5;border-bottom-color:var(--success);color:var(--success)}
+  .recite-blank.wrong{background:#fef2f2;border-bottom-color:var(--danger);color:var(--danger)}
+  .recite-blank.revealed{color:var(--primary);background:#dbeafe;border-bottom-style:solid}
+  /* Variant */
+  .variant-scenario{background:linear-gradient(135deg,#fef3c7,#fffbeb);border-radius:10px;padding:20px;margin-bottom:16px;border:1px solid #fde68a}
+  .variant-scenario h4{font-size:14px;color:#92400e;margin-bottom:8px}
+  .variant-scenario .context{font-size:15px;line-height:1.7;color:var(--text)}
+  .variant-template{background:#f8fafc;border-radius:10px;padding:20px;border:1px solid var(--border)}
+  .variant-template h4{font-size:14px;color:var(--primary);margin-bottom:10px}
+  .variant-template .template-text{font-size:15px;line-height:1.8}
+  .variant-input{display:inline-block;min-width:100px;border-bottom:2px dashed var(--primary);color:var(--primary);font-weight:600;padding:0 4px;cursor:text;transition:all .2s}
+  .variant-input:focus{outline:none;border-bottom-color:var(--accent);color:var(--accent)}
+  .variant-ref{font-size:13px;color:var(--text-secondary);margin-top:4px;display:none}
+  /* Topic Import */
+  .topic-card{display:flex;justify-content:space-between;align-items:center;padding:14px 18px;border:1px solid var(--border);border-radius:10px;margin-bottom:8px;transition:all .2s}
+  .topic-card:hover{border-color:var(--primary-light);box-shadow:var(--shadow)}
+  .topic-card.active-topic{border-color:var(--primary);background:#eff6ff}
+  .topic-card .topic-info h4{font-size:14px;font-weight:600}
+  .topic-card .topic-info span{font-size:12px;color:var(--text-secondary)}
+  .topic-card .topic-actions{display:flex;gap:6px}
+  .topic-card .topic-actions button{padding:4px 10px;border-radius:6px;font-size:12px;cursor:pointer;border:1px solid var(--border);background:#fff;transition:all .2s}
+  .topic-card .topic-actions button:hover{border-color:var(--primary);color:var(--primary)}
+  .topic-card .topic-actions button.del-btn:hover{border-color:var(--danger);color:var(--danger)}
 </style>
 </head>
 <body>
@@ -514,7 +576,8 @@
     <div class="nav-tab" data-tab="listen"><span class="emoji">🎧</span>听力训练</div>
     <div class="nav-tab" data-tab="template"><span class="emoji">📋</span>话术模板</div>
     <div class="nav-tab" data-tab="practice"><span class="emoji">🎤</span>口语练习</div>
-    <div class="nav-tab" data-tab="quiz"><span class="emoji">✅</span>测验</div>
+    <div class="nav-tab" data-tab="variant"><span class="emoji">🔀</span>变体练习</div>
+    <div class="nav-tab" data-tab="import"><span class="emoji">📥</span>主题管理</div>
   </div>
 </div>
 
@@ -633,6 +696,15 @@
       <p style="color:var(--text-secondary);margin-bottom:16px;">模拟真实项目启动会对话，练习听懂关键信息。点击每句话可以显示/隐藏中文翻译。</p>
 
       <div class="listen-controls">
+        <button class="scene-play-btn" id="playAllScenesBtn" onclick="playAllScenes()" style="font-size:14px;padding:10px 20px;">
+          ▶ 播放全部场景
+        </button>
+        <button class="scene-play-btn stop" id="stopAllScenesBtn" onclick="stopScenePlay()" style="display:none;font-size:14px;padding:10px 20px;">
+          ⏹ 停止播放
+        </button>
+        <span id="allScenesProgress" style="display:none;font-size:13px;color:var(--text-secondary);align-self:center;margin-left:8px;"></span>
+      </div>
+      <div class="listen-controls" style="margin-top:-8px;">
         <button class="btn btn-primary btn-sm" onclick="toggleAllTranslations(true)">👁️ 显示全部翻译</button>
         <button class="btn btn-outline btn-sm" onclick="toggleAllTranslations(false)">🙈 隐藏全部翻译</button>
         <button class="btn btn-ghost btn-sm" onclick="highlightKeywords()">🔑 高亮关键词</button>
@@ -671,19 +743,45 @@
     </div>
   </div>
 
-  <!-- ==================== QUIZ ==================== -->
-  <div class="section" id="sec-quiz">
+  <!-- ==================== VARIANT (模板变体练习) ==================== -->
+  <div class="section" id="sec-variant">
     <div class="card fade-in">
-      <div class="card-title"><span class="icon">✅</span>综合测验 — 项目启动会</div>
-      <div class="progress-bar"><div class="progress-fill" id="quizProgress" style="width:0%"></div></div>
-      <div class="progress-text" id="quizProgressText">第 1 题 / 共 10 题</div>
-      <div id="quizContainer" style="margin-top:20px;"></div>
-      <div class="quiz-result" id="quizResult"></div>
-      <div style="display:flex;gap:10px;margin-top:16px;">
-        <button class="btn btn-primary" id="quizSubmitBtn" onclick="submitQuiz()">提交答案</button>
-        <button class="btn btn-outline" id="quizNextBtn" onclick="nextQuiz()" style="display:none;">下一题 →</button>
+      <div class="card-title"><span class="icon">🔀</span>模板变体练习 — <span id="variantTopicName">项目启动会</span></div>
+      <p style="color:var(--text-secondary);margin-bottom:16px;">同一个话术模板，换不同的项目情境。练习灵活套用模板而非死记硬背。</p>
+      <div id="variantContainer"></div>
+      <div style="text-align:center;margin-top:16px;">
+        <button class="btn btn-primary" onclick="generateVariant()">🎲 换一个情境</button>
       </div>
-      <div id="quizFinalResult" style="display:none;margin-top:20px;"></div>
+    </div>
+  </div>
+
+  <!-- ==================== IMPORT (主题管理) ==================== -->
+  <div class="section" id="sec-import">
+    <div class="card fade-in">
+      <div class="card-title"><span class="icon">📥</span>主题管理</div>
+      <p style="color:var(--text-secondary);margin-bottom:20px;">导入自定义主题JSON文件，管理已有主题。主题JSON可通过AI对话生成。</p>
+
+      <div style="border:2px dashed var(--primary-light);border-radius:12px;padding:30px;text-align:center;margin-bottom:20px;cursor:pointer;transition:all 0.2s;" id="importDropZone" ondragover="event.preventDefault();this.style.borderColor='var(--primary)';this.style.background='#eff6ff'" ondragleave="this.style.borderColor='var(--primary-light)';this.style.background=''" ondrop="handleTopicDrop(event)" onclick="document.getElementById('topicFileInput').click()">
+        <div style="font-size:36px;margin-bottom:8px;">📁</div>
+        <div style="font-size:15px;font-weight:600;color:var(--primary);">点击选择或拖拽 JSON 文件到此处</div>
+        <div style="font-size:12px;color:var(--text-secondary);margin-top:4px;">支持标准主题数据格式 (.json)</div>
+        <input type="file" id="topicFileInput" accept=".json" style="display:none" onchange="handleTopicFile(this.files[0])">
+      </div>
+
+      <h3 style="font-size:15px;font-weight:700;margin-bottom:12px;">📋 已有主题列表</h3>
+      <div id="topicListContainer"></div>
+      <div id="topicSchemaInfo" style="margin-top:20px;background:#f8fafc;border-radius:8px;padding:16px;border:1px solid var(--border);">
+        <h4 style="font-size:14px;margin-bottom:8px;">📐 主题数据格式说明</h4>
+        <pre style="font-size:11px;line-height:1.6;overflow-x:auto;color:var(--text-secondary);white-space:pre-wrap;">{
+  "id": "topic-xxx",
+  "name": "主题名称",
+  "vocab": [{ "word":"...", "phonetic":"...", "meaning":"...", "tag":"core", "example":"...", "exampleCn":"..." }],
+  "listening": [{ "title":"场景标题", "lines":[{ "speaker":"PM", "text":"...", "cn":"..." }] }],
+  "templates": [{ "title":"...", "en":"...", "cn":"...", "tips":"..." }],
+  "speaking": [{ "scenario":"...", "prompt":"...", "reference":"...", "cn":"..." }],
+  "quiz": [{ "q":"...", "options":["A","B","C","D"], "answer":0 }]
+}</pre>
+      </div>
     </div>
   </div>
 
@@ -1107,9 +1205,6 @@ const QUIZ_DATA = {
 // ============================================================
 let currentTab = 'roadmap';
 let currentTopic = 'kickoff';
-let quizIndex = 0;
-let quizScore = 0;
-let quizAnswered = false;
 let studyStartTime = Date.now();
 let masteredWordsSet = new Set();     // words marked as mastered
 let unmasteredWordsSet = new Set();   // words marked as not mastered
@@ -1823,6 +1918,18 @@ function stopScenePlay() {
   scenePlayState.aborted = true;
   scenePlayState.playing = false;
   
+  // Also stop all-scenes playback
+  if (allScenesState.playing) {
+    allScenesState.aborted = true;
+    allScenesState.playing = false;
+    const playAllBtn = document.getElementById('playAllScenesBtn');
+    const stopAllBtn = document.getElementById('stopAllScenesBtn');
+    const progressEl = document.getElementById('allScenesProgress');
+    if (playAllBtn) { playAllBtn.style.display = ''; playAllBtn.innerHTML = '▶ 播放全部场景'; }
+    if (stopAllBtn) { stopAllBtn.style.display = 'none'; }
+    if (progressEl) { progressEl.textContent = '已停止'; setTimeout(() => { progressEl.style.display = 'none'; }, 2000); }
+  }
+  
   // Stop audio
   if (currentAudio) { currentAudio.pause(); currentAudio = null; }
   window.speechSynthesis.cancel();
@@ -1839,6 +1946,78 @@ function finishScenePlay() {
   document.querySelectorAll('.scene-play-btn.playing').forEach(el => el.classList.remove('playing'));
   document.querySelectorAll('[id^="scene-stop-"]').forEach(el => el.style.display = 'none');
   document.querySelectorAll('.dialogue-line.now-playing').forEach(el => el.classList.remove('now-playing'));
+
+  // If playing all scenes, move to next scene
+  if (allScenesState.playing && !allScenesState.aborted) {
+    allScenesState.currentSceneIdx++;
+    const data = DIALOGUE_DATA[currentTopic] || [];
+    if (allScenesState.currentSceneIdx < data.length) {
+      updateAllScenesProgress();
+      // Short pause between scenes
+      setTimeout(() => {
+        if (allScenesState.aborted) return;
+        scenePlayState = { playing: true, sceneIdx: allScenesState.currentSceneIdx, lineIdx: 0, aborted: false };
+        const playBtn = document.getElementById('scene-play-' + allScenesState.currentSceneIdx);
+        if (playBtn) playBtn.classList.add('playing');
+        const stopBtn = document.getElementById('scene-stop-' + allScenesState.currentSceneIdx);
+        if (stopBtn) stopBtn.style.display = '';
+        playNextLineInScene();
+      }, 800);
+    } else {
+      // All scenes done
+      finishAllScenesPlay();
+    }
+  }
+}
+
+// ============================================================
+// PLAY ALL SCENES - Sequential cross-scene playback
+// ============================================================
+let allScenesState = { playing: false, currentSceneIdx: 0, aborted: false };
+
+function playAllScenes() {
+  const data = DIALOGUE_DATA[currentTopic] || [];
+  if (!data.length) return;
+
+  // Stop any existing playback
+  stopScenePlay();
+
+  allScenesState = { playing: true, currentSceneIdx: 0, aborted: false };
+
+  // Update UI
+  const playBtn = document.getElementById('playAllScenesBtn');
+  const stopBtn = document.getElementById('stopAllScenesBtn');
+  const progressEl = document.getElementById('allScenesProgress');
+  if (playBtn) { playBtn.style.display = 'none'; }
+  if (stopBtn) { stopBtn.style.display = ''; }
+  if (progressEl) { progressEl.style.display = ''; }
+  updateAllScenesProgress();
+
+  // Start playing first scene
+  scenePlayState = { playing: true, sceneIdx: 0, lineIdx: 0, aborted: false };
+  const scenePlayBtn = document.getElementById('scene-play-0');
+  if (scenePlayBtn) scenePlayBtn.classList.add('playing');
+  const sceneStopBtn = document.getElementById('scene-stop-0');
+  if (sceneStopBtn) sceneStopBtn.style.display = '';
+  playNextLineInScene();
+}
+
+function updateAllScenesProgress() {
+  const data = DIALOGUE_DATA[currentTopic] || [];
+  const progressEl = document.getElementById('allScenesProgress');
+  if (progressEl) {
+    progressEl.textContent = '正在播放：场景 ' + (allScenesState.currentSceneIdx + 1) + ' / ' + data.length;
+  }
+}
+
+function finishAllScenesPlay() {
+  allScenesState.playing = false;
+  const playBtn = document.getElementById('playAllScenesBtn');
+  const stopBtn = document.getElementById('stopAllScenesBtn');
+  const progressEl = document.getElementById('allScenesProgress');
+  if (playBtn) { playBtn.style.display = ''; playBtn.innerHTML = '▶ 播放全部场景'; }
+  if (stopBtn) { stopBtn.style.display = 'none'; }
+  if (progressEl) { progressEl.textContent = '✅ 全部播放完成'; setTimeout(() => { progressEl.style.display = 'none'; }, 3000); }
 }
 
 // Google TTS with callback (core audio engine for dialogues)
@@ -1997,95 +2176,188 @@ function toggleRefCn(i) {
   el.style.display = el.style.display === 'none' ? 'block' : 'none';
 }
 
-function renderQuiz() {
-  const data = QUIZ_DATA[currentTopic] || [];
-  if (!data.length) return;
-  const q = data[quizIndex];
-  const container = document.getElementById('quizContainer');
-  container.innerHTML = `
-    <div class="quiz-question">${quizIndex + 1}. ${q.q}</div>
-    <div class="quiz-options">
-      ${q.options.map((opt, i) => `
-        <div class="quiz-option" data-idx="${i}" onclick="selectQuizOption(this)">
-          <span class="letter">${String.fromCharCode(65 + i)}</span>
-          <span>${opt}</span>
-        </div>
-      `).join('')}
-    </div>
-  `;
-  document.getElementById('quizProgress').style.width = ((quizIndex) / data.length * 100) + '%';
-  document.getElementById('quizProgressText').textContent = `第 ${quizIndex + 1} 题 / 共 ${data.length} 题`;
-  document.getElementById('quizSubmitBtn').style.display = '';
-  document.getElementById('quizNextBtn').style.display = 'none';
-  document.getElementById('quizResult').className = 'quiz-result';
-  document.getElementById('quizResult').innerHTML = '';
-  quizAnswered = false;
+// ============================================================
+// V2.0 — VARIANT (模板变体练习)
+// ============================================================
+const VARIANT_CONTEXTS = [
+  { client: '印度连锁药房 MedPharm', stores: '500家', goal: '库存管理系统上云', duration: '8个月', tech: 'Azure' },
+  { client: '新加坡超市 FreshMart', stores: '80家', goal: 'POS和会员系统升级', duration: '5个月', tech: 'AWS' },
+  { client: '香港时尚零售 StyleHK', stores: '200家', goal: '全渠道电商平台搭建', duration: '10个月', tech: 'GCP' },
+  { client: '泰国7-Eleven区域总部', stores: '3000家', goal: '供应链和配送系统重构', duration: '12个月', tech: '混合云' },
+  { client: '马来西亚百货 MyMall', stores: '45家', goal: '数据分析平台建设', duration: '4个月', tech: 'AWS' },
+  { client: '菲律宾生鲜电商 FreshPH', stores: '线上+30仓', goal: '订单履行系统优化', duration: '6个月', tech: 'Azure' },
+];
+let variantState = { contextIdx: 0, templateIdx: 0 };
+
+function renderVariant() {
+  var data = TEMPLATE_DATA[currentTopic] || [];
+  if (!data.length) { document.getElementById('variantContainer').innerHTML = '<p style="color:var(--text-secondary)">暂无模板数据</p>'; return; }
+  document.getElementById('variantTopicName').textContent = currentTopic === 'kickoff' ? '项目启动会' : currentTopic;
+  generateVariant();
 }
 
-function selectQuizOption(el) {
-  if (quizAnswered) return;
-  document.querySelectorAll('.quiz-option').forEach(o => o.classList.remove('selected'));
-  el.classList.add('selected');
+function generateVariant() {
+  var data = TEMPLATE_DATA[currentTopic] || [];
+  variantState.contextIdx = Math.floor(Math.random() * VARIANT_CONTEXTS.length);
+  variantState.templateIdx = Math.floor(Math.random() * data.length);
+  var ctx = VARIANT_CONTEXTS[variantState.contextIdx];
+  var tmpl = data[variantState.templateIdx];
+
+  var scenarioHtml = '<div class="variant-scenario">' +
+    '<h4>🎯 情境设定</h4>' +
+    '<div class="context">你正在为 <b>' + ctx.client + '</b>（' + ctx.stores + '门店）做项目启动会。<br>' +
+    '项目目标：<b>' + ctx.goal + '</b>，周期 <b>' + ctx.duration + '</b>，技术平台 <b>' + ctx.tech + '</b>。</div></div>';
+
+  // Show template with blanks for user to fill
+  var templateHtml = tmpl.en.replace(/<span class='blank'[^>]*>______<\/span>/g, '<span class="variant-input" contenteditable="true">______</span>');
+  templateHtml = templateHtml.replace(/<[^>]*>/g, '');
+
+  var html = scenarioHtml +
+    '<div class="variant-template">' +
+    '<h4>📋 ' + tmpl.title + '</h4>' +
+    '<div class="template-text">' + templateHtml + '</div>' +
+    '<div style="margin-top:12px"><button class="btn btn-sm btn-ghost" onclick="showVariantRef()">💡 查看参考答案</button>' +
+    '<button class="btn btn-sm btn-ghost" style="margin-left:8px" onclick="showVariantCn()">💬 查看中文</button></div>' +
+    '<div class="variant-ref" id="variantRef" style="margin-top:8px">' + tmpl.cn + '</div>' +
+    '<div class="variant-ref" id="variantTips" style="margin-top:4px"><strong>Tips：</strong>' + tmpl.tips + '</div>' +
+    '</div>';
+  document.getElementById('variantContainer').innerHTML = html;
 }
 
-function submitQuiz() {
-  if (quizAnswered) return;
-  const selected = document.querySelector('.quiz-option.selected');
-  if (!selected) { alert('请先选择一个答案'); return; }
+function showVariantRef() {
+  var el = document.getElementById('variantRef');
+  el.style.display = el.style.display === 'none' ? 'block' : 'none';
+  var tips = document.getElementById('variantTips');
+  tips.style.display = el.style.display;
+}
+function showVariantCn() { showVariantRef(); }
 
-  quizAnswered = true;
-  const data = QUIZ_DATA[currentTopic];
-  const q = data[quizIndex];
-  const idx = parseInt(selected.dataset.idx);
-  const resultEl = document.getElementById('quizResult');
+// ============================================================
+// V2.0 — CUSTOM TOPIC IMPORT (自定义主题导入/管理)
+// ============================================================
+let importedTopics = {};
 
-  document.querySelectorAll('.quiz-option').forEach((o, i) => {
-    if (i === q.answer) o.classList.add('correct');
-    if (i === idx && i !== q.answer) o.classList.add('wrong');
+function loadImportedTopics() {
+  try {
+    var saved = localStorage.getItem('pm-english-imported-topics');
+    if (saved) importedTopics = JSON.parse(saved);
+  } catch(e) {}
+}
+function saveImportedTopics() {
+  try { localStorage.setItem('pm-english-imported-topics', JSON.stringify(importedTopics)); } catch(e) {}
+}
+loadImportedTopics();
+
+// Register imported topics into data structures
+function registerImportedTopics() {
+  Object.keys(importedTopics).forEach(function(tid) {
+    var t = importedTopics[tid];
+    if (t.vocab && t.vocab.length) VOCAB_DATA[tid] = t.vocab;
+    if (t.listening && t.listening.length) DIALOGUE_DATA[tid] = t.listening;
+    if (t.templates && t.templates.length) TEMPLATE_DATA[tid] = t.templates;
+    if (t.speaking && t.speaking.length) SPEAKING_DATA[tid] = t.speaking;
+    if (t.quiz && t.quiz.length) QUIZ_DATA[tid] = t.quiz;
   });
+}
+registerImportedTopics();
 
-  if (idx === q.answer) {
-    quizScore++;
-    resultEl.className = 'quiz-result show correct-result';
-    resultEl.innerHTML = '✅ 正确！';
-  } else {
-    resultEl.className = 'quiz-result show wrong-result';
-    resultEl.innerHTML = `❌ 正确答案是 ${String.fromCharCode(65 + q.answer)}: ${q.options[q.answer]}`;
-  }
-
-  document.getElementById('quizSubmitBtn').style.display = 'none';
-  if (quizIndex < data.length - 1) {
-    document.getElementById('quizNextBtn').style.display = '';
-  } else {
-    // Show final result
-    const pct = Math.round(quizScore / data.length * 100);
-    document.getElementById('quizFinalResult').style.display = 'block';
-    document.getElementById('quizFinalResult').innerHTML = `
-      <div class="card" style="background:${pct >= 70 ? '#ecfdf5' : '#fffbeb'};text-align:center;padding:30px;">
-        <div style="font-size:48px;margin-bottom:12px;">${pct >= 90 ? '🎉' : pct >= 70 ? '👍' : '💪'}</div>
-        <div style="font-size:24px;font-weight:700;margin-bottom:8px;">得分：${quizScore}/${data.length} (${pct}%)</div>
-        <div style="font-size:14px;color:var(--text-secondary);margin-bottom:16px;">
-          ${pct >= 90 ? '太棒了！你已经很好地掌握了启动会相关词汇和表达！' :
-            pct >= 70 ? '不错！再复习几遍词汇卡片会更好。' :
-            '继续加油！建议回去复习词汇卡片和话术模板。'}
-        </div>
-        <button class="btn btn-primary" onclick="resetQuiz()">🔄 重新测试</button>
-      </div>
-    `;
-    document.getElementById('quizProgress').style.width = '100%';
-  }
+function handleTopicDrop(event) {
+  event.preventDefault();
+  var file = event.dataTransfer.files[0];
+  if (file) handleTopicFile(file);
+  event.target.style.borderColor = 'var(--primary-light)';
+  event.target.style.background = '';
 }
 
-function nextQuiz() {
-  quizIndex++;
-  renderQuiz();
+function handleTopicFile(file) {
+  if (!file || !file.name.endsWith('.json')) {
+    showToast('请上传 .json 格式的主题文件');
+    return;
+  }
+  var reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      var data = JSON.parse(e.target.result);
+      if (!data.id || !data.name) {
+        showToast('JSON 格式错误：缺少 id 或 name 字段');
+        return;
+      }
+      importedTopics[data.id] = data;
+      saveImportedTopics();
+      // Register into data
+      if (data.vocab) VOCAB_DATA[data.id] = data.vocab;
+      if (data.listening) DIALOGUE_DATA[data.id] = data.listening;
+      if (data.templates) TEMPLATE_DATA[data.id] = data.templates;
+      if (data.speaking) SPEAKING_DATA[data.id] = data.speaking;
+      if (data.quiz) QUIZ_DATA[data.id] = data.quiz;
+      // Add topic chip if not exists
+      addTopicChip(data.id, data.name);
+      renderTopicList();
+      showToast('✅ 主题「' + data.name + '」导入成功！');
+    } catch(err) {
+      showToast('JSON 解析失败：' + err.message);
+    }
+  };
+  reader.readAsText(file);
 }
 
-function resetQuiz() {
-  quizIndex = 0;
-  quizScore = 0;
-  document.getElementById('quizFinalResult').style.display = 'none';
-  renderQuiz();
+function addTopicChip(topicId, topicName) {
+  if (document.querySelector('.topic-chip[data-topic="' + topicId + '"]')) return;
+  var chip = document.createElement('div');
+  chip.className = 'topic-chip';
+  chip.dataset.topic = topicId;
+  chip.innerHTML = '📦 ' + topicName;
+  chip.addEventListener('click', function() { switchTopic(topicId); });
+  document.querySelector('.topic-chips').appendChild(chip);
+}
+
+function renderTopicList() {
+  var container = document.getElementById('topicListContainer');
+  var builtIn = [
+    { id: 'kickoff', name: '🚀 项目启动会', builtin: true },
+  ];
+  var imported = Object.keys(importedTopics).map(function(tid) {
+    return { id: tid, name: '📦 ' + importedTopics[tid].name, builtin: false };
+  });
+  var all = builtIn.concat(imported);
+
+  container.innerHTML = all.map(function(t) {
+    var isActive = t.id === currentTopic;
+    var vocabCount = (VOCAB_DATA[t.id] || []).length;
+    var listenCount = (DIALOGUE_DATA[t.id] || []).length;
+    return '<div class="topic-card ' + (isActive ? 'active-topic' : '') + '">' +
+      '<div class="topic-info">' +
+        '<h4>' + t.name + '</h4>' +
+        '<span>词汇 ' + vocabCount + ' · 听力场景 ' + listenCount + (t.builtin ? ' · 内置' : ' · 已导入') + '</span>' +
+      '</div>' +
+      '<div class="topic-actions">' +
+        '<button class="topic-switch-btn" data-tid="' + t.id + '">切换</button>' +
+        (t.builtin ? '' : '<button class="del-btn topic-del-btn" data-tid="' + t.id + '" style="color:var(--danger);border-color:var(--danger);">删除</button>') +
+      '</div></div>';
+  }).join('');
+
+  // Also add chips for imported topics
+  Object.keys(importedTopics).forEach(function(tid) {
+    addTopicChip(tid, importedTopics[tid].name);
+  });
+}
+
+function deleteImportedTopic(topicId) {
+  if (!importedTopics[topicId]) { showToast('主题不存在'); return; }
+  var topicName = importedTopics[topicId].name || topicId;
+  if (!confirm('确定要删除主题「' + topicName + '」吗？')) return;
+  delete importedTopics[topicId];
+  if (VOCAB_DATA[topicId]) delete VOCAB_DATA[topicId];
+  if (DIALOGUE_DATA[topicId]) delete DIALOGUE_DATA[topicId];
+  if (TEMPLATE_DATA[topicId]) delete TEMPLATE_DATA[topicId];
+  if (SPEAKING_DATA[topicId]) delete SPEAKING_DATA[topicId];
+  if (QUIZ_DATA[topicId]) delete QUIZ_DATA[topicId];
+  saveImportedTopics();
+  var chip = document.querySelector('.topic-chip[data-topic="' + topicId + '"]');
+  if (chip) chip.remove();
+  if (currentTopic === topicId) switchTopic('kickoff');
+  renderTopicList();
+  showToast('已删除主题「' + topicName + '」');
 }
 
 // ============================================================
@@ -2096,9 +2368,9 @@ function renderAll() {
   renderDialogue();
   renderTemplates();
   renderSpeaking();
-  quizIndex = 0;
-  quizScore = 0;
-  renderQuiz();
+  // V2.0 modules
+  renderVariant();
+  renderTopicList();
 }
 
 // ============================================================
@@ -2172,6 +2444,19 @@ function exportReviewCards() {
 // Init
 loadProgress();
 renderAll();
+
+// Global event delegation for topic management buttons
+document.getElementById('topicListContainer').addEventListener('click', function(e) {
+  var btn = e.target.closest('button');
+  if (!btn) return;
+  var tid = btn.dataset.tid;
+  if (!tid) return;
+  if (btn.classList.contains('topic-del-btn')) {
+    deleteImportedTopic(tid);
+  } else if (btn.classList.contains('topic-switch-btn')) {
+    switchTopic(tid);
+  }
+});
 </script>
 <div class="add-word-toast" id="addWordToast"></div>
 </body>
