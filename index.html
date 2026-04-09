@@ -1674,32 +1674,39 @@ function applyVocabFilters() {
 let speechRate = 0.85;
 let currentAudio = null;
 
-// Play a single word using dictionary pronunciation API (more natural)
+// Play a single word using multi-source audio with robust fallback
 function playWordAudio(word, btnEl) {
   // Stop any ongoing audio
   if (currentAudio) { currentAudio.pause(); currentAudio = null; }
   window.speechSynthesis.cancel();
 
   if (btnEl) btnEl.classList.add('playing');
+  const done = () => { if (btnEl) btnEl.classList.remove('playing'); currentAudio = null; };
 
-  // Try dictionary API first (real human pronunciation)
-  const cleanWord = word.toLowerCase().replace(/[^a-z\s-]/g, '').trim();
-  // Try multiple free pronunciation sources
-  const sources = [
-    `https://dict.youdao.com/dictvoice?audio=${encodeURIComponent(cleanWord)}&type=2`,
-    `https://dict.youdao.com/dictvoice?audio=${encodeURIComponent(cleanWord)}&type=1`
-  ];
+  // Prepare clean word for dictionary lookup (keep letters, spaces, hyphens)
+  const cleanWord = word.toLowerCase().replace(/[^a-z\s-]/g, ' ').replace(/\s+/g, ' ').trim();
+  // Check if it's an abbreviation/acronym (all caps, /, or very short)
+  const isAbbreviation = /^[A-Z\/.\s-]+$/i.test(word.trim()) || word.includes('/');
+
+  // Build ordered source list: Google TTS first (most reliable), then dictionary
+  const googleTtsUrl = `https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=en&q=${encodeURIComponent(word)}`;
+  const sources = [googleTtsUrl];
+  // Only try dictionary for real English words (not abbreviations/acronyms)
+  if (!isAbbreviation && cleanWord.length > 1) {
+    sources.push(`https://dict.youdao.com/dictvoice?audio=${encodeURIComponent(cleanWord)}&type=2`);
+    sources.push(`https://dict.youdao.com/dictvoice?audio=${encodeURIComponent(cleanWord)}&type=1`);
+  }
 
   let sourceIdx = 0;
   function tryNextSource() {
     if (sourceIdx >= sources.length) {
-      // Fallback to TTS
-      playSentenceTTS(word, btnEl);
+      // Final fallback: Web Speech API
+      playWithWebSpeech(word, done);
       return;
     }
     const audio = new Audio(sources[sourceIdx]);
     currentAudio = audio;
-    audio.onended = () => { if (btnEl) btnEl.classList.remove('playing'); currentAudio = null; };
+    audio.onended = done;
     audio.onerror = () => { sourceIdx++; tryNextSource(); };
     audio.play().catch(() => { sourceIdx++; tryNextSource(); });
   }
@@ -1707,7 +1714,7 @@ function playWordAudio(word, btnEl) {
 }
 
 // Play a sentence (unified entry point for vocab examples etc.)
-// Delegates to the new Google TTS engine with role support
+// Delegates to the voice engine with role support
 function playSentenceTTS(text, btnEl) {
   if (btnEl) btnEl.classList.add('playing');
   playSentenceGoogleTTS(text, () => {
@@ -1752,10 +1759,10 @@ function splitTextIntoChunks(text, maxLen) {
   return chunks;
 }
 
-// Smart play: short text = dictionary audio, long text = Google TTS
+// Smart play: short text = dictionary audio, long text = TTS sentence engine
 function playWord(text, btnEl) {
   const wordCount = text.trim().split(/\s+/).length;
-  if (wordCount <= 3) {
+  if (wordCount <= 4) {
     playWordAudio(text, btnEl);
   } else {
     playSentenceTTS(text, btnEl);
@@ -2048,15 +2055,47 @@ function playSentenceGoogleTTS(text, onDone, role, audioId) {
     audio.onended = () => { currentAudio = null; if (onDone) onDone(); };
     audio.onerror = () => {
       currentAudio = null;
-      // Fallback to Web Speech API
-      playWithWebSpeech(text, onDone, role);
+      // Fallback to Google Translate TTS, then Web Speech API
+      playWithGoogleTranslateTTS(text, onDone, role);
     };
-    audio.play().catch(() => playWithWebSpeech(text, onDone, role));
+    audio.play().catch(() => playWithGoogleTranslateTTS(text, onDone, role));
     return;
   }
   
-  // No audioId — use Web Speech API directly
-  playWithWebSpeech(text, onDone, role);
+  // No audioId — try Google Translate TTS first, then Web Speech API
+  playWithGoogleTranslateTTS(text, onDone, role);
+}
+
+// Google Translate TTS (works on mobile browsers without Web Speech API)
+function playWithGoogleTranslateTTS(text, onDone, role) {
+  const cleanText = text.replace(/<[^>]*>/g, '').replace(/["""]/g, '').trim();
+  if (!cleanText) { if (onDone) onDone(); return; }
+  
+  const lang = (role === 'client') ? 'en-GB' : 'en-US';
+  // Google TTS has ~200 char limit, so chunk long texts
+  const chunks = splitTextIntoChunks(cleanText, 180);
+  let chunkIdx = 0;
+  
+  function playNextChunk() {
+    if (chunkIdx >= chunks.length) { if (onDone) onDone(); return; }
+    const url = `https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=${lang.substring(0,2)}&q=${encodeURIComponent(chunks[chunkIdx])}`;
+    const audio = new Audio(url);
+    currentAudio = audio;
+    audio.playbackRate = speechRate <= 0.6 ? 0.7 : (speechRate >= 1.1 ? 1.25 : 1.0);
+    audio.onended = () => { chunkIdx++; playNextChunk(); };
+    audio.onerror = () => {
+      currentAudio = null;
+      // Final fallback: Web Speech API for remaining text
+      const remainingText = chunks.slice(chunkIdx).join(' ');
+      playWithWebSpeech(remainingText, onDone, role);
+    };
+    audio.play().catch(() => {
+      currentAudio = null;
+      const remainingText = chunks.slice(chunkIdx).join(' ');
+      playWithWebSpeech(remainingText, onDone, role);
+    });
+  }
+  playNextChunk();
 }
 
 // Fallback: Web Speech API
