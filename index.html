@@ -1258,9 +1258,10 @@ document.querySelectorAll('.nav-tab').forEach(tab => {
 
 // Topic switch
 function switchTopic(topic) {
-  if (document.querySelector(`.topic-chip[data-topic="${topic}"]`)?.classList.contains('locked')) return;
+  const chip = document.querySelector(`.topic-chip[data-topic="${topic}"]`);
+  if (chip?.classList.contains('locked')) return;
   document.querySelectorAll('.topic-chip').forEach(c => c.classList.remove('active'));
-  document.querySelector(`.topic-chip[data-topic="${topic}"]`).classList.add('active');
+  if (chip) chip.classList.add('active');
   currentTopic = topic;
   renderAll();
 }
@@ -1294,12 +1295,16 @@ function renderVocab() {
     // Make meaningful words in example clickable
     const highlightedExample = highlightExampleWords(v.example, wordKey);
     
+    // Safely escape word for inline onclick (handle quotes, backticks, backslashes)
+    const safeWord = v.word.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/`/g, '\\`');
+    const safeExample = v.example.replace(/\\/g, '\\\\').replace(/'/g, "\\'").replace(/`/g, '\\`').replace(/\$/g, '\\$');
+    
     return `
     <div class="vocab-card ${statusClass}" onclick="flipCard(this, event)" data-tag="${v.tag}" data-index="${i}" data-word="${wordKey}" data-mastery="${isMastered ? 'mastered' : (isUnmastered ? 'unmastered' : 'none')}" data-review="${v.isReview ? 'true' : 'false'}">
       <span class="vocab-tag ${v.tag}">${v.tag === 'core' ? '核心' : v.tag === 'business' ? '商务' : v.tag === 'tech' ? '技术' : '零售'}</span>
       <div class="vocab-word-row">
         <div class="vocab-word">${v.word}</div>
-        <button class="vocab-play-btn" onclick="event.stopPropagation(); playWord('${v.word.replace(/'/g, "\\'")}', this)" title="播放发音">🔊</button>
+        <button class="vocab-play-btn" onclick="event.stopPropagation(); playWord('${safeWord}', this)" title="播放发音">🔊</button>
       </div>
       <div class="vocab-phonetic">${v.phonetic}</div>
       <div class="vocab-meaning">${v.meaning}</div>
@@ -1307,14 +1312,14 @@ function renderVocab() {
         <div class="vocab-example-item">
           <div class="vocab-example-en">
             ${highlightedExample}
-            <button class="vocab-example-play" onclick="event.stopPropagation(); playSentenceTTS(\`${v.example.replace(/`/g, '\\`')}\`, this)">🔊</button>
+            <button class="vocab-example-play" onclick="event.stopPropagation(); playSentenceTTS('${safeExample}', this)">🔊</button>
           </div>
           <div class="vocab-example-cn">${v.exampleCn}</div>
         </div>
       </div>
       <div class="vocab-mastery">
-        <button class="mastery-btn got-it" onclick="event.stopPropagation(); markMastery('${wordKey.replace(/'/g, "\\'")}', true, this)">✅ 已掌握</button>
-        <button class="mastery-btn not-yet" onclick="event.stopPropagation(); markMastery('${wordKey.replace(/'/g, "\\'")}', false, this)">❌ 未掌握</button>
+        <button class="mastery-btn got-it" onclick="event.stopPropagation(); markMastery('${safeWord}', true, this)">✅ 已掌握</button>
+        <button class="mastery-btn not-yet" onclick="event.stopPropagation(); markMastery('${safeWord}', false, this)">❌ 未掌握</button>
       </div>
       <div class="vocab-speed-control">
         <span>语速:</span>
@@ -1570,8 +1575,10 @@ function addToNextTopicReview(word) {
   const wordData = allWords.find(v => v.word === word);
   if (!wordData) return;
   
-  // Determine next topic
-  const topicOrder = ['kickoff', 'meeting', 'requirement', 'technical', 'progress', 'risk', 'agile', 'operations', 'presentation', 'business'];
+  // Determine next topic: built-in order + imported topics
+  const builtInOrder = ['kickoff', 'meeting', 'requirement', 'technical', 'progress', 'risk', 'agile', 'operations', 'presentation', 'business'];
+  const importedOrder = Object.keys(importedTopics);
+  const topicOrder = builtInOrder.concat(importedOrder.filter(t => !builtInOrder.includes(t)));
   const currentIdx = topicOrder.indexOf(currentTopic);
   const nextTopic = topicOrder[currentIdx + 1];
   if (!nextTopic) return; // No next topic
@@ -2078,7 +2085,7 @@ function playWithGoogleTranslateTTS(text, onDone, role) {
   
   function playNextChunk() {
     if (chunkIdx >= chunks.length) { if (onDone) onDone(); return; }
-    const url = `https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=${lang.substring(0,2)}&q=${encodeURIComponent(chunks[chunkIdx])}`;
+    const url = `https://translate.google.com/translate_tts?ie=UTF-8&client=tw-ob&tl=${encodeURIComponent(lang)}&q=${encodeURIComponent(chunks[chunkIdx])}`;
     const audio = new Audio(url);
     currentAudio = audio;
     audio.playbackRate = speechRate <= 0.6 ? 0.7 : (speechRate >= 1.1 ? 1.25 : 1.0);
@@ -2327,7 +2334,8 @@ let variantState = { contextIdx: 0, templateIdx: 0 };
 function renderVariant() {
   var data = TEMPLATE_DATA[currentTopic] || [];
   if (!data.length) { document.getElementById('variantContainer').innerHTML = '<p style="color:var(--text-secondary)">暂无模板数据</p>'; return; }
-  document.getElementById('variantTopicName').textContent = currentTopic === 'kickoff' ? '项目启动会' : currentTopic;
+  var topicDisplayName = currentTopic === 'kickoff' ? '项目启动会' : (importedTopics[currentTopic] ? importedTopics[currentTopic].name : currentTopic);
+  document.getElementById('variantTopicName').textContent = topicDisplayName;
   generateVariant();
 }
 
