@@ -46,6 +46,9 @@ body{font-family:-apple-system,'PingFang SC',system-ui,sans-serif;background:#0f
 .speed-opt.active{background:#3b82f6;color:#fff;border-color:#3b82f6}
 .cn-toggle{margin-left:auto;padding:3px 10px;border-radius:10px;font-size:11px;border:1px solid #475569;background:transparent;color:#94a3b8;cursor:pointer}
 .cn-toggle.on{background:#f59e0b;color:#fff;border-color:#f59e0b}
+.all-play-btn{padding:6px 14px;border-radius:14px;font-size:12px;font-weight:700;color:#fff;background:linear-gradient(135deg,#f59e0b,#ef4444);border:none;cursor:pointer;white-space:nowrap;flex-shrink:0}
+.all-play-btn.active{background:linear-gradient(135deg,#ef4444,#dc2626);animation:pulse 1.5s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.7}}
 </style>
 </head>
 <body>
@@ -125,6 +128,7 @@ let isPlaying = false;
 let audio = null;
 let showCn = false;
 let playbackRate = 1.0;
+let playAllMode = false;
 
 // Estimate line timing (proportional by text length)
 function getLineTimings(scene) {
@@ -140,8 +144,9 @@ function getLineTimings(scene) {
 
 // Render
 function renderSceneBar() {
-  document.getElementById('sceneBar').innerHTML = SCENES.map((s, i) =>
-    `<button class="scene-btn ${i === currentScene ? 'active' : ''}" onclick="switchScene(${i})">${s.title.split('·')[0].trim()}</button>`
+  var allBtn = '<button class="all-play-btn' + (playAllMode ? ' active' : '') + '" onclick="togglePlayAll()">' + (playAllMode ? '\u23F9 \u505C\u6B62\u5168\u90E8' : '\u25B6 \u5168\u90E8\u64AD\u653E') + '</button>';
+  document.getElementById('sceneBar').innerHTML = allBtn + SCENES.map((s, i) =>
+    `<button class="scene-btn ${i === currentScene ? 'active' : ''}" onclick="switchScene(${i})">${s.title.split('\u00b7')[0].trim()}</button>`
   ).join('');
 }
 
@@ -163,12 +168,27 @@ function switchScene(idx) {
   currentScene = idx;
   currentLine = -1;
   isPlaying = false;
-  document.getElementById('playBtn').textContent = '▶';
+  // If manually switching, cancel play-all mode
+  playAllMode = false;
+  document.getElementById('playBtn').textContent = '\u25B6';
   document.getElementById('playBtn').classList.remove('playing');
   document.getElementById('progressFill').style.width = '0%';
-  document.getElementById('statusInfo').textContent = '准备播放';
+  document.getElementById('statusInfo').textContent = '\u51C6\u5907\u64AD\u653E';
   renderSceneBar();
   renderSubtitles();
+}
+
+// Internal switch for play-all mode (does not cancel playAllMode)
+function switchSceneForPlayAll(idx) {
+  if (audio) { audio.pause(); }
+  currentScene = idx;
+  currentLine = -1;
+  isPlaying = false;
+  audio = null;
+  document.getElementById('progressFill').style.width = '0%';
+  renderSceneBar();
+  renderSubtitles();
+  document.getElementById('statusInfo').textContent = '\u573A\u666F ' + (idx + 1) + '/' + SCENES.length;
 }
 
 function togglePlay() {
@@ -211,12 +231,30 @@ function startPlay() {
     
     audio.onended = () => {
       isPlaying = false;
-      document.getElementById('playBtn').textContent = '▶';
-      document.getElementById('playBtn').classList.remove('playing');
-      document.getElementById('statusInfo').textContent = '播放完成';
       document.getElementById('progressFill').style.width = '100%';
       // Mark all played
       document.querySelectorAll('.line').forEach(el => { el.classList.remove('active'); el.classList.add('played'); });
+      
+      // If in play-all mode, auto advance to next scene
+      if (playAllMode && currentScene < SCENES.length - 1) {
+        document.getElementById('statusInfo').textContent = '切换下一场景...';
+        setTimeout(() => {
+          if (!playAllMode) return;
+          switchSceneForPlayAll(currentScene + 1);
+          startPlay();
+        }, 1000);
+        return;
+      }
+      
+      // If play-all and last scene, finish
+      if (playAllMode) {
+        playAllMode = false;
+        renderSceneBar();
+      }
+      
+      document.getElementById('playBtn').textContent = '▶';
+      document.getElementById('playBtn').classList.remove('playing');
+      document.getElementById('statusInfo').textContent = '播放完成';
     };
   }
   
@@ -262,6 +300,30 @@ function toggleCn() {
   showCn = !showCn;
   document.getElementById('cnToggle').classList.toggle('on', showCn);
   document.querySelectorAll('.line').forEach(el => el.classList.toggle('show-cn', showCn));
+}
+
+function togglePlayAll() {
+  if (playAllMode) {
+    // Stop play-all
+    playAllMode = false;
+    if (audio) { audio.pause(); }
+    isPlaying = false;
+    document.getElementById('playBtn').textContent = '▶';
+    document.getElementById('playBtn').classList.remove('playing');
+    document.getElementById('statusInfo').textContent = '已停止';
+    renderSceneBar();
+  } else {
+    // Start play-all from scene 1
+    playAllMode = true;
+    if (audio) { audio.pause(); audio = null; }
+    currentScene = 0;
+    currentLine = -1;
+    isPlaying = false;
+    renderSceneBar();
+    renderSubtitles();
+    document.getElementById('statusInfo').textContent = '场景 1/' + SCENES.length;
+    startPlay();
+  }
 }
 
 renderSceneBar();
