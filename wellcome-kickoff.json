@@ -1,0 +1,326 @@
+{
+  "id": "wellcome-kickoff",
+  "name": "Wellcome App Rebuild Kickoff",
+  "vocab": [
+    { "word": "app rebuild", "phonetic": "/æp riːˈbɪld/", "meaning": "应用重建", "tag": "tech", "example": "The Food HK app rebuild aims to modernize the entire shopping experience.", "exampleCn": "Food HK应用重建旨在实现整个购物体验的现代化。" },
+    { "word": "project charter", "phonetic": "/ˈprɒdʒɛkt ˈtʃɑːrtər/", "meaning": "项目章程", "tag": "core", "example": "This project charter outlines the scope, objectives, and governance.", "exampleCn": "这份项目章程概述了范围、目标和治理机制。" },
+    { "word": "omni-channel", "phonetic": "/ˈɒmnɪˌtʃænəl/", "meaning": "全渠道", "tag": "retail", "example": "We aim to increase omni-channel customer conversion and retention.", "exampleCn": "我们的目标是提升全渠道客户转化和留存。" },
+    { "word": "conversion rate", "phonetic": "/kənˈvɜːrʒən reɪt/", "meaning": "转化率(CVR)", "tag": "retail", "example": "The new checkout flow will boost the conversion rate within six months.", "exampleCn": "新结账流程将在六个月内提高转化率。" },
+    { "word": "retention", "phonetic": "/rɪˈtɛnʃən/", "meaning": "留存/保留", "tag": "retail", "example": "Customer retention is a key metric for this project.", "exampleCn": "客户留存是项目的关键指标。" },
+    { "word": "user experience", "phonetic": "/ˈjuːzər ɪkˈspɪriəns/", "meaning": "用户体验(UX)", "tag": "tech", "example": "Enhancing user experience is our number one objective.", "exampleCn": "提升用户体验是我们的首要目标。" },
+    { "word": "personalization", "phonetic": "/ˌpɜːrsənəlaɪˈzeɪʃən/", "meaning": "个性化", "tag": "tech", "example": "We will enable data-driven personalization for targeted campaigns.", "exampleCn": "我们将实现数据驱动的个性化精准营销。" },
+    { "word": "technology stack", "phonetic": "/tɛkˈnɒlədʒi stæk/", "meaning": "技术栈", "tag": "tech", "example": "We need to modernize the technology stack for faster development.", "exampleCn": "我们需要更新技术栈以加速开发。" },
+    { "word": "scalable", "phonetic": "/ˈskeɪləbl/", "meaning": "可扩展的", "tag": "tech", "example": "The new architecture is scalable and maintainable.", "exampleCn": "新架构是可扩展且易维护的。" },
+    { "word": "third-party integration", "phonetic": "/θɜːrd ˈpɑːrti/", "meaning": "第三方集成", "tag": "tech", "example": "Seamless third-party integrations are critical for the platform.", "exampleCn": "无缝第三方集成对平台至关重要。" },
+    { "word": "analytics", "phonetic": "/ˌænəˈlɪtɪks/", "meaning": "数据分析", "tag": "tech", "example": "Robust analytics will capture user behavior for optimization.", "exampleCn": "强大的数据分析将捕获用户行为以优化。" },
+    { "word": "CEP integration", "phonetic": "/siː iː piː/", "meaning": "客户互动平台集成", "tag": "tech", "example": "CEP integration enables dynamic, user-specific content.", "exampleCn": "CEP集成实现动态个性化内容。" },
+    { "word": "PDP", "phonetic": "/piː diː piː/", "meaning": "产品详情页", "tag": "retail", "example": "Homepage and PDP will be completely redesigned.", "exampleCn": "首页和产品详情页将完全重新设计。" },
+    { "word": "MAU", "phonetic": "/ɛm eɪ juː/", "meaning": "月活跃用户", "tag": "retail", "example": "We expect MAU to grow from 0.6M to 1.15M.", "exampleCn": "预计月活从60万增长到115万。" },
+    { "word": "cross-selling", "phonetic": "/krɒs ˈsɛlɪŋ/", "meaning": "交叉销售", "tag": "retail", "example": "Product bundling and cross-selling are new revenue drivers.", "exampleCn": "捆绑和交叉销售是新营收驱动力。" },
+    { "word": "gamification", "phonetic": "/ˌɡeɪmɪfɪˈkeɪʃən/", "meaning": "游戏化", "tag": "retail", "example": "Gamification like lucky draws will boost engagement.", "exampleCn": "抽奖等游戏化功能将提升参与度。" },
+    { "word": "chatbot", "phonetic": "/ˈtʃætbɒt/", "meaning": "智能客服机器人", "tag": "tech", "example": "A smart FAQ chatbot handles self-service inquiries.", "exampleCn": "智能FAQ机器人处理自助查询。" },
+    { "word": "livestream", "phonetic": "/ˈlaɪvstriːm/", "meaning": "直播", "tag": "tech", "example": "Low latency livestream supports real-time shopping.", "exampleCn": "低延迟直播支持实时购物。" },
+    { "word": "abandoned order", "phonetic": "/əˈbændənd/", "meaning": "弃单/未支付订单", "tag": "retail", "example": "Recall abandoned orders to recover lost revenue.", "exampleCn": "召回弃单以挽回流失的营收。" },
+    { "word": "flash sale", "phonetic": "/flæʃ seɪl/", "meaning": "限时抢购", "tag": "retail", "example": "Flash sale items add-to-cart is a new feature.", "exampleCn": "限时抢购加入购物车是新功能。" },
+    { "word": "out-of-stock alert", "phonetic": "/aʊt əv stɒk/", "meaning": "缺货提醒", "tag": "retail", "example": "Out-of-stock alerts notify users when items are available.", "exampleCn": "缺货提醒在商品有货时通知用户。" },
+    { "word": "stackable rewards", "phonetic": "/ˈstækəbl/", "meaning": "可叠加优惠", "tag": "retail", "example": "Stackable rewards support multi-layer promotions.", "exampleCn": "可叠加优惠支持多层促销。" },
+    { "word": "architecture diagram", "phonetic": "/ˈɑːrkɪtɛktʃər/", "meaning": "架构图", "tag": "tech", "example": "Let me walk you through the high-level architecture diagram.", "exampleCn": "让我带大家过一下高层级架构图。" },
+    { "word": "cloud deployment", "phonetic": "/klaʊd dɪˈplɔɪmənt/", "meaning": "云端部署", "tag": "tech", "example": "The new platform will be deployed on Tencent Cloud.", "exampleCn": "新平台将部署在腾讯云上。" },
+    { "word": "system availability", "phonetic": "/əˌveɪləˈbɪləti/", "meaning": "系统可用性", "tag": "tech", "example": "We target 99.95% system availability.", "exampleCn": "目标99.95%系统可用性。" },
+    { "word": "RTO/RPO", "phonetic": "/ɑːr tiː oʊ/", "meaning": "恢复时间/恢复点目标", "tag": "tech", "example": "RTO is 2 hours and RPO is 1 hour.", "exampleCn": "恢复时间目标2小时，恢复点目标1小时。" },
+    { "word": "BCP/DR", "phonetic": "/biː siː piː/", "meaning": "业务连续性/灾备", "tag": "tech", "example": "BCP and DR plans are in place for Tier 1 criticality.", "exampleCn": "针对一级关键系统已制定BCP和灾备计划。" },
+    { "word": "CIAM", "phonetic": "/siː aɪ eɪ ɛm/", "meaning": "客户身份访问管理", "tag": "tech", "example": "IAM requirements include CIAM for customer identity.", "exampleCn": "身份管理需求包括客户身份访问管理。" },
+    { "word": "PII", "phonetic": "/piː aɪ aɪ/", "meaning": "个人身份信息", "tag": "tech", "example": "Data classification includes PII like name and contact number.", "exampleCn": "数据分类包括姓名和联系电话等PII。" },
+    { "word": "steering committee", "phonetic": "/ˈstɪərɪŋ kəˈmɪti/", "meaning": "指导委员会", "tag": "core", "example": "The steering committee approves direction and milestones.", "exampleCn": "指导委员会审批方向和里程碑。" },
+    { "word": "delivery owner", "phonetic": "/dɪˈlɪvəri ˈoʊnər/", "meaning": "交付负责人", "tag": "core", "example": "Curtis is the delivery owner from Wellcome.", "exampleCn": "Curtis是Wellcome方的交付负责人。" },
+    { "word": "project sponsor", "phonetic": "/ˈspɒnsər/", "meaning": "项目发起人", "tag": "core", "example": "Darren is the project sponsor.", "exampleCn": "Darren是项目发起人。" },
+    { "word": "key design authority", "phonetic": "/kiː dɪˈzaɪn/", "meaning": "关键设计权威(KDA)", "tag": "core", "example": "KDA sets and enforces architecture standards.", "exampleCn": "KDA制定并执行架构标准。" },
+    { "word": "PMO", "phonetic": "/piː ɛm oʊ/", "meaning": "项目管理办公室", "tag": "core", "example": "PMO handles end-to-end delivery management.", "exampleCn": "PMO负责端到端交付管理。" },
+    { "word": "change request", "phonetic": "/tʃeɪndʒ rɪˈkwɛst/", "meaning": "变更请求(CR)", "tag": "core", "example": "All CRs go through a formal journey from submission to go-live.", "exampleCn": "所有CR都经过从提交到上线的正式流程。" },
+    { "word": "PRD sign-off", "phonetic": "/piː ɑːr diː/", "meaning": "产品需求文档签字确认", "tag": "core", "example": "PRD sign-off requires all stakeholder approval.", "exampleCn": "PRD签字确认需要所有干系人批准。" },
+    { "word": "acceptance criteria", "phonetic": "/əkˈsɛptəns/", "meaning": "验收标准", "tag": "core", "example": "Each CR must include clear acceptance criteria.", "exampleCn": "每个CR必须包含清晰的验收标准。" },
+    { "word": "product design mockup", "phonetic": "/ˈmɒkʌp/", "meaning": "产品设计稿", "tag": "tech", "example": "Provide product design mockup and customer journey.", "exampleCn": "提供产品设计稿和客户旅程。" },
+    { "word": "RACI matrix", "phonetic": "/ˈreɪsi/", "meaning": "RACI职责矩阵", "tag": "core", "example": "The RACI matrix clarifies who is responsible for each task.", "exampleCn": "RACI矩阵明确每项任务的负责人。" },
+    { "word": "MVP", "phonetic": "/ɛm viː piː/", "meaning": "最小可行产品", "tag": "tech", "example": "The MVP plan spans from April to January.", "exampleCn": "MVP计划从4月到次年1月。" },
+    { "word": "SIT", "phonetic": "/ɛs aɪ tiː/", "meaning": "系统集成测试", "tag": "tech", "example": "SIT is scheduled for September.", "exampleCn": "SIT安排在9月。" },
+    { "word": "UAT", "phonetic": "/juː eɪ tiː/", "meaning": "用户验收测试", "tag": "tech", "example": "UAT and security testing follow SIT.", "exampleCn": "UAT和安全测试在SIT之后。" },
+    { "word": "cutover", "phonetic": "/ˈkʌtoʊvər/", "meaning": "系统切换", "tag": "tech", "example": "Cutover includes data initialization and dry run.", "exampleCn": "切换包含数据初始化和演练。" },
+    { "word": "dry run", "phonetic": "/draɪ rʌn/", "meaning": "演练", "tag": "tech", "example": "We do a dry run before the actual cutover.", "exampleCn": "实际切换前做一次演练。" },
+    { "word": "go/no-go", "phonetic": "/ɡoʊ noʊ ɡoʊ/", "meaning": "通过/不通过决策", "tag": "core", "example": "The go/no-go decision is planned for end of December.", "exampleCn": "通过/不通过决策计划在12月底。" },
+    { "word": "penetration testing", "phonetic": "/ˌpɛnɪˈtreɪʃən/", "meaning": "渗透测试", "tag": "tech", "example": "Penetration testing will be conducted before launch.", "exampleCn": "上线前进行渗透测试。" },
+    { "word": "investigation", "phonetic": "/ɪnˌvɛstɪˈɡeɪʃən/", "meaning": "调研/需求调研", "tag": "core", "example": "Business requirements investigation is the first phase.", "exampleCn": "业务需求调研是第一阶段。" },
+    { "word": "solution design", "phonetic": "/səˈluːʃən dɪˈzaɪn/", "meaning": "方案设计", "tag": "core", "example": "Solution design translates architecture into technical designs.", "exampleCn": "方案设计将架构转化为技术设计。" },
+    { "word": "governance", "phonetic": "/ˈɡʌvərnəns/", "meaning": "治理机制", "tag": "core", "example": "We have a unified platform for governance.", "exampleCn": "我们有统一的治理平台。" },
+    { "word": "escalation", "phonetic": "/ˌɛskəˈleɪʃən/", "meaning": "升级上报", "tag": "core", "example": "The steering committee reviews escalated risks.", "exampleCn": "指导委员会评审升级的风险。" },
+    { "word": "daily sync", "phonetic": "/ˈdeɪli sɪŋk/", "meaning": "每日同步会", "tag": "core", "example": "Daily sync resolves blockers quickly.", "exampleCn": "每日同步会快速解决阻塞项。" },
+    { "word": "risk management", "phonetic": "/rɪsk ˈmænɪdʒmənt/", "meaning": "风险管理", "tag": "core", "example": "Risk management uses red/yellow/green reporting.", "exampleCn": "风险管理使用红黄绿报告。" },
+    { "word": "scope creep", "phonetic": "/skoʊp kriːp/", "meaning": "范围蔓延", "tag": "core", "example": "Requirements risk includes scope creep.", "exampleCn": "需求风险包括范围蔓延。" },
+    { "word": "mitigation", "phonetic": "/ˌmɪtɪˈɡeɪʃən/", "meaning": "缓解措施", "tag": "core", "example": "The steering committee reviews mitigation actions.", "exampleCn": "指导委员会评审缓解措施。" },
+    { "word": "exit criteria", "phonetic": "/ˈɛɡzɪt kraɪˈtɪriə/", "meaning": "退出标准", "tag": "core", "example": "We exit the project with defined criteria.", "exampleCn": "按定义的标准退出项目。" },
+    { "word": "hypercare", "phonetic": "/ˈhaɪpərker/", "meaning": "超级保障期", "tag": "tech", "example": "Hypercare ensures system stability post go-live.", "exampleCn": "超级保障期确保上线后系统稳定。" },
+    { "word": "PIR", "phonetic": "/piː aɪ ɑːr/", "meaning": "项目实施回顾", "tag": "core", "example": "PIR assesses overall project success.", "exampleCn": "PIR评估项目整体成功。" },
+    { "word": "handover", "phonetic": "/ˈhændoʊvər/", "meaning": "交接", "tag": "core", "example": "Project handover to BAU team is part of closure.", "exampleCn": "向BAU团队交接是关闭流程的一部分。" },
+    { "word": "BAU", "phonetic": "/biː eɪ juː/", "meaning": "日常运营团队", "tag": "core", "example": "BAU team takes over after project closure.", "exampleCn": "项目关闭后BAU团队接管。" },
+    { "word": "OMS", "phonetic": "/oʊ ɛm ɛs/", "meaning": "订单管理系统", "tag": "tech", "example": "OMS integration covers store data, inventory, and orders.", "exampleCn": "OMS集成涵盖门店数据、库存和订单。" },
+    { "word": "data migration", "phonetic": "/ˈdeɪtə maɪˈɡreɪʃən/", "meaning": "数据迁移", "tag": "tech", "example": "Historical data migration is a key technical requirement.", "exampleCn": "历史数据迁移是关键技术需求。" },
+    { "word": "geo-fence", "phonetic": "/ˈdʒiːoʊ fɛns/", "meaning": "地理围栏", "tag": "tech", "example": "Warehouse management includes geo-fence for fulfillment.", "exampleCn": "仓库管理包含地理围栏用于履行。" },
+    { "word": "fulfillment", "phonetic": "/fʊlˈfɪlmənt/", "meaning": "订单履行", "tag": "retail", "example": "O2O fulfillment requires 3rd-party logistics.", "exampleCn": "O2O履行需要第三方物流。" },
+    { "word": "demo session", "phonetic": "/ˈdɛmoʊ ˈsɛʃən/", "meaning": "演示会议", "tag": "core", "example": "Demo sessions showcase the end-to-end solution.", "exampleCn": "演示会议展示端到端解决方案。" },
+    { "word": "blueprint", "phonetic": "/ˈbluːprɪnt/", "meaning": "蓝图/详细方案", "tag": "core", "example": "Blueprint sign-off is required before development.", "exampleCn": "开发前需要蓝图签字确认。" },
+    { "word": "payment hub", "phonetic": "/ˈpeɪmənt hʌb/", "meaning": "支付中台", "tag": "tech", "example": "DFI payment hub is a key integration dependency.", "exampleCn": "DFI支付中台是关键集成依赖。" },
+    { "word": "e-voucher", "phonetic": "/iː ˈvaʊtʃər/", "meaning": "电子优惠券", "tag": "retail", "example": "E-voucher integration is part of digital promotion.", "exampleCn": "电子优惠券集成是数字促销的一部分。" },
+    { "word": "SLA", "phonetic": "/ɛs ɛl eɪ/", "meaning": "服务等级协议", "tag": "tech", "example": "SLA defines support levels for hypercare and BAU.", "exampleCn": "SLA定义超级保障期和日常运营的支持级别。" },
+    { "word": "P0 scope", "phonetic": "/piː zɪroʊ/", "meaning": "P0优先级范围", "tag": "core", "example": "P0 scope lock-down is critical before development.", "exampleCn": "开发前P0范围锁定至关重要。" },
+    { "word": "gap analysis", "phonetic": "/ɡæp əˈnæləsɪs/", "meaning": "差距分析", "tag": "core", "example": "Gap analysis identifies what's missing from the standard product.", "exampleCn": "差距分析识别标准产品的不足。" },
+    { "word": "SOP", "phonetic": "/ɛs oʊ piː/", "meaning": "标准操作流程", "tag": "core", "example": "Review and advise the new SOP before rollout.", "exampleCn": "推广前审查和建议新的标准操作流程。" },
+    { "word": "L&D", "phonetic": "/ɛl ænd diː/", "meaning": "学习与发展/培训", "tag": "core", "example": "L&D engagement is part of the cutover phase.", "exampleCn": "培训参与是切换阶段的一部分。" },
+    { "word": "change control board", "phonetic": "/tʃeɪndʒ kənˈtroʊl/", "meaning": "变更控制委员会", "tag": "core", "example": "The change control board assesses scope changes.", "exampleCn": "变更控制委员会评估范围变更。" },
+    { "word": "data lake", "phonetic": "/ˈdeɪtə leɪk/", "meaning": "数据湖", "tag": "tech", "example": "DFI Data Lake integration is a technical requirement.", "exampleCn": "DFI数据湖集成是技术需求。" },
+    { "word": "CPaaS", "phonetic": "/siː pæs/", "meaning": "通信平台即服务", "tag": "tech", "example": "CPaaS integration covers SMS and email channels.", "exampleCn": "CPaaS集成覆盖短信和邮件渠道。" },
+    { "word": "e-stamp", "phonetic": "/iː stæmp/", "meaning": "电子印花", "tag": "retail", "example": "E-stamp integration is part of the loyalty module.", "exampleCn": "电子印花集成是会员模块的一部分。" },
+    { "word": "bespoke", "phonetic": "/bɪˈspoʊk/", "meaning": "定制的", "tag": "tech", "example": "The provision approach is bespoke, not off-the-shelf.", "exampleCn": "交付方式是定制的，不是现成的。" },
+    { "word": "Tier 1", "phonetic": "/tɪr wʌn/", "meaning": "一级关键(最高级别)", "tag": "tech", "example": "This system is classified as Tier 1 business criticality.", "exampleCn": "该系统被归类为一级业务关键性。" }
+  ],
+  "listening": [
+    {
+      "title": "场景一：开场与议程 (Slide 1-2)",
+      "lines": [
+        { "speaker": "PM", "text": "Good morning everyone. Thank you for joining today's kick-off meeting for the Food HK App Rebuild project. My name is Eugene, and I'm the project manager leading the delivery together with Nathan from Tencent side.", "cn": "大家早上好。感谢参加今天的Food HK应用重建项目启动会。我是Eugene，项目经理，和腾讯方的Nathan一起负责交付。" },
+        { "speaker": "PM", "text": "Before we start, let me walk you through today's agenda. We will cover five key areas: What is the project about, who will be involved in the project organization, when are the timelines and key milestones, how we plan to achieve the project goals, and what are the upcoming activities.", "cn": "开始之前，让我过一下今天的议程。我们会覆盖五个关键领域：项目概述、组织架构、时间线与里程碑、如何实现项目目标、以及接下来的活动安排。" },
+        { "speaker": "Client", "text": "Sounds good. We're excited to get this project started.", "cn": "听起来不错。我们很期待项目启动。" },
+        { "speaker": "PM", "text": "Great. Let's dive right in.", "cn": "好的，直接开始。" }
+      ]
+    },
+    {
+      "title": "场景二：项目目标 (Slide 4)",
+      "lines": [
+        { "speaker": "PM", "text": "Let me start with the key project objectives. We have four main goals. First, enhance user experience and interface — deliver a modern, intuitive design that improves engagement and reduces friction in browsing and checkout.", "cn": "先讲关键项目目标。我们有四个主要目标。第一，提升用户体验和界面——交付现代直观的设计，提升参与度，减少浏览和结账摩擦。" },
+        { "speaker": "PM", "text": "Second, modernize the technology stack — rebuild using scalable, maintainable architecture to enable faster feature development and seamless third-party integrations.", "cn": "第二，技术栈现代化——用可扩展易维护的架构重建，加速功能开发和无缝第三方集成。" },
+        { "speaker": "PM", "text": "Third, increase omni-channel customer conversion and retention — streamline checkout, integrate personalized recommendations, and boost CVR within six months post-launch.", "cn": "第三，提升全渠道客户转化和留存——简化结账、集成个性化推荐、上线后六个月内提升CVR。" },
+        { "speaker": "PM", "text": "And fourth, enable data-driven personalization — implement robust analytics to capture user behavior for targeted campaigns and continuous optimization.", "cn": "第四，实现数据驱动的个性化——实施强大的分析捕获用户行为，用于精准营销和持续优化。" },
+        { "speaker": "Client", "text": "These objectives align well with our business strategy. What's the expected impact on MAU?", "cn": "这些目标和我们的业务策略一致。对月活的预期影响？" },
+        { "speaker": "PM", "text": "We expect MAU to grow from around 600 thousand to over 1.15 million after full launch.", "cn": "预计全功能上线后月活从约60万增长到超过115万。" }
+      ]
+    },
+    {
+      "title": "场景三：变化对比 — 当前vs未来 (Slide 5)",
+      "lines": [
+        { "speaker": "PM", "text": "Now let me show you what will change. This slide compares the current state on the left with the future state on the right, across five key areas.", "cn": "现在展示将会有什么变化。这页PPT对比了五个关键领域的当前状态和未来状态。" },
+        { "speaker": "PM", "text": "For homepage and PDP — we're moving from static layouts to a personalized homepage with CEP integration, reimagined UI/UX, over 26 flexible content components, and precision targeting.", "cn": "首页和产品详情页——从静态布局升级到个性化首页（CEP集成）、全新UI/UX、超过26种灵活组件和精准定向。" },
+        { "speaker": "PM", "text": "For search and recommendation — replacing basic capability with user-specific personalization, location-based recommendations, multi-dimensional weighted scoring, and intelligent zero-result handling.", "cn": "搜索和推荐——从基础能力升级到用户个性化、基于位置的推荐、多维加权评分和智能零结果处理。" },
+        { "speaker": "PM", "text": "For the cart experience — we're addressing major gaps by adding flash sale items, out-of-stock alerts, abandoned order recovery, and product bundling with cross-selling.", "cn": "购物车——通过增加限时抢购、缺货提醒、弃单召回、产品捆绑和交叉销售来弥补重大缺口。" },
+        { "speaker": "PM", "text": "For marketing and promotions — adding over 20 advanced promo tools, best price logic, social gamification like group buys and lucky draws, stackable rewards, and tag-based targeted campaigns.", "cn": "营销促销——增加20+种高级促销工具、最优价格逻辑、拼团和抽奖等社交游戏化、可叠加优惠和基于标签的精准营销。" },
+        { "speaker": "PM", "text": "And for customer service — introducing a smart FAQ chatbot for self-service and VIP support, plus low-latency livestream capability with top-speed high-definition.", "cn": "客户服务——引入智能FAQ机器人用于自助和VIP服务，加上低延迟高清直播能力。" },
+        { "speaker": "Client", "text": "Impressive scope. The cart improvements and social gamification features are exactly what we need.", "cn": "范围令人印象深刻。购物车改进和社交游戏化功能正是我们需要的。" }
+      ]
+    },
+    {
+      "title": "场景四：技术架构 (Slide 6)",
+      "lines": [
+        { "speaker": "PM", "text": "Now let me walk you through the technical architecture. Wellcome is rebuilding the shopping app and website with Tencent as the key technology partner.", "cn": "现在讲一下技术架构。Wellcome正在与腾讯作为关键技术合作伙伴重建购物App和网站。" },
+        { "speaker": "PM", "text": "The key architecture changes are: first, the new platform will be deployed on the vendor's cloud, specifically Tencent Cloud. Second, digital OMS, payment hub, digital e-stamp and voucher systems will be integrated. Third, the platform will be integrated with DFI's core foundational systems.", "cn": "关键架构变更是：第一，新平台将部署在供应商云上，具体是腾讯云。第二，将集成数字OMS、支付中台、数字印花和优惠券系统。第三，平台将与DFI核心基础系统集成。" },
+        { "speaker": "PM", "text": "For the organizational architecture — the market is Hong Kong, business unit is Wellcome, format is Food. The provision approach is bespoke. Business criticality is Tier 1 with 99.95% system availability. RTO is 2 hours and RPO is 1 hour. Data classification includes PII such as name, address, and contact number.", "cn": "组织架构方面——市场是香港，业务单元是Wellcome，业态是Food。交付方式是定制。业务关键性为一级，系统可用性99.95%。RTO 2小时，RPO 1小时。数据分类包括姓名、地址和联系电话等PII。" },
+        { "speaker": "Client", "text": "What about the IAM requirements?", "cn": "身份管理需求呢？" },
+        { "speaker": "PM", "text": "IAM requirements include CIAM for customer identity. Infrastructure requirements include Bamboo and the digital middle layer.", "cn": "身份管理需求包括客户身份访问管理(CIAM)。基础设施需求包括Bamboo和数字中间层。" }
+      ]
+    },
+    {
+      "title": "场景五：组织架构与职责 (Slide 8-9)",
+      "lines": [
+        { "speaker": "PM", "text": "Now let me introduce the project organization. It's jointly managed by Wellcome and Tencent. On the Wellcome side, Darren Chan is the project sponsor, Curtis Liu is the delivery owner, and Forest Jiang is the project owner. On Tencent side, Katy Chen leads as VP.", "cn": "现在介绍项目组织。由Wellcome和腾讯联合管理。Wellcome方面，Darren Chan是项目发起人，Curtis Liu是交付负责人，Forest Jiang是项目负责人。腾讯方面Katy Chen作为VP负责。" },
+        { "speaker": "PM", "text": "We have a Steering Committee for strategic decisions, a Key Design Authority for architecture governance led by Dave, Edward, Kelvin and Jane, and a PMO for end-to-end delivery which I lead together with Nathan.", "cn": "指导委员会负责战略决策，关键设计权威由Dave、Edward、Kelvin和Jane负责架构治理，PMO由我和Nathan负责端到端交付。" },
+        { "speaker": "PM", "text": "Now let me clarify each team's roles. The Steering Committee handles strategic decision-making, resource coordination, and performance oversight. The KDA sets architecture standards and vets solutions. The PMO manages end-to-end delivery, stakeholder communication, cutover planning, and risk management.", "cn": "现在明确各团队职责。指导委员会负责战略决策、资源协调和绩效监督。KDA制定架构标准和审查方案。PMO管理端到端交付、干系人沟通、切换计划和风险管理。" },
+        { "speaker": "PM", "text": "Solution Design translates architecture into actionable designs and acts as the liaison between business and development. The Implementation Team handles agile development, QA, and technical problem-solving. Core Group Digital and IT manages all external dependencies and integration development.", "cn": "方案设计将架构转化为可执行设计，是业务和开发之间的桥梁。实施团队负责敏捷开发、QA和技术问题解决。核心数字化和IT组管理所有外部依赖和集成开发。" },
+        { "speaker": "Client", "text": "Very clear structure. Who handles change management?", "cn": "结构很清晰。谁负责变更管理？" },
+        { "speaker": "PM", "text": "Change Management establishes standard procedures for change assessment and approval, analyzes impacts, and drives stakeholder alignment.", "cn": "变更管理建立变更评估和审批的标准程序，分析影响，并推动干系人对齐。" }
+      ]
+    },
+    {
+      "title": "场景六：变更请求流程与RACI (Slide 10-11)",
+      "lines": [
+        { "speaker": "PM", "text": "Now let me explain the Change Request journey from submission to go-live. It's a five-step process.", "cn": "现在讲一下变更请求从提交到上线的流程。这是一个五步流程。" },
+        { "speaker": "PM", "text": "Step one is CR Submission — submit change requests via emails or documents based on DFI's e-commerce business processes. Step two is CR Confirmation — build business requirements and provide commercial acceptance criteria, then get sign-off from all stakeholders.", "cn": "第一步CR提交——通过邮件或文档提交变更请求。第二步CR确认——构建业务需求并提供商业验收标准，然后获得所有干系人签字。" },
+        { "speaker": "PM", "text": "Step three is CR Solution and PRD Sign-Off — gather requirements with business scenarios, provide design mockup, customer journey, and benchmark, define acceptance criteria, and decide if architect governance is required.", "cn": "第三步CR方案和PRD签字——收集业务场景需求，提供设计稿、客户旅程和基准，定义验收标准，决定是否需要架构治理。" },
+        { "speaker": "PM", "text": "Step four is UAT Sign-Off — build UAT test cases covering functional, non-functional, and performance tests, coordinate stakeholders, execute testing, and get sign-off.", "cn": "第四步UAT签字——构建UAT测试用例（功能、非功能、性能测试），协调干系人，执行测试并获得签字。" },
+        { "speaker": "PM", "text": "Step five is Rollout and Hypercare — iterative testing for SIT and UAT, then go-live with hypercare support.", "cn": "第五步推广和超级保障——SIT和UAT迭代测试，然后上线并提供超级保障支持。" },
+        { "speaker": "PM", "text": "On the next slide you can see the RACI matrix showing expected roles and responsibilities for each workstream.", "cn": "下一页可以看到RACI矩阵，展示每个工作线的预期角色和职责。" }
+      ]
+    },
+    {
+      "title": "场景七：时间线与近期计划 (Slide 13-14)",
+      "lines": [
+        { "speaker": "PM", "text": "Let me walk you through the MVP high-level plan. The timeline spans April 2026 to January 2027, organized into two iterations. We are currently here at the investigation and design phase.", "cn": "介绍MVP高层级计划。时间线从2026年4月到2027年1月，分两个迭代。我们目前在调研设计阶段。" },
+        { "speaker": "PM", "text": "Key milestones: requirements sign-off by end of May, solution design confirmation by mid-June, SIT starts mid-September, UAT completion by end of November, go/no-go decision end of December, and final cutover end of January.", "cn": "关键里程碑：需求签字5月底，方案设计确认6月中，SIT 9月中开始，UAT 11月底完成，go/no-go决策12月底，最终切换1月底。" },
+        { "speaker": "PM", "text": "Now for the next 2 to 3 weeks. After today's kick-off, we immediately move into system demo and business requirements investigation. Demo sessions will showcase the end-to-end solution to business stakeholders and the digital team.", "cn": "接下来2到3周的计划。今天启动会之后，我们立即进入系统演示和业务需求调研。演示会向业务干系人和数字团队展示端到端解决方案。" },
+        { "speaker": "PM", "text": "The investigation will be divided into two main parts: key functions covering the customer shopping journey and business operations, and integration covering API clarification and Bamboo integration.", "cn": "调研分两大部分：关键功能（覆盖客户购物旅程和业务运营）和集成（API澄清和Bamboo集成）。" },
+        { "speaker": "Client", "text": "When do the demo sessions start?", "cn": "演示会什么时候开始？" },
+        { "speaker": "PM", "text": "The first demo session is planned for the week of April 13th. I'll send out the detailed schedule right after this meeting.", "cn": "第一次演示会计划在4月13日那周。会后我会立即发出详细日程。" }
+      ]
+    },
+    {
+      "title": "场景八：用户参与 (Slide 16)",
+      "lines": [
+        { "speaker": "PM", "text": "We expect user involvement throughout the entire project lifecycle. Let me walk you through what we need from your side at each stage.", "cn": "我们期望用户在整个项目生命周期中全程参与。让我讲一下每个阶段需要你们做什么。" },
+        { "speaker": "PM", "text": "Stage one, Initiation and Planning, from February to March — we needed your feedback on the project go or no-go decision, which is already done.", "cn": "第一阶段，启动和规划，2月到3月——我们需要你们对项目通过/不通过决策的反馈，这已经完成。" },
+        { "speaker": "PM", "text": "Stage two, Process Alignment and Solutioning, April to May — this is where we are now. We need business teams to attend demo sessions, provide feedback, review and confirm all P0 requirements and proposed solutions. Deliverables include CR sign-off and blueprint sign-off.", "cn": "第二阶段，流程对齐和方案设计，4月到5月——这是我们目前所在。需要业务团队参加演示、提供反馈、审查确认所有P0需求和方案。交付物包括CR签字和蓝图签字。" },
+        { "speaker": "PM", "text": "Stage three, Development and Testing, June to December — we need your team to review test plans, participate in UAT, and sign off. Stage four, Cutover, September to January — review training materials, advise on new SOPs, and support in-store rollout verification.", "cn": "第三阶段，开发和测试，6月到12月——需要你们审查测试计划、参与UAT并签字。第四阶段，切换，9月到1月——审查培训材料、建议新SOP、支持门店推广验证。" },
+        { "speaker": "PM", "text": "Stage five, Post Go-live, January to May 2027 — share feedback in the lessons learned session, design P1 to P3 requirements, and the BAU team takes over the project.", "cn": "第五阶段，上线后，1月到2027年5月——在经验教训会上分享反馈、设计P1到P3需求、BAU团队接管项目。" },
+        { "speaker": "Client", "text": "Understood. We'll make sure the right people are available for each stage.", "cn": "明白了。我们会确保每个阶段有合适的人参与。" }
+      ]
+    },
+    {
+      "title": "场景九：沟通治理 (Slide 17)",
+      "lines": [
+        { "speaker": "PM", "text": "For communication governance, we have a unified platform at three levels. Monthly, the Executive Steering Committee meets for status updates, key decisions, and escalated issues.", "cn": "沟通治理方面，我们有三层统一平台。每月执行指导委员会开会汇报状态、做关键决策和处理升级问题。" },
+        { "speaker": "PM", "text": "Weekly, the core cross-team project update covers progress sharing, risk review, and change requests. During testing, we add daily sync-ups focusing on blockers and plans.", "cn": "每周核心跨团队项目更新覆盖进展分享、风险评审和变更请求。测试期间增加每日同步会，聚焦阻塞项和计划。" },
+        { "speaker": "PM", "text": "We also have several by-request meetings: KDA for architecture review, Change Control Board for scope changes, business-solution workshops for deep-dive requirements, and go-live handover coordination weekly before launch.", "cn": "还有按需会议：KDA做架构审查、变更控制委员会做范围变更、业务方案研讨会做深入需求、上线前每周的上线交接协调会。" },
+        { "speaker": "Client", "text": "That's comprehensive. When do the weekly meetings start?", "cn": "很全面。每周会议什么时候开始？" },
+        { "speaker": "PM", "text": "The weekly meetings start next week. I'll send out invites today.", "cn": "每周会议下周开始。今天我会发出邀请。" }
+      ]
+    },
+    {
+      "title": "场景十：风险管理、退出标准与下一步 (Slide 18-19-21)",
+      "lines": [
+        { "speaker": "PM", "text": "For risk management, we use red, yellow, green status reporting reviewed weekly. Red means major risk that may suspend the project. Yellow means issues exist with corrective action required. Green means minor deviations only.", "cn": "风险管理使用每周评审的红黄绿状态报告。红色是可能暂停项目的重大风险。黄色是有问题需纠正。绿色是轻微偏差。" },
+        { "speaker": "PM", "text": "Priority risk areas include requirements risk like scope creep, organizational risk like slow decisions, and execution risk like staffing changes. The core cycle is: identify, assess, mitigate, and review.", "cn": "优先风险领域包括范围蔓延等需求风险、决策缓慢等组织风险、人员变动等执行风险。核心循环：识别、评估、缓解、评审。" },
+        { "speaker": "PM", "text": "For project exit, we have clearly defined criteria: completion of all deliverables, achieving objectives, completion of hypercare, full handover to BAU with knowledge transfer, post-implementation review, and formal closure approval including financial closure.", "cn": "项目退出有明确标准：完成所有交付物、实现目标、完成超级保障期、向BAU完整交接含知识转移、项目实施回顾、以及含财务关闭的正式关闭批准。" },
+        { "speaker": "PM", "text": "Now for the upcoming activities — business requirements investigation. We've planned the schedule in three waves. Technical requirements from April 13th covering standard product demos, and business requirements from April 20th covering integration and data topics, with requirements sign-off targeted for mid-May.", "cn": "接下来的活动——业务需求调研。分三轮计划。技术需求从4月13日开始覆盖标准产品演示，业务需求从4月20日覆盖集成和数据主题，需求签字目标5月中旬。" },
+        { "speaker": "PM", "text": "That covers everything on today's agenda. I'll distribute the meeting minutes and contact list by end of day. Thank you all for a productive kickoff meeting. Looking forward to working together.", "cn": "以上是今天议程的全部内容。今天结束前发出会议纪要和联系人清单。感谢大家高效的启动会。期待合作。" }
+      ]
+    }
+  ],
+  "templates": [
+    {
+      "title": "开场白 — 欢迎与议程 (Slide 1-2)",
+      "en": "Good morning everyone. Thank you for joining today's kick-off meeting for the Food HK App Rebuild project. My name is Eugene, and I'm the project manager from CloudTech, leading the delivery together with Nathan from Tencent side. Before we start, let me walk you through today's agenda. We will cover five key areas: what is the project about, who will be involved in the project organization, when are the project timelines and key milestones, how we plan to achieve the project goals, and what are the upcoming activities. Let's get started.",
+      "cn": "大家早上好。感谢参加今天的Food HK应用重建项目启动会。我是Eugene，CloudTech的项目经理，和腾讯方的Nathan一起负责交付。开始之前，让我过一下今天的议程。我们会覆盖五个关键领域：项目概述、组织架构、时间线与里程碑、如何实现项目目标、以及接下来的活动安排。开始吧。",
+      "tips": "开场简洁自信。先自我介绍说明角色，再用 'five key areas' 预告结构。"
+    },
+    {
+      "title": "项目目标讲解 (Slide 4)",
+      "en": "Let me start with the key project objectives. We have four main goals. First, enhance user experience and interface — deliver a modern, intuitive, and accessible design that improves customer engagement, reduces friction in browsing and checkout, and aligns with our current brand identity. Second, modernize the technology stack — rebuild using scalable, maintainable architecture to enable faster feature development, seamless third-party integrations, and easier future updates. Third, increase omni-channel customer conversion and retention — streamline the checkout flow, integrate personalized recommendations, and add new features to boost conversion rate and repeat purchase rate within six months post-launch. And fourth, enable data-driven personalization — implement robust analytics and tracking to capture user behavior, allowing for targeted campaigns, personalized product discovery, and continuous optimization based on real-time insights.",
+      "cn": "先讲关键项目目标。四个主要目标。第一，提升用户体验和界面——交付现代直观无障碍的设计，提升参与度，减少摩擦，与品牌调性一致。第二，技术栈现代化——用可扩展易维护架构重建，加速功能开发、无缝集成、简化升级。第三，提升全渠道客户转化和留存——简化结账、集成推荐、上线后六个月内提升CVR和复购率。第四，数据驱动个性化——实施分析捕获用户行为，支持精准营销和实时优化。",
+      "tips": "用 'First... Second... Third... And fourth...' 清晰结构。每个目标先说标题再展开。"
+    },
+    {
+      "title": "变化对比 — 当前vs未来 (Slide 5)",
+      "en": "Now let me show you what will change. This slide compares the current state with the future state across five key areas. For homepage and PDP — we're moving from static, repetitive layouts to a personalized homepage with CEP integration for dynamic user-specific content, reimagined UI/UX with a fresh modern design language, over 26 flexible content components, and precision scheduled targeting. For search and recommendation — replacing basic capability with user-specific and location-based personalization, multi-dimensional weighted scoring, and intelligent zero-result handling. For the cart — addressing major gaps by adding flash sale items, out-of-stock alerts, abandoned order recovery, and product bundling with cross-selling. For marketing and promotions — adding best price logic, over 20 advanced promo tools, social gamification including group buys, referrals and lucky draws, stackable rewards with multi-layer promotions, and tag-based targeted campaigns. For customer service and livestream — introducing a smart FAQ chatbot for self-service and VIP support, plus low-latency livestream with top-speed high definition.",
+      "cn": "展示变化。这页对比五个领域的当前和未来。首页和PDP——从静态布局升级到个性化首页（CEP集成动态内容）、全新UI/UX、26+灵活组件、精准定时投放。搜索和推荐——从基础能力升级到用户和位置个性化、多维加权评分、智能零结果处理。购物车——增加限时抢购、缺货提醒、弃单召回、捆绑和交叉销售。营销促销——增加最优价格逻辑、20+高级促销工具、拼团/推荐/抽奖等社交游戏化、可叠加多层优惠、基于标签的精准营销。客服和直播——智能FAQ机器人（自助+VIP）、低延迟高清直播。",
+      "tips": "讲对比时用 'we're moving from... to...' 句式。每个领域先说痛点再说方案。语速放慢让客户跟上。"
+    },
+    {
+      "title": "技术架构 (Slide 6)",
+      "en": "Now let me walk you through the technical architecture. Wellcome is rebuilding the shopping app and website with Tencent as the key technology partner. There are three key architecture changes. First, the new platform will be deployed on the vendor's cloud, specifically Tencent Cloud. Second, digital OMS, payment hub, digital e-stamp and voucher systems will be fully integrated. Third, the platform will be integrated with DFI's core foundational systems. For the organizational architecture — the market is Hong Kong, business unit is Wellcome, format is Food. The hosting strategy is on vendor's cloud. The provision approach is bespoke. Business criticality is Tier 1 with a target of 99.95% system availability. BCP and DR plans are in place with RTO of 2 hours and RPO of 1 hour. IAM requirements include CIAM. Data classification includes PII — name, address, and contact number. Infrastructure requirements include Bamboo and the digital middle layer.",
+      "cn": "讲技术架构。Wellcome与腾讯作为技术合作伙伴重建购物App和网站。三个关键架构变更：第一，新平台部署在腾讯云。第二，全面集成数字OMS、支付中台、数字印花和优惠券系统。第三，与DFI核心基础系统集成。组织架构——市场香港，业务单元Wellcome，业态Food。托管策略供应商云。交付方式定制。业务关键性一级，目标99.95%可用性。BCP和灾备就绪，RTO 2小时RPO 1小时。身份管理需求含CIAM。数据分类含PII——姓名、地址、联系电话。基础设施需求含Bamboo和数字中间层。",
+      "tips": "技术架构页面信息密度高。语速可适当放慢，SLA/RTO/RPO等数字要说清楚。讲完后问 'Any questions on the architecture?'"
+    },
+    {
+      "title": "组织架构与团队职责 (Slide 8-9)",
+      "en": "Let me introduce the project organization chart. This project is jointly managed by Wellcome and Tencent. At the top, we have the Steering Committee — Darren Chan as project sponsor from Wellcome, and Katy Chen as VP from Tencent. Below that, the Key Design Authority led by Dave, Edward, Kelvin and Jane, responsible for architecture standards and solution vetting. The PMO, which I lead together with Nathan, handles end-to-end delivery, stakeholder communication, and delivery control. Each team has clear responsibilities. The Steering Committee handles strategic decisions, resource coordination, and performance oversight. Solution Design translates architecture into actionable designs and acts as the liaison between business and development. The Implementation Team handles agile development, QA, and technical problem-solving. Change Management establishes standard procedures for change assessment. Core Group Digital and IT manages all external system dependencies and integration development.",
+      "cn": "介绍项目组织架构图。由Wellcome和腾讯联合管理。最上层指导委员会——Darren Chan为Wellcome项目发起人，Katy Chen为腾讯VP。下面KDA由Dave、Edward、Kelvin和Jane负责架构标准和方案审查。PMO由我和Nathan负责端到端交付、干系人沟通和交付管控。各团队职责明确。指导委员会负责战略决策、资源协调、绩效监督。方案设计将架构转化为可执行设计，是业务和开发的桥梁。实施团队负责敏捷开发、QA和技术问题。变更管理建立变更评估标准程序。核心数字化和IT组管理外部系统依赖和集成开发。",
+      "tips": "介绍组织架构从上到下。提人名要自信。讲完职责后问 'Is it clear who to contact for what?'"
+    },
+    {
+      "title": "变更请求(CR)流程 (Slide 10)",
+      "en": "Now let me explain the Change Request journey from submission to go-live. It's a five-step process. Step one, CR Submission — submit change requests via emails or documents based on DFI's e-commerce business processes and implementation of Tencent's Tmall suite. Step two, CR Confirmation — build business and CR requirements, provide commercial acceptance criteria, and ensure CR sign-off with all related stakeholders. Step three, CR Solution and PRD Sign-Off — gather and draft product requirements with business scenarios, provide product design mockup, customer journey, and benchmark, define product acceptance criteria, decide if the solution requires architect governance, and ensure PRD sign-off. Step four, UAT Sign-Off — build UAT test cases covering functional, non-functional, and performance tests plus UX/UI audit, coordinate stakeholders, execute UAT testing, and get sign-off. Step five, Rollout and Hypercare — go through iterative SIT and UAT testing phases, then deploy with hypercare support.",
+      "cn": "讲变更请求从提交到上线的流程。五步。第一步CR提交——通过邮件或文档提交。第二步CR确认——构建业务和CR需求，提供商业验收标准，确保所有干系人签字。第三步CR方案和PRD签字——收集业务场景需求，提供设计稿、客户旅程和基准，定义验收标准，决定是否需要架构治理，确保PRD签字。第四步UAT签字——构建功能/非功能/性能测试用例加UX/UI审计，协调干系人执行测试并签字。第五步推广和超级保障——经过SIT和UAT迭代测试后部署并提供保障。",
+      "tips": "CR流程是客户最关心的之一。每一步都要说清楚输入和输出。强调 'sign-off from all related stakeholders' 表明规范性。"
+    },
+    {
+      "title": "时间线、里程碑与近期计划 (Slide 13-14)",
+      "en": "Let me walk you through the MVP version high-level plan. The overall timeline spans April 2026 to January 2027, organized into two main iterations. We are currently here, at the investigation and design phase. Key milestones: business requirements sign-off targeted for end of May, solution design confirmation by mid-June, system build from June through September, SIT starting mid-September, UAT and security testing from October to November, go/no-go decision at end of December, and final cutover targeted for end of January. Now for the immediate next steps over the next 2 to 3 weeks. After today's kick-off, we move directly into system demo and business requirements investigation. Demo sessions will showcase the end-to-end solution to business stakeholders and the digital team. The investigation will be divided into two parts: key functions covering customer shopping journey and business operations, and integration covering API clarification and Bamboo integration. Each session will cover project core goals, business scenarios, current pain points, system landscape, and function list clarification.",
+      "cn": "介绍MVP高层级计划。时间线2026年4月到2027年1月，两个迭代。我们目前在调研设计阶段。关键里程碑：需求签字5月底，方案设计确认6月中，系统建设6月到9月，SIT 9月中，UAT和安全测试10月到11月，go/no-go决策12月底，最终切换1月底。接下来2-3周计划。启动会后直接进入系统演示和需求调研。演示向业务干系人和数字团队展示端到端方案。调研分两部分：关键功能（客户购物旅程和业务运营）和集成（API澄清和Bamboo集成）。每场覆盖核心目标、业务场景、痛点、系统现状和功能清单澄清。",
+      "tips": "讲时间线用 'We are currently here' 标记位置。'targeted for' 比 'will be on' 灵活。近期计划要具体到周。"
+    },
+    {
+      "title": "用户参与生命周期 (Slide 16)",
+      "en": "We expect user involvement throughout the entire project lifecycle. There are five stages. Stage one, Initiation and Planning, February to March — we needed your feedback on the go or no-go decision and high-level timeline alignment. This is already done. Stage two, Process Alignment and Solutioning, April to May — this is where we are now. We need business teams from e-commerce, commercial, store operations, last mile, marketing, customer services, master data, and finance to attend demo sessions, provide feedback, and review and confirm all P0 requirements and proposed solutions. Key deliverables are CR and business requirement sign-off, and blueprint sign-off. Stage three, Development and Testing, June to December — we need your team to review and confirm test plans and test cases, participate in UAT, and sign off. Stage four, Cutover and Process Transformation, September to January — review training materials, advise on new SOPs, support in-store rollout verification, and work with the service management team on SLA and support model. Stage five, Post Go-live, January to May 2027 — share feedback in lessons learned sessions, design P1 to P3 requirements, and BAU team takes over the project.",
+      "cn": "我们期望用户全程参与。五个阶段。第一阶段启动规划，2-3月——需要go/no-go反馈和时间线对齐，已完成。第二阶段流程对齐和方案，4-5月——当前阶段。需要电商、商务、门店运营、末端配送、营销、客服、主数据和财务团队参加演示、提供反馈、确认P0需求和方案。交付物是CR/需求签字和蓝图签字。第三阶段开发测试，6-12月——审查测试计划和用例、参与UAT并签字。第四阶段切换和流程转型，9月-1月——审查培训材料、建议新SOP、支持门店推广验证、与服务管理团队制定SLA和支持模式。第五阶段上线后，1月-2027年5月——经验教训分享、设计P1-P3需求、BAU接管。",
+      "tips": "这页重点是让客户理解他们需要投入什么。每个阶段强调 'we need your team to...'，让客户做好准备。"
+    },
+    {
+      "title": "沟通治理机制 (Slide 17)",
+      "en": "For communication governance, we have established a unified platform at three levels. At the top, the Executive Steering Committee meets monthly for overall project status updates to senior leadership, key decision-making, reviewing escalated risks and issues, controlling resources and costs, and approving change requests. The core cross-team project update happens weekly — this is our main forum for progress sharing, alignment on approach and timelines, risk and issue review, and identifying change requests. During the testing phase, we add daily sync-ups for quick issue resolution, focusing on yesterday's blockers and today's plan. We also have several by-request meetings: Key Design Authority for reviewing new design and architecture, Change Control Board for assessing scope, schedule, or budget changes, business-solution workshops for deep-dive requirements, and go-live handover coordination weekly before launch to finalize transition plans and confirm operational readiness.",
+      "cn": "沟通治理建立了三层统一平台。最高层执行指导委员会每月开会——汇报状态、做关键决策、评审升级问题、管控资源成本、审批变更请求。核心跨团队项目更新每周——进展分享、方案对齐、风险评审、识别变更。测试阶段增加每日同步——聚焦阻塞项和计划。按需会议：KDA审查新设计和架构、变更控制委员会评估范围/进度/预算变更、业务方案研讨会深入需求、上线前每周交接协调会确认运营就绪。",
+      "tips": "按频率从月→周→日介绍。最后说 'I'll send out meeting invites today' 体现执行力。"
+    },
+    {
+      "title": "风险管理 (Slide 18)",
+      "en": "For project risk management, we follow a structured approach with red, yellow, green status reporting, reviewed weekly in our project meetings. Red indicates a major risk that may suspend the project — we must reassess or redefine before proceeding. Yellow means issues exist but the project continues with immediate corrective action required. Green means minor deviation only, no major correction needed. Our objective is to minimize major risks and control residual exposure. As the project manager, I will identify, document, and monitor risks. The steering committee reviews mitigation actions and makes key decisions. Priority risk areas include: requirements risk such as change requests and scope creep, organizational risk like slow decisions and management delays, and execution risk including planning gaps, staffing changes, and schedule pressure. The core risk management cycle is: identify, assess, mitigate, and review.",
+      "cn": "风险管理遵循结构化方法，使用红黄绿状态报告每周评审。红色是可能暂停项目的重大风险——必须重新评估。黄色是有问题但继续并需立即纠正。绿色是轻微偏差。目标是最小化主要风险并控制残余风险。作为PM我识别、记录和监控风险。指导委员会评审缓解措施和做决策。优先风险领域：需求风险（变更和范围蔓延）、组织风险（决策慢和管理延误）、执行风险（计划缺口、人员变动、进度压力）。核心循环：识别、评估、缓解、评审。",
+      "tips": "讲风险时语气沉稳。红黄绿要解释清楚。用四步循环收尾显得方法论清晰。"
+    },
+    {
+      "title": "项目退出标准与关闭 (Slide 19)",
+      "en": "We will exit the project with clearly defined criteria. These include: completion of all key deliverables as defined in the project charter, achieved project objectives, completion of the hypercare period to ensure system stability, complete project handover to the BAU team including knowledge transfer and all documentation, completion of a post-implementation review to assess overall success and document lessons learned, project closure documentation including a closure report and any required compliance documents handed over to the BAU team, project closure approval — obtaining formal approval from the project sponsor and steering committee and dissolving the project team, and financial closure.",
+      "cn": "我们按明确标准退出项目。包括：完成项目章程定义的所有交付物、实现项目目标、完成超级保障期确保系统稳定、向BAU团队完整交接含知识转移和文档、项目实施回顾评估成功并记录经验教训、项目关闭文档含关闭报告和合规文档交给BAU、获得项目发起人和指导委员会的正式关闭批准并解散项目团队、财务关闭。",
+      "tips": "退出标准给客户信心。用 'clearly defined criteria' 强调专业性。最后一句总结。"
+    },
+    {
+      "title": "接下来的活动 — 需求调研 (Slide 21)",
+      "en": "Finally, let me walk you through the upcoming activities for business requirements investigation. We've planned this in three waves with both business and technical requirements tracks running in parallel. For technical requirements, we start the week of April 13th with standard product capability demonstrations covering product management, inventory, store management, warehouse and geo-fence, trade and logistics, payment integration, finance and billing, and promotion features including campaigns, coupons, group-buy, and pre-sales. The second wave from April 20th covers data requirements including reports, analytics, historical data migration, and DFI Data Lake integration, plus technical integration requirements for OMS, e-voucher, third-party logistics, and DFI payment hub. For business requirements, the first wave covers online decoration, user features, messaging, customer service including chatbot, search and recommendation, and all third-party integrations including YUU, CPaaS, CEP, e-stamp, and Google. Requirements sign-off is targeted for mid-May. That concludes today's kick-off. Thank you all for your time and engagement. I'll distribute the meeting minutes and full contact list by end of day.",
+      "cn": "最后讲接下来的需求调研活动。分三轮，业务和技术需求并行。技术需求从4月13日那周开始，演示标准产品能力——产品管理、库存、门店管理、仓库和地理围栏、交易物流、支付集成、财务计费、促销功能（营销、优惠券、拼团、预售）。第二轮从4月20日覆盖数据需求（报表、分析、历史数据迁移、DFI数据湖集成）和技术集成需求（OMS、电子优惠券、第三方物流、DFI支付中台）。业务需求第一轮覆盖在线装修、用户功能、消息推送、客服含机器人、搜索推荐、以及所有第三方集成（YUU、CPaaS、CEP、电子印花、Google）。需求签字目标5月中旬。以上是今天启动会的全部内容。感谢大家的时间和参与。今天结束前发出会议纪要和完整联系人清单。",
+      "tips": "需求调研是会后立即启动的工作，要讲得具体。明确说出日期和覆盖范围让客户有准备。最后用 'That concludes...' 正式收尾。"
+    }
+  ],
+  "speaking": [
+    {
+      "scenario": "场景1：开场自我介绍与议程",
+      "prompt": "你是Food HK App Rebuild项目的PM，在kickoff会上做开场。请用英语介绍自己，说明你的角色，并介绍今天的5个议程主题。",
+      "reference": "Good morning everyone. Thank you for joining today's kick-off meeting for the Food HK App Rebuild project. My name is Eugene, and I'm the project manager leading the delivery. Today's agenda covers five areas: what the project is about, the project organization, timelines and key milestones, how we plan to achieve our goals, and upcoming activities. Let's get started.",
+      "cn": "大家早上好。感谢参加Food HK应用重建项目启动会。我是Eugene，负责交付的PM。议程覆盖五个方面：项目概述、组织架构、时间线和里程碑、如何实现目标、接下来的活动。开始吧。"
+    },
+    {
+      "scenario": "场景2：讲解四个项目目标",
+      "prompt": "请用英语讲解Food HK App Rebuild的四个关键目标：UX提升、技术栈现代化、全渠道转化提升、数据驱动个性化。",
+      "reference": "We have four key objectives. First, enhance user experience with a modern, intuitive design. Second, modernize the technology stack for faster development and seamless integrations. Third, increase omni-channel conversion and retention through streamlined checkout and personalized recommendations. Fourth, enable data-driven personalization with robust analytics for targeted campaigns and real-time optimization.",
+      "cn": "四个关键目标。第一，现代直观设计提升UX。第二，技术栈现代化加速开发和无缝集成。第三，简化结账和个性化推荐提升全渠道转化留存。第四，强大分析实现数据驱动个性化精准营销和实时优化。"
+    },
+    {
+      "scenario": "场景3：讲解技术架构关键变更",
+      "prompt": "客户问技术架构变更。请用英语介绍三个关键变更：云部署、系统集成、核心系统对接，以及SLA和RTO/RPO等关键参数。",
+      "reference": "Three key architecture changes. First, deployment on Tencent Cloud. Second, full integration of digital OMS, payment hub, e-stamp and voucher systems. Third, integration with DFI's core foundational systems. Business criticality is Tier 1 with 99.95% availability. RTO is 2 hours, RPO is 1 hour. BCP and DR plans are in place.",
+      "cn": "三个关键架构变更。第一，部署在腾讯云。第二，全面集成数字OMS、支付中台、印花和优惠券系统。第三，与DFI核心系统对接。业务关键性一级，可用性99.95%。RTO 2小时RPO 1小时。BCP和灾备就绪。"
+    },
+    {
+      "scenario": "场景4：介绍变更请求(CR)五步流程",
+      "prompt": "请用英语介绍变更请求的五步流程：提交→确认→方案/PRD签字→UAT签字→推广和超级保障。",
+      "reference": "The CR journey has five steps. Step one, CR Submission via emails or documents. Step two, CR Confirmation — build requirements and get sign-off. Step three, Solution and PRD Sign-Off — provide design mockup, acceptance criteria, and ensure stakeholder approval. Step four, UAT Sign-Off — build test cases, execute testing, and get sign-off. Step five, Rollout and Hypercare — deploy with support.",
+      "cn": "CR流程五步。第一步通过邮件或文档提交CR。第二步CR确认——构建需求并签字。第三步方案和PRD签字——提供设计稿、验收标准并确保签字。第四步UAT签字——构建测试用例、执行测试并签字。第五步推广和超级保障——部署并提供支持。"
+    },
+    {
+      "scenario": "场景5：介绍时间线和里程碑",
+      "prompt": "客户问项目时间线。请用英语介绍从4月到1月的关键阶段和里程碑日期。",
+      "reference": "The project spans April 2026 to January 2027. We're currently in investigation and design. Requirements sign-off by end of May. Solution confirmation mid-June. System build June to September. SIT mid-September. UAT October to November. Go/no-go end of December. Final cutover end of January.",
+      "cn": "项目从2026年4月到2027年1月。目前在调研设计阶段。需求签字5月底。方案确认6月中。系统建设6月到9月。SIT 9月中。UAT 10到11月。Go/no-go 12月底。最终切换1月底。"
+    },
+    {
+      "scenario": "场景6：讲解用户在各阶段的参与要求",
+      "prompt": "请用英语向客户介绍五个阶段中他们需要做什么：从启动到上线后。",
+      "reference": "User involvement across five stages. Stage one, Initiation — already completed the go/no-go decision. Stage two, now — attend demo sessions, review and confirm P0 requirements and solutions, sign off on CRs and blueprints. Stage three, Development — review test plans, participate in UAT, sign off. Stage four, Cutover — review training materials, advise on SOPs, support rollout verification. Stage five, Post Go-live — lessons learned sessions, design P1-P3 requirements, BAU team takes over.",
+      "cn": "五阶段用户参与。第一阶段启动——已完成go/no-go。第二阶段当前——参加演示、审查确认P0需求和方案、签字CR和蓝图。第三阶段开发——审查测试计划、参与UAT、签字。第四阶段切换——审查培训材料、建议SOP、支持推广验证。第五阶段上线后——经验教训、设计P1-P3需求、BAU接管。"
+    },
+    {
+      "scenario": "场景7：回答客户关于风险管理的提问",
+      "prompt": "客户问：'How do you manage project risks?' 请用英语回答。",
+      "reference": "We use red, yellow, green status reporting reviewed weekly. Red means major risk that may suspend the project. Yellow means issues exist with corrective action. Green is minor deviations. Key risks include scope creep, slow decisions, and staffing changes. Our cycle: identify, assess, mitigate, review.",
+      "cn": "我们使用每周评审的红黄绿报告。红色可能暂停项目。黄色有问题需纠正。绿色轻微偏差。关键风险含范围蔓延、决策慢、人员变动。循环：识别、评估、缓解、评审。"
+    },
+    {
+      "scenario": "场景8：收尾总结与下一步",
+      "prompt": "会议结束，请用英语总结action items并介绍接下来的需求调研计划。",
+      "reference": "That covers everything on today's agenda. To summarize: I'll distribute meeting minutes and contact list by end of day. We need your team to confirm business representatives for the demo sessions by this Friday. The first demo session starts the week of April 13th with standard product capability demonstrations. Investigation will cover both key functions and integration topics in parallel. Requirements sign-off is targeted for mid-May. Thank you all for a productive kickoff. Looking forward to working together.",
+      "cn": "以上是今天全部内容。总结：今天结束前发出会议纪要和联系人清单。需要你们本周五前确认演示会的业务代表。第一次演示4月13日那周开始，做标准产品能力展示。调研将并行覆盖关键功能和集成主题。需求签字目标5月中旬。感谢高效启动会。期待合作。"
+    }
+  ],
+  "quiz": [
+    { "q": "Food HK App Rebuild有几个核心目标？", "options": ["2个", "3个", "4个", "5个"], "answer": 2 },
+    { "q": "'全渠道转化率'的英文是？", "options": ["Omni-channel CVR", "Multi-channel CPC", "Cross-channel CPA", "Digital-channel CPM"], "answer": 0 },
+    { "q": "系统可用性目标是多少？", "options": ["99.9%", "99.95%", "99.99%", "99.5%"], "answer": 1 },
+    { "q": "CR流程共几步？", "options": ["3步", "4步", "5步", "6步"], "answer": 2 },
+    { "q": "go/no-go决策计划在什么时候？", "options": ["2026年9月", "2026年11月", "2026年12月", "2027年1月"], "answer": 2 },
+    { "q": "红黄绿风险报告中黄色代表什么？", "options": ["一切正常", "有问题但继续并纠正", "暂停项目", "已解决"], "answer": 1 },
+    { "q": "'超级保障期'的英文是？", "options": ["warranty", "hypercare", "maintenance", "support period"], "answer": 1 },
+    { "q": "RTO是多少？", "options": ["30分钟", "1小时", "2小时", "4小时"], "answer": 2 }
+  ]
+}
