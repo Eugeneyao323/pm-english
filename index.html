@@ -2100,14 +2100,18 @@ function renderTemplates() {
   const container = document.getElementById('templateContainer');
   const data = TEMPLATE_DATA[currentTopic] || [];
   container.innerHTML = data.map((t, i) => `
-    <div class="template-block">
+    <div class="template-block" data-tpl-idx="${i}">
       <div class="template-header" onclick="this.nextElementSibling.style.display = this.nextElementSibling.style.display === 'none' ? '' : 'none'">
         <span>${t.title}</span>
         <span style="color:var(--text-secondary);font-size:20px;">▾</span>
       </div>
       <div class="template-body" ${i > 0 ? 'style="display:none"' : ''}>
         <div class="template-en">${t.en}</div>
-        <div style="display:flex;gap:8px;margin:12px 0;">
+        <div style="display:flex;gap:8px;margin:12px 0;flex-wrap:wrap;align-items:center;">
+          <button class="btn btn-sm btn-primary tpl-play-btn" data-idx="${i}">🔊 播放</button>
+          <button class="btn btn-sm btn-warning tpl-loop-btn" data-idx="${i}">🔁 循环播放</button>
+          <button class="btn btn-sm btn-ghost tpl-stop-btn" data-idx="${i}" style="display:none;">⏹ 停止</button>
+          <span class="tpl-play-status" data-idx="${i}" style="font-size:12px;color:var(--text-secondary);"></span>
           <button class="btn btn-sm btn-ghost" onclick="toggleCn(this)">👁️ 查看中文</button>
           <button class="btn btn-sm btn-ghost" onclick="revealBlanks(this)">💡 显示答案</button>
         </div>
@@ -2129,6 +2133,17 @@ function renderTemplates() {
       }
     });
   });
+
+  // Template audio play/loop/stop buttons
+  container.querySelectorAll('.tpl-play-btn').forEach(btn => {
+    btn.addEventListener('click', function() { playTemplate(parseInt(btn.dataset.idx), false); });
+  });
+  container.querySelectorAll('.tpl-loop-btn').forEach(btn => {
+    btn.addEventListener('click', function() { playTemplate(parseInt(btn.dataset.idx), true); });
+  });
+  container.querySelectorAll('.tpl-stop-btn').forEach(btn => {
+    btn.addEventListener('click', function() { stopTemplatePlay(); });
+  });
 }
 
 function toggleCn(btn) {
@@ -2142,6 +2157,87 @@ function revealBlanks(btn) {
     b.textContent = b.dataset.answer;
     b.classList.add('filled');
   });
+}
+
+// ============================================================
+// TEMPLATE AUDIO PLAYBACK (with loop support)
+// ============================================================
+let tplPlayState = { playing: false, looping: false, idx: -1, aborted: false };
+
+function playTemplate(idx, loop) {
+  stopTemplatePlay();
+  const data = TEMPLATE_DATA[currentTopic] || [];
+  if (!data[idx]) return;
+
+  tplPlayState = { playing: true, looping: loop, idx: idx, aborted: false };
+
+  // UI
+  const stopBtn = document.querySelector('.tpl-stop-btn[data-idx="' + idx + '"]');
+  const statusEl = document.querySelector('.tpl-play-status[data-idx="' + idx + '"]');
+  const playBtn = document.querySelector('.tpl-play-btn[data-idx="' + idx + '"]');
+  const loopBtn = document.querySelector('.tpl-loop-btn[data-idx="' + idx + '"]');
+  if (stopBtn) stopBtn.style.display = '';
+  if (playBtn) playBtn.style.display = 'none';
+  if (loopBtn) loopBtn.style.display = 'none';
+  if (statusEl) statusEl.textContent = loop ? '🔁 循环播放中...' : '🔊 播放中...';
+
+  // Get plain text (strip HTML)
+  const plainText = data[idx].en.replace(/<span class='blank'[^>]*>[^<]*<\/span>/g, function(m) {
+    var match = m.match(/data-answer='([^']*)'/);
+    return match ? match[1] : '';
+  }).replace(/<[^>]*>/g, '');
+
+  doPlayTemplateText(plainText);
+}
+
+function doPlayTemplateText(text) {
+  if (tplPlayState.aborted) return;
+
+  playSentenceGoogleTTS(text, function() {
+    if (tplPlayState.aborted) return;
+    if (tplPlayState.looping) {
+      // Loop: wait 2 seconds then play again
+      var statusEl = document.querySelector('.tpl-play-status[data-idx="' + tplPlayState.idx + '"]');
+      if (statusEl) statusEl.textContent = '🔁 2秒后重播...';
+      setTimeout(function() {
+        if (!tplPlayState.aborted && tplPlayState.looping) {
+          var statusEl2 = document.querySelector('.tpl-play-status[data-idx="' + tplPlayState.idx + '"]');
+          if (statusEl2) statusEl2.textContent = '🔁 循环播放中...';
+          doPlayTemplateText(text);
+        }
+      }, 2000);
+    } else {
+      finishTemplatePlay();
+    }
+  }, 'pm');
+}
+
+function stopTemplatePlay() {
+  tplPlayState.aborted = true;
+  tplPlayState.playing = false;
+  tplPlayState.looping = false;
+
+  if (currentAudio) { currentAudio.pause(); currentAudio = null; }
+  window.speechSynthesis.cancel();
+
+  // Reset all template play UI
+  document.querySelectorAll('.tpl-stop-btn').forEach(function(el) { el.style.display = 'none'; });
+  document.querySelectorAll('.tpl-play-btn').forEach(function(el) { el.style.display = ''; });
+  document.querySelectorAll('.tpl-loop-btn').forEach(function(el) { el.style.display = ''; });
+  document.querySelectorAll('.tpl-play-status').forEach(function(el) { el.textContent = ''; });
+}
+
+function finishTemplatePlay() {
+  tplPlayState.playing = false;
+  var idx = tplPlayState.idx;
+  var stopBtn = document.querySelector('.tpl-stop-btn[data-idx="' + idx + '"]');
+  var playBtn = document.querySelector('.tpl-play-btn[data-idx="' + idx + '"]');
+  var loopBtn = document.querySelector('.tpl-loop-btn[data-idx="' + idx + '"]');
+  var statusEl = document.querySelector('.tpl-play-status[data-idx="' + idx + '"]');
+  if (stopBtn) stopBtn.style.display = 'none';
+  if (playBtn) playBtn.style.display = '';
+  if (loopBtn) loopBtn.style.display = '';
+  if (statusEl) { statusEl.textContent = '✅ 播放完成'; setTimeout(function() { statusEl.textContent = ''; }, 2000); }
 }
 
 function renderSpeaking() {
