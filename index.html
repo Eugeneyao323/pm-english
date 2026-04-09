@@ -2357,6 +2357,37 @@ function registerImportedTopics() {
 }
 registerImportedTopics();
 
+// ============================================================
+// AUTO-PRELOAD REMOTE TOPICS (no manual import needed)
+// ============================================================
+var PRELOAD_TOPICS = [
+  'wellcome-kickoff'
+];
+var TOPIC_BASE_URL = 'https://eugeneyao323.github.io/pm-english/';
+
+function autoPreloadTopics() {
+  var needLoad = PRELOAD_TOPICS.filter(function(tid) { return !importedTopics[tid]; });
+  if (needLoad.length === 0) return;
+  needLoad.forEach(function(tid) {
+    fetch(TOPIC_BASE_URL + tid + '.json?' + Date.now())
+      .then(function(r) { return r.json(); })
+      .then(function(data) {
+        if (!data.id || !data.name) return;
+        importedTopics[data.id] = data;
+        saveImportedTopics();
+        if (data.vocab) VOCAB_DATA[data.id] = data.vocab;
+        if (data.listening) DIALOGUE_DATA[data.id] = data.listening;
+        if (data.templates) TEMPLATE_DATA[data.id] = data.templates;
+        if (data.speaking) SPEAKING_DATA[data.id] = data.speaking;
+        if (data.quiz) QUIZ_DATA[data.id] = data.quiz;
+        addTopicChip(data.id, data.name);
+        renderTopicList();
+      })
+      .catch(function() {});
+  });
+}
+autoPreloadTopics();
+
 function handleTopicDrop(event) {
   event.preventDefault();
   var file = event.dataTransfer.files[0];
