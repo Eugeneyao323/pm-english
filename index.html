@@ -1823,7 +1823,7 @@ function playDialogueLineByIdx(sceneIdx, lineIdx, btnEl) {
   const plainText = line.text.replace(/<[^>]*>/g, '');
   const role = line.speaker === 'PM' ? 'pm' : 'client';
   const lineId = `line-${sceneIdx}-${lineIdx}`;
-  const audioId = `s${sceneIdx + 1}-${lineIdx}`;
+  const audioId = `${currentTopic}/s${sceneIdx + 1}-${lineIdx}`;
   
   playDialogueLine(plainText, btnEl, lineId, role, audioId);
 }
@@ -1887,7 +1887,7 @@ function playNextLineInScene() {
   const plainText = line.text.replace(/<[^>]*>/g, '');
   const lineId = `line-${si}-${li}`;
   const role = line.speaker === 'PM' ? 'pm' : 'client';
-  const audioId = `s${si + 1}-${li}`;
+  const audioId = `${currentTopic}/s${si + 1}-${li}`;
   
   // Highlight current line
   document.querySelectorAll('.dialogue-line.now-playing').forEach(el => el.classList.remove('now-playing'));
